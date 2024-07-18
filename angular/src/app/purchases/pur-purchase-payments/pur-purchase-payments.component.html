@@ -1,0 +1,218 @@
+
+  <ngx-spinner></ngx-spinner>
+ 
+  <div *ngIf='opened'>
+    <h3>
+       Payment Details
+    </h3>
+    <table style="width: 90%;">
+    <tr>
+        <td colspan="2">
+            <select class="form-control" [(ngModel)]='customerid'>
+                <option value="-1">--Select--</option>
+                <option *ngFor='let cus of customers' value="{{cus.recordId}}">{{cus.partyName}}</option>
+            </select> 
+        </td>
+        <td style="width: 10%;"> <button class="btn btn-primary" style="width: 100%;" (click)='showDet()'>Show</button> </td>
+    </tr>
+    <tr>
+        <td style="width: 50%;"> &nbsp;
+        </td>
+        <td style="width: 40%;"> <input type="number" class="form-control" [(ngModel)]='amtadjust'> </td>
+        <td style="width: 10%;"> <button class="btn btn-info" style="width: 100%;" (click)='makeAdjustments()'>Adjust</button> </td>
+
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div style="width: 100%;height: 400px;overflow-y: scroll;">
+            <table class="table m-6" style="width: 100%;" >
+                <thead class="thead-light">
+                  <tr>
+                    <th style="text-align: left; width: 4%;"># </th>
+                    <th style="text-align: left; width: 4%;">
+                    <input type="checkbox" id="chk11" [(ngModel)]='selall' (change)='makeTotalSelection()'>
+                    </th>
+                    <th style="text-align: left; width: 10%;" >Bill </th>
+                    <th style="text-align: left; width: 12%;">Date </th>
+                    <th style="text-align: right; width: 10%;">Actaul Amt </th>
+                    <th style="text-align: right; width: 10%;">Pending Amt</th>
+                    <th style="text-align: right; width: 10%;">Return Amt</th>
+                    <th style="text-align: right; width: 10%;">Credit Note</th>
+                    <th style="text-align: right; width: 10%;">Paid Amt</th>
+                    <th style="text-align: right; width: 10%;">Balance Amt</th>
+                    
+                    <th style="text-align: right; width: 10%;">Amount</th>
+                 
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr *ngFor='let det of details;let i=index' >
+                      <td style="width: 4%;">{{i+1}}</td>
+                       
+                      <td style="width: 4%;"> <input type="checkbox" id="checkbox{{i}}"  [(ngModel)]='det.chk' (change)='makeChange(det)'> </td>
+                    <td style="width: 10%;">{{det.billno}}</td>
+                    <td style="width: 12%;">{{det.dat | date:'dd-MMM-yy'}}</td>
+                    <td align="right" style="width: 10%;">{{det.traamt | number:'0.2'}}</td>
+                    <td align="right" style="width: 10%;">{{det.credamt | number:'0.2'}}</td>
+                     <td align="right" style="width: 10%;">{{det.purreturn | number:'0.2'}}</td>
+                     <td align="right" style="width: 10%;">{{det.crnote | number:'0.2'}}</td>
+                     <td align="right" style="width: 10%;">{{det.paid | number:'0.2'}}</td>
+                     <td align="right" style="width: 10%;">{{det.balance | number:'0.2'}}</td>
+                     <td align="right" style="width: 10%;"><input type="number" [disabled]='!det.chk' (input)='makeCalculations()' style="text-align: right;" class="form-control" [(ngModel)]='det.amt'  > </td>
+                     </tr>
+   
+    </table>
+</div>
+
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 84%;" align="right">
+                Total Amount
+            </td>
+            <td align="right" style="width: 16%;"><input type="number" disabled style="text-align: right;" class="form-control" [(ngModel)]='amt'> </td>
+             
+        </tr>
+        <!--
+        <tr>
+            <td style="width: 84%;" align="right">
+                TDS
+            </td>
+            <td align="right" style="width: 16%;"><input type="number" style="text-align: right;" class="form-control" (input)='makeTotals()' [(ngModel)]='tds'> </td>
+            
+        </tr>-->
+        <tr>
+            <td style="width: 84%;" align="right">
+                Rebate
+            </td>
+            <td align="right" style="width: 16%;"><input type="number" style="text-align: right;" class="form-control" (input)='makeTotals()' [(ngModel)]='rebate'> </td>
+            
+        </tr>
+        <tr>
+            <td style="width: 84%;" align="right">
+                Other Deductions
+            </td>
+            <td align="right" style="width: 16%;"><input type="number" style="text-align: right;" class="form-control" (input)='makeTotals()' [(ngModel)]='others'> </td>
+            
+        </tr>
+        <tr>
+            <td style="width: 84%;" align="right">
+                Amount to be paid
+            </td>
+            <td align="right" style="width: 16%;"><input type="number" disabled style="text-align: right;" class="form-control" [(ngModel)]='recamt'> </td>
+             
+        </tr>
+        <tr>
+            <td style="width: 84%;" align="right">
+                Payment Mode
+            </td>
+            <td align="right" style="width: 16%;">
+                <select class="form-control" [(ngModel)]='paymentmode' (change)='filterAccounts()'>
+                    <option value=" ">--Select--</option>
+                     <option value="CASH">Cash</option>
+                     <option value="CARD">Card</option>
+                     <option value="CHEQUE">Cheque</option>
+                     <option value="ONLINE">On line</option>
+                     <option value="M_WALLET">Mobile Wallet</option>
+                           </select>            
+            </td>
+          
+        </tr>
+        <tr>
+            <td style="width: 84%;" align="right">
+                Reverse Account
+            </td>
+            <td align="right" style="width: 16%;">
+                <select class="form-control" [(ngModel)]='revereseAccount'>
+                    <option value="0">--Select--</option>
+                    <option *ngFor='let acc of accounts' value="{{acc.accountId}}">{{acc.accountname}}</option>
+                </select>     
+            </td>
+           
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="button" class="btn-lg btn-info mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >Submit</button>
+                <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+             
+            </td>
+        </tr>
+     
+      
+    </table>
+
+
+</td>
+</tr>
+    </table>
+  </div>
+
+
+
+  <div *ngIf='!opened'>
+    <h3>
+        List of Payments
+    </h3>
+    
+    <table style="width: 80%;">
+    <tr>
+
+     <td align="right" style="width: 40%;">
+         <div class="input-group">
+             <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker 
+               #d1="ngbDatepicker" style="width: 50%;" [(ngModel)]='listdate' [disabled]='!dateCheck'>
+             <div class="input-group-append">
+               <div class="input-group-text" (click)="d1.toggle()">
+                 <i class="fa fa-calendar" style="cursor: pointer;"></i>
+               </div>
+             </div>
+           </div>
+     
+     </td>
+     <td align="left" style="width: 25%;">   <button type="button" class="btn btn-secondary mr-1 mb-1" (click)='listAdd()' >Show</button> </td>
+
+        <td align="left" style="width: 25%;">
+            <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+        </td>
+      
+    </tr>
+    </table>
+    
+    <table class="table m-0" style="width: 99%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Voucher</th>
+            <th>Supplier</th>
+            <th style="text-align: right;">Base Amt</th>
+           <!--<th style="text-align: right;">TDS</th>-->
+            <th style="text-align: right;">Rebate</th>
+            <th style="text-align: right;">Others</th>
+            <th style="text-align: right;">Received</th>
+            <th>Mode</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let det of receipts;let i=index'>
+            <th scope="row" >{{i+1}}</th>
+            <td>{{det.seq}}</td>
+            <td>{{det.branchId}}</td>
+             
+
+            <td align="right">{{det.baseAmt | number:'0.2'}}</td>
+            <!--<td align="right">{{det.tds | number:'0.2'}}</td>-->
+            <td align="right">{{det.rebate | number:'0.2'}}</td>
+            <td align="right">{{det.others | number:'0.2'}}</td>
+            <td align="right">{{det.receiptAmt | number:'0.2'}}</td>
+            <td>{{det.modeOfPayment}}</td>
+            <td><i class="ft-trash font-medium-1" (click)='deleteReceipt(det)' ></i></td>
+             
+          </tr>
+         
+        </tbody>
+      </table>
+
+</div>

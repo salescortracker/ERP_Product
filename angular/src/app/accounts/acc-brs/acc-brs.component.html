@@ -1,0 +1,133 @@
+
+<ngx-spinner></ngx-spinner>
+
+<h3>
+    Bank Reconciliation
+</h3>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 50%;">Bank</td>
+    <td style="width: 20%;">From</td>
+    <td style="width: 20%;">To</td>
+    <td style="width: 10%;"> &nbsp; </td>
+</tr>
+<tr>
+    <td style="width: 50%;"> <select class="form-control" [(ngModel)]='bankid'> <option value="-1">--Select--</option>
+    <option *ngFor='let bank of banks' value="{{bank.accountId}}">{{bank.accountname}}</option>
+    </select> </td>
+    <td style="width: 20%;">  <input type="date" class="form-control" [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)"> 
+    </td>
+    <td style="width: 20%;"> <input type="date" class="form-control" [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)"> </td>
+    <td style="width: 10%;">  <button class="btn btn-info" type="button" (click)='listAdd()'>Show</button> </td>
+</tr>
+<tr>
+    <td colspan="4">
+        <div style="width: 100%;height: 600px;overflow-y: scroll;">
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>On Account</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Narration</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                  <tr *ngFor='let tra of transactions;let i=index'>
+                    <th scope="row" >{{i+1}}</th>
+                    <td> {{tra.dat | date:'dd-MMM-yy'}} </td>
+                    <td>{{tra.onAccount}}</td>
+                    <td>{{tra.deb | number:'0.2'}}</td>
+                    <td>{{tra.cre | number:'0.2'}}</td>
+                    <td>{{tra.narration}}</td>
+
+                    <td> <span *ngIf='tra.pos == 0'> Pending </span> 
+                      <span *ngIf='tra.pos == 1'> Cleared </span>
+                      <span *ngIf='tra.pos == 2'> Rejected </span>
+                    </td>
+                    <td><i class="ft-edit font-medium-1" (click)='open(content,tra)'></i></td>
+                     </tr>
+                 
+                </tbody>
+              </table>
+        </div>
+
+    </td>
+</tr>
+</table>
+
+
+<ng-template #content let-c="close" let-d="dismiss" style="width: 800px;" >
+  <div class="modal-header">
+    <h6 class="modal-title">BRS Details</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+     <table style="width: 100%;">
+    <tr>
+      <td style="width: 30%;">Tra Date</td>
+      <td style="width: 70%;">{{selectedTra.dat | date:'dd-MMM-yy'}}</td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">on Accounts</td>
+      <td style="width: 70%;">{{selectedTra.onAccount}}</td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">
+      <span *ngIf='selectedTra.deb > 0'> Receipt </span>
+      <span *ngIf='selectedTra.cre > 0'> Payment </span>
+      </td>
+      <td style="width: 70%;">
+        <span *ngIf='selectedTra.deb > 0'> {{selectedTra.deb | number:'0.2'}} </span>
+        <span *ngIf='selectedTra.cre > 0'>  {{selectedTra.cre | number:'0.2'}}  </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Tra Details</td>
+      <td style="width: 70%;">{{selectedTra.bankdet}}</td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Narration</td>
+      <td style="width: 70%;">{{selectedTra.narration}}</td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Position</td>
+      <td style="width: 70%;"><span *ngIf= 'selectedTra.pos==0'> Pending </span>
+        <span *ngIf= 'selectedTra.pos!=0'> Reconciliated </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Status</td>
+      <td style="width: 70%;"> 
+        <select class="form-control" [(ngModel)]='pos'> <option value="-1">-Select-</option> 
+        <option value="1">Cleared</option>
+        <option value="2">Rejected</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Description</td>
+      <td style="width:70%"> <textarea rows="2" style="width: 100%;" class="form-control" [(ngModel)]='description'>
+      
+      </textarea> </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button class="btn btn-primary" type="button" (click)='save()'> <span *ngIf='selectedTra.pos==0'>Save</span> <span *ngIf='selectedTra.pos!=0'>Modify</span> </button>
+      </td>
+    </tr>
+    </table>
+
+  </div>
+  <div class="modal-footer">
+   
+  </div>
+</ng-template>

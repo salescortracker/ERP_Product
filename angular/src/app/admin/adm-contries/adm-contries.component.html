@@ -1,0 +1,128 @@
+<ngx-spinner></ngx-spinner>
+ 
+<ng-sidebar-container >
+  <ng-sidebar [opened]="opened" mode="push" position="right">
+      <h3>
+      Country Details
+    </h3>
+    <br>
+    <table style="width: 80%;">
+    <tr>
+     <td style="width: 30%;" align="right">Country</td>
+      <td style="width: 70%;">
+       <input type="text" class="form-control" id="basicInput"  placeholder="Country" ngDefaultControl  [(ngModel)]='country.Cntname' style="width: 90%;">
+      
+          </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;" align="right">Currency</td>
+     <td style="width: 70%;">
+       <input type="text" class="form-control" id="basicInput"  placeholder="Currency" ngDefaultControl  [(ngModel)]='country.Curr' style="width: 40%;">
+      
+          </td>
+ 
+ 
+   </tr>
+   <tr>
+    <td style="width: 30%;" align="right">Coins</td>
+   <td style="width: 70%;">
+     <input type="text" class="form-control" id="basicInput"  placeholder="Coins" ngDefaultControl  [(ngModel)]='country.coins' style="width: 40%;">
+    
+        </td>
+
+
+ </tr>
+   <tr>
+    <td style="width: 30%;" align="right">Symbol</td>
+    <td style="width: 70%;">
+      <input type="text" class="form-control" id="basicInput"  placeholder="Currency symbol" ngDefaultControl  [(ngModel)]='country.CurrSymbol' style="width: 40%;">
+     
+         </td>
+
+
+  </tr>
+   <tr>
+    <td style="width: 30%;" align="right">Conversion to default</td>
+     <td style="width: 70%;">
+       <input type="number" class="form-control" id="basicInput"  placeholder="Conversion Factory" ngDefaultControl  [(ngModel)]='country.ConversionFactor' style="width: 40%;">
+      
+          </td>
+ 
+ 
+   </tr>
+   <tr>
+    <td style="width: 30%;" align="right">Status</td>
+    <td style="width: 70%;">
+     <select class="form-control" [(ngModel)]='country.Statu' style="width: 50%;">
+        <option value="1">Active</option>
+        <option value="2">Defualt</option>
+        <option value="0">Inactive</option>
+     </select>
+         </td>
+
+
+  </tr>
+   
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='saveCountry()' >{{saveStr}}</button>
+        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+      </td>
+    </tr>
+    </table>
+   
+  </ng-sidebar>
+       
+      
+  <div ng-sidebar-content>
+      
+    <nav>
+        <h3>
+            List of Countries
+        </h3>
+        
+        <table style="width: 100%;">
+        <tr>
+            <td align="left">
+                <button type="button" class="btn-lg btn-success mr-1 mb-1" *ngIf='!opened' (click)='openNew()' >New</button>
+            </td>
+        </tr>
+        </table>
+        
+        <table class="table m-0" style="width: 60%;">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Country </th>
+                <th>Currency</th>
+                <th>Symbol</th>
+                <th>Conversion</th>
+                <th>Status</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let cnt of countries; let i=index'>
+                <th scope="row" >{{i+1}}</th>
+                <td>{{cnt.cntname}}</td>
+                <td>{{cnt.curr}}</td>
+                <td>{{cnt.currSymbol}}</td>
+                <td>{{cnt.conversionFactor}}</td>
+                <td *ngIf='cnt.statu==1'>Active</td>
+                <td *ngIf='cnt.statu==2'>Default</td>
+                <td *ngIf='cnt.statu==0'>Inactive</td>
+                <td><i class="ft-edit font-medium-1" (click)='openOld(cnt)' *ngIf='!opened'></i></td>
+              </tr>
+             
+            </tbody>
+          </table>
+  
+    </nav>
+  </div>
+        </ng-sidebar-container>

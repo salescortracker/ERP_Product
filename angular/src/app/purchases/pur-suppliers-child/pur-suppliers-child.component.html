@@ -1,0 +1,156 @@
+<h2>New Supplier Details</h2> 
+
+
+
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 30%;"> <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Select Group</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+    <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 350px; overflow-y: scroll;">
+                  <span *ngFor='let obj1 of treeObj'  >
+                      <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                      <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.subGroup}} </span> <br>
+          
+                      <div  *ngIf='obj1.openCheck'>
+                      
+                      <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+                        <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                        <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span><br>
+                        
+                        <div  *ngIf='obj2.openCheck'>
+                        <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                          <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                        <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>      <span (click)='toggleVisible(obj3)'> {{obj3.subGroup}} </span> <br>
+                        </span>
+                        </div>
+          
+                      </span>
+                  </div>
+                  </span>
+          
+              </div>
+    
+    
+                  </div>
+                  </div>
+         </div> </td>
+        <td style="width: 70%;">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Supplier Details</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+    
+                        <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 350px; overflow-y: scroll;">
+                            
+                             <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 9%;" align="right">Supplier</td>
+                                <td colspan="3"> <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.PartyName'  placeholder="Supplier"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 9%;" align="right">Group</td>
+                                <td colspan="3">  <input type="text" class="form-control" id="basicInput" [(ngModel)]='partygrp' placeholder="Supplier Group" disabled></td>
+                            </tr>
+    
+    
+    
+    
+                       
+                                <tr>
+                                    <td style="width: 9%;" align="right">Name</td>
+                                    <td colspan="3"> <input type="text" class="form-control" [(ngModel)]='address.nam'> </td>
+                                </tr>
+                                <tr>
+                                            
+                                    <td style="width: 9%;" align="right">Address</td>
+                                    <td style="width: 41%;" rowspan="2">  <textarea id="projectinput8" rows="3" class="form-control" name="comment" placeholder="Address" [(ngModel)]='address.addr'></textarea> </td>
+                                    <td style="width: 9%;" align="right">ZIP</td>
+                                    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Zip" [(ngModel)]='address.zip' ></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 9%;" align="right">&nbsp;</td>
+                                <td style="width: 9%;" align="right">Mobile</td>
+                                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Mobile" [(ngModel)]='address.mobile' ></td>
+                        
+                            </tr>
+                            <tr>
+                                
+                                <td style="width: 9%;" align="right">Country</td>
+                                <td style="width: 41%;">     <select class="form-control" [(ngModel)]='address.country'  (change)='changeCountry()'>
+                                    <option value="-1">--Select Country--</option>
+                                    <option *ngFor='let country of countries' value={{country.cntname}}>{{country.cntname}}</option>
+                            </select>  </td>
+                                <td style="width: 9%;" align="right">Tel</td>
+                                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Telephone" [(ngModel)]='address.tel'></td>
+                        </tr>
+                        <tr>
+                                
+                            <td style="width: 9%;" align="right">State</td>
+                            <td style="width: 41%;">    
+                                <select class="form-control" [(ngModel)]='address.stat'>
+                                    <option value=" ">--Select State--</option>
+                                    <option *ngFor='let sta of selectedstates' value="{{sta.stateName}}">{{sta.stateName}}</option>
+                                    
+                
+                                  </select>
+                            </td>
+                            <td style="width: 9%;" align="right">Fax</td>
+                            <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Fax" [(ngModel)]='address.fax'></td>
+                    </tr>
+                    <tr>
+                                
+                        <td style="width: 9%;" align="right">District</td>
+                        <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="District" [(ngModel)]='address.district'></td>
+                        <td style="width: 9%;" align="right">Email</td>
+                        <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Email" [(ngModel)]='address.email'></td>
+                </tr>
+                <tr>
+                                
+                    <td style="width: 9%;" align="right">City</td>
+                    <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="City" [(ngModel)]='address.city'></td>
+                    <td style="width: 9%;" align="right">Web</td>
+                    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Web" [(ngModel)]='address.web'></td>
+                </tr>
+                
+                <tr>
+                    <td style="width: 9%;" align="right">Status</td>
+                    <td colspan="3"> <select class="form-control" [(ngModel)]='address.statu'>
+                        <option value="1">Active</option> <option value="2">Inactive</option>
+                    </select>  </td>
+                </tr>
+                
+               
+                
+                            
+                         
+                
+   
+        </table>
+ 
+    
+                        </div>
+    
+    
+                    </div>
+                </div>
+            </div>
+    
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+
+
+            <button class="btn-lg btn-primary" (click)='saveSupplier()'>Save Supplier</button>
+
+        </td>
+    </tr>
+    
+</table>
+

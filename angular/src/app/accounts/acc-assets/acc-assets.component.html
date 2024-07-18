@@ -1,0 +1,105 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+     <h3>
+     Asset Details
+   </h3>
+   <br>
+   
+   <table style="width: 60%;">
+    <tr>
+        <td style="width: 20%;" align="right">Asset</td>
+        <td colspan="3"> <input type="text" class="form-control" id="basicInput"  placeholder="Enter Asset" [(ngModel)]='asset'> </td>
+    </tr>
+<tr>
+<td style="width: 20%;" align="right">Op Date</td>
+<td style="width: 30%;">
+    
+    
+    <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="dat" ngbDatepicker
+          #d2="ngbDatepicker">
+        <div class="input-group-append">
+          <div class="input-group-text" (click)="d2.toggle()">
+            <i class="fa fa-calendar" style="cursor: pointer;"></i>
+          </div>
+        </div>
+      </div>
+
+</td>
+<td style="width: 20%;" align="right">Depreciation%</td>
+<td style="width: 30%;"><input type="number" class="form-control" id="basicInput"  placeholder="Enter %" [(ngModel)]='depreciation'> </td>
+
+</tr>
+
+
+<tr>
+    <td style="width: 20%;" align="right">Opening Value</td>
+    <td colspan="3"> <input type="number" class="form-control" id="basicInput"  placeholder="Enter Value" [(ngModel)]='openingvalue'> </td>
+</tr>
+
+   <tr>
+     <td colspan="4">
+       &nbsp;
+     </td>
+   </tr>
+   <tr>
+     <td colspan="4">
+       <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+       <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+       <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+
+   </tr>
+   </table>
+ </div>
+ <div *ngIf='!opened'>
+       <h3>
+           List of Assets
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+            <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchItems()' >
+            </div>
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 80%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Asset</th>
+               <th>Opening Date</th>
+               <th>Opening Value</th>
+               <th>Current Value</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let ast of assets;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{ast.assetName}}</td>
+               <td>{{ast.opedate | date:'dd-MM-y'}}</td>
+               <td>{{ast.opvalue}}</td>
+               <td>{{ast.presetnvalue}}</td>
+             
+               <td><i  *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(ast)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+ </div>
+
+ 
+ <span *ngIf='!authCheck'>
+  <h2>Please verify your authorization</h2>
+</span>

@@ -1,0 +1,90 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+     <h3>
+    Leave Details
+   </h3>
+   <br>
+   <table style="width: 80%;">
+<tr>
+    <td style="width: 25%;" align="right">Leave Code</td>
+    <td style="width: 75%;"> <input type="text" class="form-control" style="width: 50%;" [(ngModel)]='leave.LeaveCode'> </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Leave</td>
+    <td style="width: 75%;"> <input type="text" class="form-control" [(ngModel)]='leave.LeaveDescription'> </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Pay type</td>
+    <td style="width: 75%;">  
+    <select class="form-control" [(ngModel)]='leave.PayType'>
+        <option value="0">--Select--</option>
+        <option value="1">LOP</option>
+        <option value="2">Half day Pay</option>
+        <option value="3">Complete Pay</option>
+    </select>
+    
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Forward Type</td>
+    <td style="width: 75%;">  
+    <select class="form-control" [(ngModel)]='leave.ForwardType'>
+        <option value="0">--Select--</option>
+        <option value="1">Close within year</option>
+        <option value="2">Carry forward</option>
+        <option value="3">Paid leaves</option>
+    </select>
+    
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;">&nbsp;</td>
+    <td style="width: 75%;"> 
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteLeave()' >Delete</button>
+        <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='saveLeave()' >{{saveStr}}</button>
+        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+ 
+    
+    </td>
+</tr>
+   </table>
+ </div>
+
+ <div *ngIf='!opened'>
+       <h3>
+          List of Leaves
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+            &nbsp;
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 80%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Code</th>
+               <th>Leave</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let lea of leaves;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{lea.leaveCode}}</td>
+               <td>{{lea.leaveDescription}}</td>
+               <td><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(lea)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+ </div>

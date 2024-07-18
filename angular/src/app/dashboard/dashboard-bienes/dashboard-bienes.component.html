@@ -1,0 +1,143 @@
+<!--Statistics cards Starts-->
+<div class="row" (resized)="onResized($event)">
+
+
+ 
+
+
+
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("pur")'>
+        <div class="card gradient-ibiza-sunset">
+          <div class="card-content">
+            <div class="card-body py-0">
+              <div class="media pb-1">
+                <div class="media-body white text-left">
+                  <h3 class="font-large-1 white mb-0">Purchases</h3>
+                  <br>
+                  <span>1234</span>
+                </div>
+                <div class="media-right white text-right">
+                    <i class="icon-basket-loaded font-large-1"></i>
+                  
+                </div>
+              </div>
+            </div>
+                  <div id="ft-tv" class=" ft-tbv mb-2">
+          <br>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+       
+
+  
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("sal")'>
+      <div class="card gradient-mint">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Sales</h3>
+                <br>
+                <span>2121</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="ft-trending-up font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                  <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+
+
+      <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("inv")'>
+        <div class="card gradient-king-yna">
+          <div class="card-content">
+            <div class="card-body py-0">
+              <div class="media pb-1">
+                <div class="media-body white text-left">
+                  <h3 class="font-large-1 white mb-0">Inventory</h3>
+                  <br>
+                  <span>400</span>
+                </div>
+                <div class="media-right white text-right">
+                  <i class="icon-basket-loaded font-large-1"></i>
+                </div>
+              </div>
+            </div>
+            <div id="ft-tv" class=" ft-tbv mb-2">
+                      <br>
+                    </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+        <div class="card gradient-blackberry">
+          <div class="card-content">
+            <div class="card-body py-0">
+              <div class="media pb-1">
+                <div class="media-body white text-left">
+                  <h3 class="font-large-1 white mb-0">Admin</h3>
+                  <br>
+                  <span>13/39</span>
+                </div>
+                <div class="media-right white text-right">
+                  <i class="icon-settings font-large-1"></i>
+                </div>
+              </div>
+            </div>
+            <div id="ft-tv" class=" ft-tbv mb-2">
+                      <br>
+                    </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!--Statistics cards Ends-->
+  
+
+
+
+      
+      <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Purchases to Sales</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="lineAreaChartOptions.series"
+                  [colors]="lineAreaChartOptions.colors"
+                  [chart]="lineAreaChartOptions.chart"
+                  [xaxis]="lineAreaChartOptions.xaxis"
+                  [yaxis]="lineAreaChartOptions.yaxis"
+                  [title]="lineAreaChartOptions.title"
+                  [dataLabels]="lineAreaChartOptions.dataLabels"
+                  [stroke]="lineAreaChartOptions.stroke"
+                  [grid]="lineAreaChartOptions.grid"
+                  [tooltip]="lineAreaChartOptions.tooltip"
+                  [plotOptions]="lineAreaChartOptions.plotOptions"
+                  [fill]="lineAreaChartOptions.fill"
+                  [legend]="lineAreaChartOptions.legend"
+                  [labels]="lineAreaChartOptions.labels"
+                  [markers]="lineAreaChartOptions.markers"
+                  [theme]="lineAreaChartOptions.theme"
+                  [responsive]="lineAreaChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    

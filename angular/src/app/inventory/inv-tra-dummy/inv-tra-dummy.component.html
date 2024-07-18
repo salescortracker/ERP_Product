@@ -1,0 +1,202 @@
+
+
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened==2'>
+<h3>{{title}} Details</h3>
+ 
+<table style="width: 100%;">
+    
+    <tr>
+        <td style="width: 22%;" align="right">Store</td>
+        <td colspan="3">&nbsp;</td>
+        <td colspan="3">Date</td>
+    </tr>
+    <tr>
+        <td style="width: 22%;" align="right">
+            <select class="form-control" [disabled]='lineItems.length > 0' [(ngModel)]='storeid' (change)='makeStoreWiseInfo()'>
+                <option *ngFor='let sto of stores' value="{{sto.recordId}}">{{sto.storeCode}}</option>
+            </select></td>
+        <td colspan="3">&nbsp;</td>
+        <td colspan="3"><input type="text" class="form-control" disabled value="{{tradat | date:'dd-MMM-yy'}}"> </td>
+    </tr>
+    <tr>
+        <td style="width: 22%;">{{title}}</td>
+        <td style="width: 30%;">Material</td>
+        <td style="width: 15%;">Batch</td>
+        
+        <td style="width: 10%;">Total Available</td>
+        <td style="width: 9%;">Qty</td>
+        <td style="width: 8%;">UM</td>
+        <td style="width: 6%;">&nbsp;</td>
+    </tr>
+     
+    <tr>
+        <td style="width: 22%;"><select class="form-control" [(ngModel)]='traid' (change)='findtraDescr()'>
+            <option value="-1">--Select--</option>
+            <option *ngFor='let tra of tradets' value="{{tra.recordid}}">{{tra.name}}</option>
+        </select></td>
+        <td style="width: 30%;"><ng-select id='cmbitem'  (change)="makeUnits($event)" >
+            <ng-option *ngFor="let item of materials" [value]="item.recordId">{{item.itemname}}</ng-option>
+        </ng-select></td>
+        <td style="width: 15%;"><select class="form-control" [(ngModel)]='gin' (change)='findBatchQty()'>
+            <option *ngFor='let bat of batches' value="{{bat.gin}}">{{bat.batchno}}</option>
+        </select>  </td>
+         <td style="width: 10%;"><input type="text" class="form-control"  [(ngModel)]='totalavailable' disabled></td>
+        <td style="width: 9%;"><input type="number" class="form-control" [(ngModel)]='qty'></td>
+        <td style="width: 8%;"><input type="text" [(ngModel)]='um' class="form-control" disabled></td>
+        <td style="width: 6%;"> <button type="button" class="btn btn-info" (click)='addLine()'>Add</button> </td>
+    </tr>
+    
+    <tr>
+        <td style="width: 22%;">&nbsp;</td>
+        <td style="width: 30%;">Group</td>
+        <td style="width: 15%;">Batch Available</td>
+        
+        <td style="width: 10%;">&nbsp;</td>
+        <td style="width: 9%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 6%;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="width: 22%;"> <input type="text" disabled [(ngModel)]='tradescription' class="form-control"> </td>
+        <td style="width: 30%;"> <input type="text" *ngIf='material' disabled class="form-control" [(ngModel)]='material.grpname'>
+            <input type="text" *ngIf='!material' disabled class="form-control"> </td>
+        <td style="width: 15%;"><input type="text" class="form-control"  [(ngModel)]='batchavailable' disabled></td>
+        
+        <td style="width: 10%;">&nbsp;</td>
+        <td style="width: 9%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 6%;">&nbsp;</td>
+    </tr>
+    
+      
+    </table>
+
+    
+    <div style="width: 100%; height: 350px; overflow-y: scroll ;">
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>{{title}}</th>
+            <th>Material</th>
+            <th>Batch/Gin</th>
+            <th>Qty</th>
+            <th>UOM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let item of lineItems; let i=index'>
+            <th scope="row" >{{i+1}}</th>
+            <td>{{item.traname}}</td>
+            <td>{{item.materialname}}</td>
+            <td>{{item.batchno}}</td>
+            <td>{{item.qty}}</td>
+            <td>{{item.um}}</td>
+            <td><i class="ft-trash font-medium-1" (click)='deleteLine(item)' ></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+ 
+    </div>
+    <table style="width: 100%;">
+    <tr>
+        <td style="width: 100%;">
+            <button type="button" class="btn-lg btn-primary mr-1 mb-1"  (click)='save()' >Save</button>
+            <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+          
+        </td>
+    </tr>
+    </table>
+</div>
+
+<div *ngIf='opened==1'>
+
+    <h3>List of {{title}} Details</h3>
+    <table style="width: 100%;">
+    <tr>
+      <td style="width: 15%;" align="right">Date</td>
+      <td style="width: 15%;"> <input type="date" class="form-control" [(ngModel)]='listdate'> </td>
+      <td style="width: 10%;"> <button type="button" class="btn-lg btn-success" (click)='listAdd()'>Show</button> </td>
+      <td style="width: 60%;" align="right"> <button type="button" class="btn-lg btn-info" (click)='openNew()'>New</button></td>
+    </tr>
+    </table>
+    
+
+    
+    <table class="table m-0" style="width: 100%;">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Store Code</th>
+          <th>Store Name</th>
+          <th>Store Incharge</th>
+          <th>Open</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        <tr *ngFor='let tra of transactions; let i=index'>
+          <th scope="row" >{{i+1}}</th>
+          <td>{{store.storeCode}}</td>
+          <td>{{store.storeName}}</td>
+          <td>{{store.storeIncharge}}</td>
+          <td><i *ngIf='!opened' class="ft-edit font-medium-1" (click)='openOld(store)' ></i></td>
+        </tr>
+       
+      </tbody>
+    </table>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+      <br>
+      <br>
+     
+      <br>
+      <br>
+
+      <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>{{title}}</th>
+            <th>Material</th>
+            <th>Batch/Gin</th>
+            <th>Qty</th>
+            <th>UOM</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let item of mgtItems; let i=index'>
+            <th scope="row" >{{i+1}}</th>
+            <td>{{item.traname}}</td>
+            <td>{{item.materialname}}</td>
+            <td>{{item.gin}}</td>
+            <td>{{item.qty}}</td>
+            <td>{{item.um}}</td>
+            <td><i class="ft-trash font-medium-1" (click)='deleteLine(item)' ></i></td>
+          </tr>
+         
+        </tbody>
+      </table>-->

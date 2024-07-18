@@ -1,0 +1,185 @@
+
+ <ngx-spinner></ngx-spinner>
+  
+    <div *ngIf='opened'>
+     <h3>
+     Allowances and Deductions
+   </h3>
+   <br>
+   <table style="width: 95%;">
+   <tr>
+    <td style="width:60%">
+    <table style="width: 100%;">
+      <tr>
+        <td colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">Name</td>
+        <td style="width: 80%;"><input class="form-control" [(ngModel)]='allowance.Allowance'></td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">Type</td>
+        <td style="width: 80%;"><select class="form-control" [(ngModel)] = 'allowance.AllowanceCheck'>
+          <option value="0">--Select--</option>
+          <option value="1">Allowance</option>
+          <option value="2">Deduction</option>
+        </select> </td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">Effet as</td>
+        <td style="width: 80%;"><select class="form-control" [(ngModel)] = 'allowance.EffectAs'>
+          <option value="0">--Select--</option>
+          <option value="1">Percentage</option>
+          <option value="2">Lumpsum</option>
+         
+        </select> </td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">Calculation</td>
+        <td style="width: 80%;"><select class="form-control" [(ngModel)] = 'allowance.CalcType' (change)='makeCalculation()'>
+          <option value="0">--Select--</option>
+          <option value="1">Exact Value</option>
+          <option value="2">Lower</option>
+          <option value="3">Upper</option>
+          <option value="4">Round</option>
+        </select> </td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">&nbsp;</td>
+        <td style="width: 80%;">
+          <table style="width: 100%;">
+            <tr>
+              <td style="width: 33%;">
+                Original
+              </td>
+              <td style="width: 34%;">&nbsp;
+              </td>
+              <td style="width: 33%;">
+               Calculated
+              </td>
+            </tr>
+          <tr>
+            <td style="width: 33%;">
+              <input type="text" disabled class="form-control" value="3.25">
+            </td>
+            <td style="width: 34%;">&nbsp;
+            </td>
+            <td style="width: 33%;">
+              
+              <input type="text" disabled class="form-control" [(ngModel)]='calculated'>
+            </td>
+          </tr>
+          </table>
+      
+
+        </td>
+      </tr>
+    </table>
+  </td>
+  <td style="width:40%" valign="top">
+   <table style="width: 100%;">
+    <tr>
+      <td style="width: 85%;">Effect on</td>
+      <td style="width: 15%;">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="width: 85%;"> 
+      <select class="form-control" [(ngModel)]='effid'>
+        <option value="">--Select--</option>
+         <option *ngFor='let eff of effects' value="{{eff.sno}}">{{eff.nam}}</option>
+      </select>
+      </td>
+      <td style="width: 15%;">
+        <button type="button" class="btn btn-primary mr-1 mb-1" (click)='addEffect()'>Add</button>
+   
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table class="table m-0" style="width: 100%;">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Effect</th>
+            
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+           
+            <tr *ngFor='let eff of selEffects;let i=index'>
+              <th scope="row" >{{i+1}}</th>
+              <td>{{eff.nam}}</td>
+                          <td><i class="ft-trash font-medium-1" (click)='deleteEffect(eff)'></i></td>
+            </tr>
+            
+          </tbody>
+        </table>
+
+      </td>
+    </tr>
+   </table>
+  </td>
+   </tr>
+    
+    
+   <tr>
+     <td colspan="2">
+       &nbsp;
+     </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+       <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+       <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+       <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+   </tr>
+   </table>
+    </div>
+   <div *ngIf='!opened'>
+       <h3>
+          Allowances & Deductions
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+            <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchItems()' >
+            </div>
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 80%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Type</th>
+               <th>Status</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let allow of allowances;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{allow.allowance}}</td>
+               <td> 
+<span *ngIf='allow.allowanceCheck==1'>Allowance</span>
+<span *ngIf='allow.allowanceCheck!=1'>Deduction</span>
+               </td>
+               <td>Active</td>
+               <td><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(allow)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+
+   </div>

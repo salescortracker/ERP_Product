@@ -1,0 +1,135 @@
+<h3> Year End Process 31-Mar-22</h3>
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ngb-tabset type="pills">
+               <!--P & L Account starts-->
+            <ngb-tab title="P & L Account">
+              <ng-template ngbTabContent>
+                <div style="overflow-y: scroll; width:100%; height: 400px ">
+                    <table class="table table-sm m-0">
+                        <thead>
+                            <th>#</th>
+                            <th>Account</th>
+                            <th>Group</th>
+                            <th style="text-align: right ;">Debit</th>
+                            <th style="text-align: right ;">Credit</th>
+                        </thead>
+                        <tbody>
+                             
+                        </tbody>
+                    </table>
+                </div>
+                <h6>
+                    <table style="width: 100%;"> 
+                    <tr>
+                        <td style="width: 80%;">No profit no loss</td>
+                        <td style="width: 20%;" align="right">0.00</td>
+                    </tr>
+                    </table>
+                    
+                
+                </h6>
+                <br>
+                 <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 6%;">&nbsp;</td>
+                        <td style="width: 35%;"> Account  </td>
+                        <td style="width: 31%;"> Group </td>
+                        <td style="width: 10%;"> Debit </td>
+                        <td style="width: 10%;">Credit</td>
+                        <td style="width: 8%;"> &nbsp; </td>
+                    </tr>
+                <tr>
+                    <td style="width: 6%;">&nbsp;</td>
+                    <td style="width: 35%;"> <ng-select [items]="pnlaccounts" bindLabel="accountname"  [(ngModel)]='pnlaccount'></ng-select>  </td>
+                    <td style="width: 31%;"> <input type="text" class="form-control" disabled [(ngModel)]='pnlaccount.grp'> </td>
+                    <td style="width: 10%;"> <input type="number" class="form-control" [disabled]='cre > 0' [(ngModel)]='deb'> </td>
+                    <td style="width: 10%;"><input type="number" class="form-control" [disabled]='deb > 0' [(ngModel)]='cre'></td>
+                    <td style="width: 8%;"> <button class="btn btn-info" (click)='addPNL()'>Add</button> </td>
+                </tr>
+                </table>
+                <div style="overflow-y: scroll; width:100%; height: 170px ">
+                    <table class="table table-sm m-0">
+                        <thead>
+                            <th style="width: 6%;">#</th>
+                            <th  style="width: 35%;">Account</th>
+                            <th  style="width: 31%;">Group</th>
+                            <th style="width: 10%; text-align: right ;">Debit</th>
+                            <th style="width: 10%; text-align: right;">Credit</th>
+                            <th style="width: 8%;">&nbsp;</th>
+                        </thead>
+                        <tbody>
+                             <tr *ngFor='let acc of pnldetails;let i=index'>
+                                 <th style="width: 6%;">{{i+1}}</th>
+                                    <td style="width: 35%;">{{acc.accountname}}</td>
+                                    <td style="width: 31%;">{{acc.grp}}</td>
+                                    <td style="width: 10%;" align="right">{{acc.deb | number:'0.2'}}</td>
+                                    <td style="width: 10%;" align="right">{{acc.cre | number:'0.2'}}</td>
+                                    <td style="width: 8%;"><i _ngcontent-yya-c277="" class="ft-trash-2" (click)='deletePNL(acc)' ></i></td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+                &nbsp;<button class="btn btn-primary" type="button" disabled>Save</button>
+
+            </ng-template>
+        </ngb-tab>
+  <!--P & L Account Ends-->
+
+
+        <!--Balance Sheet starts-->
+        <ngb-tab title="Balance Sheet">
+            <ng-template ngbTabContent>
+                <div style="overflow-y: scroll; width:100%; height: 650px ">
+                    <table class="table table-sm m-0">
+                        <thead>
+                            <th>#</th>
+                            <th>Account</th>
+                            <th>Group</th>
+                            <th style="text-align: right ;">Debit</th>
+                            <th style="text-align: right ;">Credit</th>
+                        </thead>
+                        <tbody>
+                             
+                        </tbody>
+                    </table>
+                </div>
+                &nbsp;<button class="btn btn-primary" type="button" disabled>Forward</button>
+            </ng-template>
+        </ngb-tab>
+  <!--Balance Sheet Ends-->
+
+
+  
+        <!--Closing Stocks starts-->
+        <ngb-tab title="Closing Stocks">
+            <ng-template ngbTabContent>
+                <div style="overflow-y: scroll; width:100%; height: 650px ">
+                    <table class="table table-sm m-0">
+                        <thead>
+                            <th>#</th>
+                            <th>Material</th>
+                            <th>Group</th>
+                            <th style="text-align: right ;">Stock</th>
+                            <th style="text-align: right ;">Value</th>
+                        </thead>
+                        <tbody>
+                             
+                        </tbody>
+                    </table>
+                </div>
+                &nbsp;<button class="btn btn-primary" type="button" disabled>Forward</button>
+            </ng-template>
+        </ngb-tab>
+  <!--Closing Stocks Ends-->
+
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+</div>

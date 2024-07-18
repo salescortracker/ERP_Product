@@ -1,0 +1,131 @@
+
+ <ngx-spinner></ngx-spinner>
+ 
+ <div *ngIf='opencheck'>
+     <h3>
+     User Details
+   </h3>
+   <br>
+   <table style="width: 40%;">
+    <tr>
+        <td style="width: 30%;">User Name</td>
+        <td style="width: 70%;"><input type="text" class="form-control" [(ngModel)]='user' [disabled]='recordId > 0'> </td>
+    </tr>
+    <tr>
+        <td style="width: 30%;">Role Name</td>
+        <td style="width: 70%;"> <select class="form-control" [(ngModel)]='rolename'>
+            <option value="">--Select--</option>
+            <option *ngFor='let role of roles' value="{{role}}">{{role}}</option>
+        </select>  </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Profile Name</td>
+        <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='profile.UserProfileName'> </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Employee</td>
+        <td style="width: 70%;"> 
+          <ng-select [items]="employees" bindLabel="empname"  [(ngModel)]='employee'></ng-select>
+  
+        </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Emp no</td>
+        <td style="width: 70%;"> 
+          <input type="text" disabled class="form-control" [(ngModel)]='employee.empno'>
+          </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Department</td>
+        <td style="width: 70%;"> 
+          <input type="text" disabled class="form-control" [(ngModel)]='employee.department'>
+          </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Designation</td>
+        <td style="width: 70%;"> 
+          <input type="text" disabled class="form-control" [(ngModel)]='employee.designation'>
+          </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;">Mobile</td>
+        <td style="width: 70%;"> 
+          <input type="text" disabled class="form-control" [(ngModel)]='employee.mobile'>
+          </td>
+    </tr>
+
+    <tr>
+      <td style="width: 30%;">&nbsp;</td>
+      <td style="width: 70%;">   <div class="checkbox">
+        <input type="checkbox" id="checkbox1" [(ngModel)]='webenablecheck'>
+        <label for="checkbox1"><span>Enable in all web pages</span></label>
+      </div></td>
+  </tr>
+  <tr>
+    <td style="width: 30%;">&nbsp;</td>
+    <td style="width: 70%;">   <div class="checkbox">
+      <input type="checkbox" id="checkbox2" [(ngModel)]='mobileenablecheck'>
+      <label for="checkbox2"><span>Enable in all Mobiles</span></label>
+    </div></td>
+</tr>
+   
+    <tr>
+        <td colspan="2">
+                    <button type="button" class="btn-lg btn-info mr-1 mb-1" *ngIf='recordId ==0' (click)='setUser()' >Add User</button>
+                    <button type="button" class="btn-lg btn-info mr-1 mb-1" *ngIf='recordId >0' (click)='setUser()' >Change Details</button>
+                   
+                    <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='recordId > 0' (click) ='blockuser()' >Block/Unblock</button>
+                    <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='recordId > 0' (click) ='resetPassword()' >Reset Password</button>
+
+                    <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+        </td>
+      </tr>
+</table>
+
+
+
+ </div>
+      
+     
+
+
+ <div *ngIf='!opencheck'>
+       <h3>
+           List of Users
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+             &nbsp;
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 80%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>User</th>
+               <th>Role</th>
+               <th>Status</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let usr of users;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{usr.usrName}}</td>
+               <td>{{usr.roleName}}</td>
+               <td><span *ngIf='usr.pos > 0'> Active</span><span *ngIf='usr.pos <= 0'> Blocked</span></td>
+               <td><i class="ft-edit font-medium-1"(click)='openOld(usr)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+ </div>
+ 

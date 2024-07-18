@@ -1,0 +1,22 @@
+<h3>Settings</h3>
+
+
+
+
+
+<table style="width: 50%;">
+    <tr *ngFor='let det of details'>
+        <td style="width: 30%;" align="right">{{det.descr}}</td>
+        <td style="width: 70%;">
+        <select class="form-control" [(ngModel)]='det.SetupValue'>
+            <option *ngFor='let opt of det.options' value="{{opt.code}}">{{opt.descr}}</option>
+        </select>
+        </td>
+
+    </tr>
+    
+<tr>
+    <td colspan="2"> <button type="button" class="btn-lg btn-primary" (click)='save()'>Save</button> </td>
+</tr> 
+</table>
+<font face=Arial size=4 color=maroon>Setting will affect on next login</font>

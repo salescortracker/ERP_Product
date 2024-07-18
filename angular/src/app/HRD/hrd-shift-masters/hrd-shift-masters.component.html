@@ -1,0 +1,90 @@
+
+ <ngx-spinner></ngx-spinner>
+  <div *ngIf='opened'>
+      <h3>
+     Shift Details 
+    </h3>
+    <br>
+    <table style="width: 40%;">
+ <tr>
+     <td style="width: 25%;" align="right">Shift Name</td>
+     <td colspan="3"> <input type="text" class="form-control"  [(ngModel)]='shift.ShiftName'> </td>
+ </tr>
+ <tr>
+     <td style="width: 25%;" align="right">From</td>
+     <td style="width: 35%;"> <select class="form-control" [(ngModel)]='fromhour' >
+         <option *ngFor='let hh of hours' value="{{hh}}">{{hh}}</option>
+     </select>  </td>
+     <td style="width: 5%;" align="center" > : </td>
+     <td style="width: 35%;">     <select class="form-control" [(ngModel)]='fromminute' >
+        <option *ngFor='let mm of minutes' value="{{mm}}">{{mm}}</option>
+    </select> </td>
+  </tr>
+  <tr>
+    <td style="width: 25%;" align="right">To</td>
+    <td style="width: 35%;"> <select class="form-control" [(ngModel)]='tohour' >
+        <option *ngFor='let hh of hours' value="{{hh}}">{{hh}}</option>
+    </select>  </td>
+    <td style="width: 5%;" align="center" > : </td>
+    <td style="width: 35%;">    <select class="form-control" [(ngModel)]='tominute' >
+       <option *ngFor='let mm of minutes' value="{{mm}}">{{mm}}</option>
+   </select> </td>
+ </tr>
+   
+ <tr>
+     <td style="width: 25%;">&nbsp;</td>
+     <td colspan="3"> 
+         <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteShift()' >Delete</button>
+         <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='saveShift()' >{{saveStr}}</button>
+         <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+  
+     
+     </td>
+ </tr>
+    </table>
+  </div>
+
+ <div *ngIf='!opened'>
+        <h3>
+           List of Leaves
+        </h3>
+        
+        <table style="width: 80%;">
+        <tr>
+            <td align="left" style="width: 50%;">
+                <button type="button" *ngIf='!opened' class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+            </td>
+            <td align="right" style="width: 50%;">
+           &nbsp;
+            </td>
+        </tr>
+        </table>
+        
+        <table class="table m-0" style="width: 80%;">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Shift</th>
+                <th>From</th>
+                <th>To</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let shi of shifts;let i=index'>
+                <th scope="row" >{{i+1}}</th>
+                <td>{{shi.shiftName}}</td>
+                <td>{{shi.fromTime}}</td>
+                <td>{{shi.toTime}}</td>
+                <td><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(shi)'></i></td>
+              </tr>
+             <tr *ngIf='shifts.length <= 0'>
+
+                <td colspan="5" align="center"> <span style="color: maroon; font-size: large;">No records Found</span>  </td>
+             </tr>
+            </tbody>
+          </table>
+        </div>
+  
+  

@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files*/
+@import "assets/prism/assets/vendor/animate.css/animate.min.css";
+@import "assets/prism/assets/vendor/aos/aos.css";
+@import "assets/prism/assets/vendor/bootstrap/css/bootstrap.min.css";
+@import "assets/prism/assets/vendor/bootstrap-icons/bootstrap-icons.css";
+@import "assets/prism/assets/vendor/boxicons/css/boxicons.min.css";
+@import "assets/prism/assets/vendor/glightbox/css/glightbox.min.css";
+@import "assets/prism/assets/vendor/swiper/swiper-bundle.min.css";
+@import "assets/prism/assets/css/style.css"; 
+
+@import "assets/comercio/assets_design/css/style.css";
+@import "assets/comercio/assets_design/vendor/aos/aos.css";
+ 
+
+.titleTotal
+{
+    width: 100%;
+  /*background-color: lightgray;*/
+
+}

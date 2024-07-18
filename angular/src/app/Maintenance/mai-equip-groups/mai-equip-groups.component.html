@@ -1,0 +1,183 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+ <h3>
+     Equipment Group Details
+   </h3>
+   <br>
+
+
+    <div class="row">
+       
+     
+      <div class="col-xl-4 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Select Group</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <table style="width: 100%;">
+                    <tr>
+                     
+                     <div class="card">
+                         <div class="card-header">
+                             <h5 class="card-title">Select Equipment Group</h5>
+                         </div>
+                         <div class="card-content">
+                             <div class="card-body">
+                 
+                     <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 360px; overflow-y: scroll;">
+                     
+                       <!--   <span *ngFor='let obj1 of grptree'  >
+                             <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                             <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='  (obj1)'>  {{obj1.sGrp}} </span> <br>
+                 
+                             <div  *ngIf='obj1.openCheck'>
+                             
+                             <span *ngFor='let obj2 of obj1.child' style="left: 32px; position: relative;"  >
+                               <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                               <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisible(obj2)'>  {{obj2.sGrp}} </span><br>
+                               
+                            
+                             </span>
+                         </div>
+                         </span>-->
+
+
+
+
+                         <span *ngFor='let obj1 of grptree'  >
+                          <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                          <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.sGrp}} </span> <br>
+              
+                          <div  *ngIf='obj1.openCheck'>
+                          
+                          <span *ngFor='let obj2 of obj1.child' style="left: 32px; position: relative;"  >
+                            <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                            <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.sGrp}} </span><br>
+                            
+                            <div  *ngIf='obj2.openCheck'>
+                            <span *ngFor='let obj3 of obj2.child' style="left: 32px; position: relative;" >
+                              <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                            <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>      <span (click)='toggleVisible(obj3)'> {{obj3.sGrp}} </span> <br>
+                            </span>
+                            </div>
+              
+                          </span>
+                      </div>
+                      </span>
+                 
+                     </div>
+                             </div>
+                         </div>
+                     </div>
+                     
+                    </tr>
+                <tr>
+                    <td  style="width: 50%;" align="right">
+                        <input type="text" class="form-control" id="basicInput"  placeholder="Enter Group" [(ngModel)]='subgrp'  >
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td  style="width: 50%;" align="right">
+                        <input type="text" class="form-control" id="basicInput"  placeholder="Main Group" [(ngModel)]='maingrp'  disabled >
+                    </td>
+                </tr>
+                
+                <tr>
+                  <td  style="width: 50%;" align="right">
+                    <select class="form-control" [(ngModel)]='activecheck'>
+                      <option value="1">Active</option>
+                      <option value="2">Inactive</option>
+                    </select>
+                   </td>
+                </tr>
+                    <tr>
+                      <td colspan="2">
+                        &nbsp;
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+                        <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+                        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+                      </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+    <div class="col-xl-8 col-12">
+      &nbsp;
+    </div>
+  
+    </div>
+  
+
+
+
+ </div>
+
+
+
+
+ <div *ngIf='!opened'>
+      <h3>
+           List of Equipment Groups
+       </h3>
+       
+       <table style="width: 90%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td  style="width: 50%;" align="right">
+            <input type="text" class="form-control" id="basicInput"  placeholder="Search...." [(ngModel)]='searchText' (input)='searchDetails()' >
+        </td>
+
+           
+       </tr>
+       </table>
+       <ngb-pagination [collectionSize]="totalpages" (pageChange)="loadPage($event)" [(page)]="page4" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  
+       <table class="table m-0" style="width: 90%;">
+           <thead class="thead-light">
+             <tr>
+               <th style="width: 5%;">#</th>
+               <th style="width: 34%;">Group</th>
+               <th style="width: 30%;">Main Group</th>
+               <th style="width: 15%;">Status</th>
+              <!-- <th style="width: 8%;">Image</th>-->
+               <th style="width: 8%;"></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let grp of showgroups; let i=index'>
+               <th scope="row" style="vertical-align: middle; width: 5%;">{{i+1+(pageno-1)*PAGESIZE}}</th>
+               <td style="vertical-align: middle; width: 34%;">{{grp.subGroup}}</td>
+               <td style="vertical-align: middle; width: 30%;">{{grp.mainGroup}}</td>
+               <td style="vertical-align: middle; width: 15%;">{{grp.statu}}</td>
+             <!--  <td style="vertical-align: middle; width: 8%; height: 74px;" align="center">
+                <img style="width: 70px;" src="{{grp.image}}">
+                
+                <label for="upload{{grp.recordID}}" style="width: 100%;" class="custom-file-upload">
+                  <span>Change Image</span>
+                   </label>
+                   <input type="file" id="upload{{grp.recordID}}" hidden [(ngModel)]='grp.FileObj' accept="image/*" (change)='imageEdit($event,grp)'/>
+           
+                </td>-->
+               <td style="vertical-align: middle; width: 8%;"><i class="ft-edit font-medium-1" (click)='openOld(grp)' ></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+         
+
+        </div>

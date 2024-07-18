@@ -1,0 +1,97 @@
+<h3>License Details</h3>
+
+<div *ngIf='registration'>
+
+
+
+<h4> Customer Id {{registration.customerId}}</h4>
+
+
+
+
+<font face="Arial" size=3 color="black">
+<table style="width: 90%;">
+<tr>
+    <td style="width: 15%;" align="right">Registration </td>
+    <td colspan="3">
+        <input type="text" disabled class="form-control" value="{{registration.customer}}">
+        </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Address</td>
+
+    <td style="width: 35%;" rowspan="2">
+        <textarea class="form-control" disabled rows="3">
+        {{registration.addr}} </textarea></td>
+    <td style="width: 15%;" align="right">Zip</td>
+    <td style="width: 35%;">
+    <input type="text" class="form-control" disabled value="{{registration.zip}}"> </td>
+</tr>
+<tr>
+    <td style="width: 15%;">&nbsp;</td>
+    <td style="width: 15%;" align="right">Mobile</td>
+    <td style="width: 35%;">
+        <input type="text" class="form-control" disabled value="{{registration.mobile}}">
+         </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Country</td>
+    <td style="width: 35%;"> <input type="text" class="form-control" disabled value="{{registration.country}}"> </td>
+    <td style="width: 15%;" align="right">Tel</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.tel}}"> </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">State</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.stat}}">  </td>
+
+    
+    <td style="width: 15%;" align="right">GST</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.fax}}">  </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">District</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.district}}"> </td>
+    <td style="width: 15%;" align="right">E-Mail</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.email}}">  </td>
+</tr>
+<tr>
+
+    <td style="width: 15%;" align="right">City</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.city}}"> </td>
+    <td style="width: 15%;" align="right">Web</td>
+    <td style="width: 35%;"><input type="text" class="form-control" disabled value="{{registration.web}}">  </td>
+ 
+</tr>
+<tr>
+    <td colspan="4">&nbsp;</td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Reg. Date</td>
+    <td style="width: 35%;">
+        <input type="text" class="form-control" disabled value="{{registration.regDate | date:'dd-MMM-yy'}} ">
+        </td>
+    <td style="width: 15%;" align="right">Reg. Validity</td>
+    <td style="width: 35%;">
+        <input type="text" class="form-control" disabled value="{{registration.expDate | date:'dd-MMM-yy'}} ">
+  
+        </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Financial year</td>
+    <td style="width: 35%;">
+        <input type="text" class="form-control" disabled value="{{registration.fiscal | slice:0:6}} ">
+  
+        </td>
+    <td style="width: 15%;" align="right">Currency</td>
+    <td style="width: 35%;">
+        <input type="text" class="form-control" disabled value="{{registration.currency}}-{{registration.coins}}">
+  
+         </td>
+</tr>
+</table>
+
+</font>
+</div>
+<br>
+<br>
+<span style="font-size: 12; color: red;">{{msg}}</span>

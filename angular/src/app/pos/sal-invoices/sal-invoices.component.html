@@ -1,0 +1,76 @@
+<h3>
+    List of Dispatches to be invoiced
+</h3>
+
+<table style="width: 80%;">
+<tr>
+
+ <td align="right" style="width: 30%;">
+     <div class="input-group">
+         <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker 
+           #d1="ngbDatepicker" style="width: 50%;" [(ngModel)]='listdat'>
+         <div class="input-group-append">
+           <div class="input-group-text" (click)="d1.toggle()">
+             <i class="fa fa-calendar" style="cursor: pointer;"></i>
+           </div>
+         </div>
+       </div>
+ 
+ </td>
+ 
+ <td align="right" style="width: 30%;">
+    <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp1"   ngbDatepicker 
+          #d2="ngbDatepicker" style="width: 50%;"  >
+        <div class="input-group-append">
+          <div class="input-group-text" (click)="d2.toggle()">
+            <i class="fa fa-calendar" style="cursor: pointer;"></i>
+          </div>
+        </div>
+      </div>
+
+</td>
+ <td align="left" style="width: 20%;">   <button type="button" class="btn btn-secondary mr-1 mb-1" (click)='listAdd()' >Show</button> </td>
+
+    <td align="left" style="width: 20%;">
+        <button type="button" class="btn btn-primary mr-1 mb-1"  >Submit</button>
+    </td>
+  
+</tr>
+</table>
+
+<table class="table m-0" style="width: 80%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>DC-No</th>
+       
+        <th>Customer</th>
+        <th>Transporter</th>
+        <th>Mobile</th>
+        <th style="text-align: right;">Base Amount</th>
+        <th style="text-align: right;">Taxes</th>
+        <th style="text-align: right;">Others</th>
+        <th style="text-align: right;">Total</th>
+        <th style="text-align: center;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor='let pur of purchases;let i=index'>
+        <td> <input type="checkbox">  </td>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{pur.seq}}</td>
+        <td>{{pur.invoiceno}}</td>
+        <td>{{pur.vendorname}}</td>
+        <td>{{pur.mobile}}</td>
+        <td align="right">{{pur.baseamt | number:'0.2'}}</td>
+        <td align="right">{{pur.taxes | number:'0.2'}}</td>
+        <td align="right">{{pur.others | number:'0.2'}}</td>
+        <th scope="row" style="text-align: right;">{{pur.totalAmt | number:'0.2'}}</th>
+        <td align="center"><i class="ft-edit font-medium-1" (click)='openOld(pur)' ></i></td>
+      </tr>
+     
+    </tbody>
+  </table>
+

@@ -1,0 +1,32 @@
+
+.terms-modal .modal-content {
+    // background-color: #292b2c;
+     width: 900px;
+   //  color: white;
+     position:absolute;
+     left: -200px;
+ }
+  .terms-modal .close {
+     color: black;
+ }
+ 
+ .terms-modal .modal-title {
+   color: black;
+ }
+ 
+ 
+ .dark-modal .modal-content {
+     background-color: #292b2c;
+     width: 190%;
+     color: white;
+     position:absolute;
+     left: -300px;
+ }
+  .dark-modal .close {
+     color: white;
+ }
+ 
+ .dark-modal .modal-title {
+   color: white;
+ }
+ 

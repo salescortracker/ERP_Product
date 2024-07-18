@@ -1,0 +1,74 @@
+
+ <ngx-spinner></ngx-spinner>
+<h3>Request Approvals</h3>
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 10%;">Department</td>
+    <td style="width: 35%;"> <select class="form-control" [(ngModel)]='department' (change)='makeDepartment()' >
+        <option value="0">--Select--</option>
+        <option *ngFor='let dep of departments' value="{{dep.recordid}}">{{dep.department}}</option>
+    </select></td>
+    <td  style="width: 55%;" align="right"> <button class="btn-lg btn-success" type="button" (click)='getPurchaseRequests()'>Show</button> </td>
+    
+</tr>
+<tr>
+    <td colspan="3">
+       
+        <div style="width: 100%; height: 600px; overflow-y: scroll ;">
+    
+       
+
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 3%;">#</th>
+                    <th style="width: 4%;"> <input type="checkbox" (change)='makeTotalSelect()' [(ngModel)]='chk'></th>
+                    
+                    <th style="width: 6%;">Date</th>
+                    <th style="width: 11%;">Employee</th>
+                    <th style="width: 15%;">Material</th>
+                    <th style="width: 15%;">Pref Supplier</th>
+                   
+                   
+                    <th style="text-align: right; width: 7%;">Qty</th>
+                    <th style="text-align: right; width: 7%;">Apprvoved</th>
+                    <th style="width: 5%;">UOM</th>
+                    <th style="width: 9%;">Reqd by</th>
+                    <th style="width: 18%;">Purpose</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let item of totalItems;let i=index'>
+                        <th style="width: 3%;" class="textstyle">{{i+1}}</th>
+                        <td style="width:4%">  <input type="checkbox" [(ngModel)]='item.chk'>  </td>
+                        <th style="width: 6%;" class="textstyle">{{item.Dat}}</th>
+                        <td style="width: 11%;" class="textstyle">{{item.empname}}</td>
+                        <td style="width: 15%;" class="textstyle">{{item.ItemDescription}}</td>
+                        <td style="width: 15%;" class="textstyle">{{item.ApprovedUsr}}</td>
+                        <td align="right" style="width: 7%;" class="textstyle">{{item.Qty}}</td>
+                        <td align="right" style="width: 7%;" class="textstyle"> <input type="number" style="text-align: right;" class="form-control"[(ngModel)]='item.ApprovedQty'></td>
+                        <td style="width: 5%;" class="textstyle">{{item.Um}}</td>
+                        <td style="width: 9%;" class="textstyle">{{item.ReqdBy}}</td>
+                        <td style="width: 18%;" class="textstyle">{{item.Purpose}}</td>
+                       </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+       
+
+
+
+
+    </td>
+
+</tr>
+<tr>
+    <td colspan="3">
+        <button class="btn-lg btn-primary" type="button" [disabled]='totalItems.length <= 0' (click)='save()'  >Submit</button>
+    </td>
+</tr>
+</table>
+

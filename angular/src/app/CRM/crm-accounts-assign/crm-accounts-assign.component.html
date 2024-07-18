@@ -1,0 +1,38 @@
+<h3>
+    Accounts Assign
+</h3>
+
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+         
+      
+        <th style="width: 30%;">Description</th>
+        <th style="width: 40%;"> Account</th>
+        <th style="width: 30%;"> Group</th>
+    
+      </tr>
+    </thead>
+    <tbody>
+         <tr *ngFor='let detail of details'>
+                <td style="width: 30%;">{{detail.transdescription}}</td>
+                <td style="width: 40%;">
+                <select class="form-control" [(ngModel)] ='detail.accountId' (change) ='findGroup(detail)'>
+             <option value="0">--Select--</option>
+                    <option *ngFor='let acc of accounts' value="{{acc.accountId}}">{{acc.accountName}}</option>
+                </select>
+                </td>
+                <td style="width: 30%;">{{detail.grp}}</td>
+         </tr>
+         <tr>
+             <td style="width: 30%;">
+                <button type="button" class="btn btn-info mr-1 mb-1" (click) ='save()' >Save</button>
+     
+            </td>
+            <td style="width: 40%;"> &nbsp;
+            </td>
+            <td style="width: 30%;">&nbsp;
+            </td>
+         </tr>
+        </tbody>
+</table>

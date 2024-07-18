@@ -1,0 +1,91 @@
+<h3>Stock audit as on {{dat | date:'dd-MMM-yyyy'}}</h3>
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 14%;">Store</td>
+        <td style="width: 27%;">Material</td>
+        <td style="width: 10%;">Batch No</td>
+        
+        <td style="width: 13%;">Qty</td>
+        <td style="width: 13%;">UOM</td>
+        <td style="width: 13%;">Rate</td>
+       
+        <td style="width: 10%;">&nbsp;</td>
+    </tr>
+    
+    <tr>
+        <td style="width: 14%;">   <select style="width: 100%;" class="form-control" [(ngModel)]='storeid' (change)='listAdd()'>
+        
+            <option value="{{store.recordId}}" *ngFor='let store of stores'>{{store.storeCode}}</option>
+             
+            </select></td>
+        <td style="width: 27%;">   <ng-select [items]="items" bindLabel="itemname" [(ngModel)]='material' > </ng-select> </td>
+        <td style="width: 10%;">
+            <select class="form-control" [(ngModel)]='batchno'>
+                <option value=" ">--Select--</option>
+            </select>
+           </td>
+
+         
+      
+        <td style="width: 8%;"><input type="number" [(ngModel)]='qty' class="form-control" style="width: 100%;"></td>
+        <td style="width: 8%;"> <input type="text"  class="form-control"  disabled style="width: 100%;" [(ngModel)]='material.stdum'>  </td>
+        <td style="width: 8%;"><input type="number" [(ngModel)]='rat' class="form-control" style="width: 100%;"></td>
+    
+        <td style="width: 5%;"><button type="button" style="width: 100%;" class="btn-lg btn-success mr-1 mb-1" [disabled]='addcheck' (click)='addStock()' >Add</button></td>
+    </tr>
+    <tr>
+      <td style="width: 14%;" align="right">Group</td>
+      <td style="width: 27%;"> <input type="text"  class="form-control"  disabled style="width: 100%;" [(ngModel)]='material.grp'>  </td>
+      <td style="width: 10%;">&nbsp;</td>
+       
+      <td style="width: 13%;">&nbsp;</td>
+      <td style="width: 13%;">&nbsp;</td>
+      <td style="width: 13%;">&nbsp;</td>
+     
+      <td style="width: 10%;">&nbsp;</td>
+  </tr>
+
+  <tr>
+     <td colspan="7">&nbsp;</td>
+</tr>
+
+<tr>
+  <td colspan="9">
+<table class="table m-0" style="width: 100%;">
+<thead class="thead-light">
+  <tr>
+     
+  
+    <th>Material</th>
+    <th>Batch</th>
+   
+    <th>Qty</th>
+    <th>UM</th>
+    <th>Rate</th>
+    <th>&nbsp;</th>
+  </tr>
+</thead>
+
+
+<tr *ngFor='let item of opestocks; let i=index'>
+  
+  
+  <td>{{item.itemname}}</td>
+  <td>{{item.batchNo}}</td>
+  
+  <td>{{item.qty}}</td>
+  <td>{{item.stdUm}}</td>
+  <td>{{item.rat}}</td>
+  <td><i class="ft-trash font-medium-1" (click)='deleteStock(item)' ></i></td>
+</tr>
+
+
+</table>
+</td>
+</tr>
+
+</table>
+
+
+
+<ngx-spinner></ngx-spinner>

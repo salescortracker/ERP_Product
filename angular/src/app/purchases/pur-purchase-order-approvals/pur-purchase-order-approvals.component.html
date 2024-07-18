@@ -1,0 +1,40 @@
+<h3>
+    List of Purchase Orders For Approvals
+</h3>
+
+<table style="width: 100%;">
+
+</table>
+
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 15%;">PO</th>
+        <th style="width: 22%;">Supplier</th>
+        <th style="width: 15%;">Mobile</th>
+        <th style="text-align: right; width: 10%;">Base Amount</th>
+        <th style="text-align: right; width: 10%;">Others</th>
+        <th style="text-align: right; width: 12%;">Total</th>
+        
+        <th style="width: 4%;"></th>
+        <th style="width:7%"></th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let order of purchaseorders;let i=index'>
+        <th scope="row" style="width: 5%;">{{i+1}}</th>
+        <td style="width: 15%;">{{order.seq}}</td>
+        <td style="width: 22%;">{{order.vendorname}}</td>
+        <td style="width: 15%;">{{order.mobile}}</td>
+
+        <td align="right" style="width: 12%;">{{order.baseamt | number:'0.2'}}</td>
+        <td align="right" style="width: 12%;">{{order.others | number:'0.2'}}</td>
+        <th scope="row" style="text-align: right; width: 12%;" >{{order.totalAmt | number:'0.2'}}</th>
+          <td style="width: 4%;"><i class="ft-printer font-medium-1" (click)='printOrder(order)' ></i></td>
+    <td style="width: 7%;"> <button type="button" class="btn-sm btn-info" style="width: 100%;" (click)='makeApprove(order)'>Approve</button> </td>
+        </tr>
+     
+    </tbody>
+  </table>

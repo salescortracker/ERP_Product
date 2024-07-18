@@ -1,0 +1,36 @@
+<ngx-spinner></ngx-spinner>
+
+<table style="width: 50%;">
+<tr>
+    <td style="width: 30%">Cycle type</td>
+    <td style="width: 70%;">
+    <select class="form-control" [(ngModel)]='cycle'>
+        <option value="-1">--Select--</option>
+        <option value="1">Monthly</option>
+        <option value="2">Quarterly</option>
+        <option value="3">Half Yearly</option>
+        <option value="4">Yearly</option>
+    </select>
+    </td>
+</tr>
+<tr>
+    <td style="width: 30%">Target on</td>
+    <td style="width: 70%;">
+    <select class="form-control" [(ngModel)]='target'>
+        <option value="-1">--Select--</option>
+        <option value="1">Product</option>
+        <option value="2">Category</option>
+        <option value="3">Lumpsum</option>
+      
+    </select>
+    </td>
+</tr>
+<tr>
+    <td style="width: 30%;">
+    
+    </td>
+    <td style="width: 70%;">
+        <button class="btn btn-primary" type="button" (click)='save()'>Submit</button>
+    </td>
+</tr>
+</table>

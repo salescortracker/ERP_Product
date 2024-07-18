@@ -1,0 +1,120 @@
+<ngx-spinner></ngx-spinner>
+
+
+<div *ngIf='opened'>
+    <h3>Process Clearance infomration</h3>
+    <table style="width: 100%;">
+    <tr>
+        <td style="width: 30%;">Process</td>
+        <td style="width: 30%;">Incharge</td>
+        <td style="width: 30%;">Designation</td>
+        <td style="width: 10%;">Mobile</td>
+    </tr>
+    <tr>
+        <td style="width: 30%;"> <select class="form-control" [(ngModel)]='processid' (change)='makePendingProcesses()'>
+            <option value="0">--Select--</option>
+            <option *ngFor='let pro of processes' value="{{pro.recordId}}">{{pro.processName}}</option>
+        </select> </td>
+        <td style="width: 30%;"><ng-select [items]="employees" bindLabel="empname" [(ngModel)]='employ'> </ng-select></td>
+        <td style="width: 30%;"> <input type="text" class="form-control" disabled [(ngModel)]='employ.designation'> </td>
+        <td style="width: 10%;"><input type="text" class="form-control" disabled [(ngModel)]='employ.mobile'></td>
+    </tr>
+    <tr>
+        <td colspan="4">
+
+            <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 300px">
+            
+            
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 15%;">Batch No</th>
+            <th style="width: 28%;">Item Name</th>
+            <th style="width: 9%;">Qty</th>
+            <th style="width: 8%;">UM</th>
+            <th style="width: 35%;">Production Incharge</th>
+             
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let proc of filterpendings;let i=index'>
+            <th scope="row" style="width: 5%;"> <input type="checkbox" [(ngModel)]='proc.chk'> </th>
+            <td style="width: 15%;">{{proc.batchno}}</td>
+            <td style="width: 28%;">{{proc.itemname}}</td>
+           
+            <td style="width: 9%;">{{proc.qty}}</td>
+            <td style="width: 8%;">{{proc.um}}</td>
+            <td style="width: 35%;">{{proc.productionincharge}}</td>
+            </tr>
+         
+        </tbody>
+      </table>
+            
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <button  *ngIf='recordId > 0' [disabled]='!delCheck' class="btn-lg btn-danger" (click)='deleteProcess()'>Cancel</button>
+            <button *ngIf='recordId == 0'  [disabled]='!creCheck' class="btn-lg btn-primary" (click)='saveProcess()'>Save</button>
+            <button   class="btn-lg btn-dark" (click)='close()'>Close</button>
+            
+            
+
+        </td>
+    </tr>
+    </table>
+</div>
+
+
+
+<div *ngIf='!opened'>
+    <h3>
+        List of Processes
+    </h3>
+    
+    <table style="width: 100%;">
+    <tr>
+
+     <td align="right" style="width: 40%;">
+          
+           <input type="date" class="form-control"  [disable]='!dateCheck'  [value]="listDate | date:'yyyy-MM-dd'" (input)="listDate=parseDate($event.target.value)">
+     
+     </td>
+     <td align="left" style="width: 25%;">   <button type="button" class="btn-lg btn-info mr-1 mb-1" (click)='ShowOrders()' >Show</button> </td>
+
+        <td align="left" style="width: 25%;">
+            <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+        </td>
+      
+    </tr>
+    </table>
+    
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 15%;">Job Card</th>
+            <th style="width: 35%;">Process Name</th>
+            <th style="width: 40%;">Inchage</th>
+            
+             <th style="width: 5%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let proc of processeslist;let i=index'>
+            <th scope="row" style="width: 5%;"> {{i+1}}</th>
+            <td style="width: 15%;">{{proc.jobcard}}</td>
+            <td style="width: 35%;">{{proc.processname}}</td>
+            <td style="width: 40%;">{{proc.processincharge}}</td>
+
+          
+             <td style="width: 5%;"><i class="ft-edit font-medium-1" (click)='openOld(proc)' ></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>

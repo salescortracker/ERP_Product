@@ -1,0 +1,25 @@
+<h3> Enquiry Covering Letter Details </h3>
+
+<table style="width: 80%;">
+<tr>
+    <td style="width: 30%;" align="right">Subject</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='letter.Subjec'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Salutation</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='letter.Salutation'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Body</td>
+    <td style="width: 70%;">  <textarea class="form-control" rows="3" [(ngModel)] ='letter.Body'>
+
+    </textarea> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Image</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='letter.Img'> </td>
+</tr>
+<tr>
+    <td colspan="2"><button class="btn-lg btn-primary" (click)='save()'>Save</button></td>
+</tr>
+</table>

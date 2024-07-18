@@ -1,0 +1,411 @@
+
+
+<div *ngIf='!opened'>
+    <h3>List of Resume</h3>
+   
+     <table style="width: 80%;">
+     <tr>
+         <td align="left" style="width: 20%;">
+             <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+         </td>
+         <td align="right" style="width: 10%;">
+        From
+         </td>
+         <td style="width: 20%;" align="left">
+            <input type="date" class="form-control" [disabled]='!datecheck'  [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)">
+        </td>
+        <td align="right" style="width: 10%;">
+            To
+             </td>
+             <td style="width: 20%;" align="left">
+                
+                <input type="date" class="form-control" [disabled]='!datecheck'  [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)">
+      
+            </td>
+            <td style="width: 20%;" align="left">
+            <button type="button" class="btn-lg btn-info" (click)='listAdd()'>Show</button>
+            </td>
+     </tr>
+     </table>
+     
+     <table class="table m-0" style="width: 100%;">
+         <thead class="thead-light">
+           <tr>
+             <th>#</th>
+             <th>Seq</th>
+             <th>Name</th>
+             <th>DOA</th>
+             <th>Designation</th>
+             <th>Mobile</th>
+             <th>Email</th>
+           
+             <th></th>
+             
+           </tr>
+         </thead>
+         <tbody>
+          
+           <tr *ngFor='let res of resumes;let i=index'>
+             <th scope="row" >{{i+1}}</th>
+             <td>{{res.seq}}</td>
+             <td>{{res.nameOfCandidate}}</td>
+             <td>{{res.dat | date:'dd-MMM-yy'}}</td>
+             <td>{{res.zip}} </td>
+             <td>{{res.mobile}}</td>
+             <td>{{res.email}}</td>
+              
+             <td><i class="ft-edit font-medium-1" (click)='openOld(res)'></i></td>
+              
+           </tr>
+          
+         </tbody>
+       </table>
+
+</div>
+
+
+
+
+
+
+
+
+<div *ngIf='opened'>
+    <h1>Resume Details</h1>
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 12%;">
+                <img [src]='fileName' id='imgid' height="130px" width="100%">
+            </td>
+            
+            <td style="width: 4%; background-color: rgb(252, 100, 100); color: black;" align="left" valign="bottom">
+        
+                <label for="file-upload" class="custom-file-upload">
+                <i class="ft-edit font-medium-1">
+                </i>
+                </label>
+        
+                    <input type="file"  id="file-upload" (change)='onSelectFile($event)'/>
+        
+              
+                
+            </td>
+            <td style="width: 84%; background-color: rgb(252, 100, 100); color: wheat;">
+                
+                <table style="width: 100%;">
+                <tr>
+                    <td colspan="2" align="left" valign="middle">
+                     
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="left" valign="middle"> 
+                        
+                    </td>
+                    <td style="width: 80%;">
+                        <h2 style="color: #fff;">   {{header.NameOfCandidate}} {{header.SurName}}</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="left" valign="middle"> 
+                         
+                    </td>
+                    <td style="width: 80%;">
+                        <h4 style="color: #fff;">   {{designation}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;">
+                        &nbsp;
+                    </td>
+                    <td style="width: 80%;">
+                        &nbsp;
+                         </td>
+                </tr>
+                </table>
+         
+            </td>
+            
+        </tr>
+        
+        </table>
+
+
+<div class="row">
+
+    <table style="width: 100%;">
+    <tr>
+        <td style="width: 45%;">
+        
+       
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Personal Details</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+    <table style="width: 100%;">
+        
+        <tr>
+            <td style="width: 30%;" align="right">*Application Date</td>
+            
+            <td style="width: 70%;"> 
+                <input type="date" class="form-control" [value]="header.AppDate | date:'yyyy-MM-dd'" (input)="header.AppDate=parseDate($event.target.value)">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">*Name</td>
+            <td style="width: 70%;"> <input type="text" [(ngModel)]='header.NameOfCandidate' class="form-control"> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Surname</td>
+            <td style="width: 70%;"> <input type="text" [(ngModel)]='header.SurName'  class="form-control"> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Father/husband</td>
+            <td style="width: 70%;"> <input type="text" [(ngModel)]='header.FatherName'  class="form-control"> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Date of Birth</td>
+            <td style="width: 70%;">    <input type="date" class="form-control" [value]="header.Dob | date:'yyyy-MM-dd'" (input)="header.Dob=parseDate($event.target.value)">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">*Gender</td>
+            <td style="width: 70%;"> <select class="form-control" [(ngModel)]='header.Gender'>
+                <option value="0">--Select--</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Transgender</option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Marital Status</td>
+            <td style="width: 70%;"> <select class="form-control" [(ngModel)]='header.MaritalStatus'>
+                <option value="0">--Select--</option>
+                <option value="1">Single</option>
+                <option value="2">Married</option>
+            </select> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Reference</td>
+            <td style="width: 70%;"> <input type="text"  class="form-control"  [(ngModel)]='header.Reference'> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">*Designation</td>
+            <td style="width: 70%;"> <select class="form-control" (change)='findDepartment()' [(ngModel)]='header.Designation'>
+                <option value="-1">--Select--</option>
+                <option *ngFor='let des of designations' value="{{des.RecordId}}">{{des.Designation}}</option>
+                
+            </select> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Department</td>
+            <td style="width: 70%;"> <input type="text" disabled class="form-control" [(ngModel)]='department'> </td>
+        </tr>
+        <tr>
+            <td style="width: 30%;" align="right">Expected Salary</td>
+            <td style="width: 70%;"> <input type="number" style="width: 60%;" class="form-control" [(ngModel)]='header.ExpectedSalary'> </td>
+        </tr>
+    </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Address Details</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 10%;" align="right">Address</td>
+            <td style="width: 50%;" rowspan="2"> <textarea class="form-control" rows="3" [(ngModel)]='header.Addr'></textarea> </td>
+            <td style="width: 10%;" align="right">Zip</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.Zip'> </td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" align="right">&nbsp;</td>
+            <td style="width: 10%;" align="right">*Mobile</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.Mobile'> </td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" align="right">Country</td>
+            <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='header.Country'> </td>
+            <td style="width: 10%;" align="right">Tel</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.Tel'> </td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" align="right">State</td>
+            <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='header.Stat'> </td>
+            <td style="width: 10%;" align="right">Fax</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.Fax'> </td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" align="right">District</td>
+            <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='header.District'> </td>
+            <td style="width: 10%;" align="right">*E-mail</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.Email'> </td>
+        </tr>
+        <tr>
+            <td style="width: 10%;" align="right">City</td>
+            <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='header.City'> </td>
+            <td style="width: 10%;" align="right">Aadhar</td>
+            <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='header.PermenentId'> </td>
+        </tr>
+    </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</td>
+<td style="width: 55%;">
+
+
+
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Curriculum Details</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 20%;">From  </td>
+            <td style="width: 10%;">To</td>
+            <td style="width: 32%;">Qualification  </td>
+            <td style="width: 32%;">Board/University  </td>
+            <td style="width: 6%;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 20%;"><input type="number" class="form-control" [(ngModel)]='cfrom'>  </td>
+            <td style="width: 10%;"><input type="number" class="form-control" [(ngModel)]='cto'></td>
+            <td style="width: 32%;"><input type="text" class="form-control" [(ngModel)]='quali'> </td>
+            <td style="width: 32%;"><input type="text" class="form-control" [(ngModel)]='board'></td>
+            <td style="width: 6%;"><button type="button" class="btn-sm btn-inf" style="width: 100%;" (click)='addCurriculum()'>Add</button> </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <div style="overflow-y: scroll; width:100%; height: 250px ">
+                    <table class="table m-0" style="width: 100%;">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>#</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Qualification</th>
+                            <th>Board / University</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          <tr *ngFor='let cur of curriculum;let i=index'>
+                            <th scope="row" >{{i+1}}</th>
+                            <td>{{cur.FromYear}}</td>
+                            <td>{{cur.ToYead}}</td>
+                            <td>{{cur.Qualification}}</td>
+                            <td>{{cur.Board}}</td>
+                             <td><i class="ft-trash font-medium-1" (click)='deleteCurriculum(cur)'></i></td>
+                           </tr>
+                         
+                        </tbody>
+                      </table>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+    
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Experience Details</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 20%;">From  </td>
+            <td style="width: 10%;">To</td>
+            <td style="width: 32%;">Designation  </td>
+            <td style="width: 32%;">Organisaction  </td>
+            <td style="width: 6%;">&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 20%;"><input type="number" class="form-control" [(ngModel)]='efrom'>  </td>
+            <td style="width: 10%;"><input type="number" class="form-control" [(ngModel)]='eto'></td>
+            <td style="width: 32%;"><input type="text" class="form-control" [(ngModel)]='exper'> </td>
+            <td style="width: 32%;"><input type="text" class="form-control" [(ngModel)]='organisation'></td>
+            <td style="width: 6%;"><button type="button" class="btn-sm btn-inf" style="width: 100%;" (click)='addExperience()'>Add</button> </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <div style="overflow-y: scroll; width:100%; height: 250px ">
+                    <table class="table m-0" style="width: 100%;">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>#</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Qualification</th>
+                            <th>Board / University</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                            <tr *ngFor='let exp of experience;let i=index'>
+                                <th scope="row" >{{i+1}}</th>
+                                <td>{{exp.FromYear}}</td>
+                                <td>{{exp.ToYead}}</td>
+                                <td>{{exp.Designation}}</td>
+                                <td>{{exp.Organisation}}</td>
+                                 <td><i class="ft-trash font-medium-1" (click)='deleteExperience(exp)'></i></td>
+                               </tr>
+                        </tbody>
+                      </table>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+            </div>
+          </div>
+        </div>
+    </div>
+ 
+
+</td>
+</tr>
+<tr>
+    <td colspan="2">
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='recordid > 0' [disabled]='!delcheck' (click) ='delete()' >Delete</button>
+    <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!crecheck' (click)='save()' > <span *ngIf='recordid==0'>Save</span> <span *ngIf='recordid>0'>Modify</span>  </button>
+    <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+
+    </td>
+</tr>
+</table>
+
+
+
+
+
+</div>
+</div>

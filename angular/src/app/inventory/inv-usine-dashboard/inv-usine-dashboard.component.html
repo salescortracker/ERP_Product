@@ -1,0 +1,189 @@
+
+    
+<!-- Minimal statistics with bg color section start -->
+<section id="minimal-statistics-bg">
+     
+<h2>
+    Inventory Dashboard</h2>
+    <div class="row">
+      <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-warning">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">278k</h3>
+                  <span>Production</span>
+                </div>
+                <div class="media-right align-self-center">
+                  <i class="icon-wrench font-large-2 float-right"></i>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-success">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">15k</h3>
+                  <span>Home</span>
+                </div>
+                <div class="media-right align-self-center">
+                    <i class="ft-briefcase font-large-2 float-right"></i>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-danger">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">64.89 %</h3>
+                  <span>Maintenance</span>
+                </div>
+                <div class="media-right align-self-center">
+                    <i class="ft-life-buoy font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-primary">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">423</h3>
+                  <span>Others</span>
+                </div>
+                <div class="media-right align-self-center">
+                  
+                  <i class="ft-user font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-warning">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">278</h3>
+                  <span>In Process</span>
+                </div>
+                <div class="media-right align-self-center">
+                    <i class="icon-wrench font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-6 col-12">
+        <div class="card card-inverse bg-success">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="media">
+                <div class="media-body text-left">
+                  <h3 class="card-text">156</h3>
+                  <span>Losses</span>
+                </div>
+                <div class="media-right align-self-center">
+                  <i class="ft-zap font-large-2 float-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+      <!-- Bar Chart starts -->
+      <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Consumptions Chart</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="barChartOptions.series"
+                  [colors]="barChartOptions.colors"
+                  [chart]="barChartOptions.chart"
+                  [xaxis]="barChartOptions.xaxis"
+                  [yaxis]="barChartOptions.yaxis"
+                  [title]="barChartOptions.title"
+                  [dataLabels]="barChartOptions.dataLabels"
+                  [stroke]="barChartOptions.stroke"
+                  [grid]="barChartOptions.grid"
+                  [tooltip]="barChartOptions.tooltip"
+                  [plotOptions]="barChartOptions.plotOptions"
+                  [fill]="barChartOptions.fill"
+                  [legend]="barChartOptions.legend"
+                  [labels]="barChartOptions.labels"
+                  [markers]="barChartOptions.markers"
+                  [theme]="barChartOptions.theme"
+                  [responsive]="barChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+
+
+     <!-- Bar Chart starts -->
+     <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">ABC Analysis</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="abcChartOptions.series"
+                  [colors]="abcChartOptions.colors"
+                  [chart]="abcChartOptions.chart"
+                  [xaxis]="abcChartOptions.xaxis"
+                  [yaxis]="abcChartOptions.yaxis"
+                  [title]="abcChartOptions.title"
+                  [dataLabels]="abcChartOptions.dataLabels"
+                  [stroke]="abcChartOptions.stroke"
+                  [grid]="abcChartOptions.grid"
+                  [tooltip]="abcChartOptions.tooltip"
+                  [plotOptions]="abcChartOptions.plotOptions"
+                  [fill]="abcChartOptions.fill"
+                  [legend]="abcChartOptions.legend"
+                  [labels]="abcChartOptions.labels"
+                  [markers]="abcChartOptions.markers"
+                  [theme]="abcChartOptions.theme"
+                  [responsive]="abcChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+
+    
+
+
+    

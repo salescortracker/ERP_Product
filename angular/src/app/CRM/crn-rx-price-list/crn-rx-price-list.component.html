@@ -1,0 +1,80 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='authCheck'>
+ <div *ngIf='opencheck'>
+    <h3>
+    RX Sale Price List
+  </h3>
+
+  
+   <table style="width: 100%;">
+    <tr>
+      <td style="width: 40%;">
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 25%;" align="right">Price List</td>
+            <td style="width: 60%;" align="right"> <input type="text" class="form-control" [disabled]='editcheck' [(ngModel)]='pricename'> </td>
+            <td style="width: 25%;"><button type="button" class="btn btn-info mr-1 mb-1" (click)='savePrice()' >Save</button></td>
+          </tr></table>
+      </td>
+      <td style="width: 60%" align="right">
+        <button type="button" class="btn btn-dark mr-1 mb-1" (click)='close()' >Close</button>
+      </td>
+    </tr>
+ 
+  </table>
+<table class="table m-0" style="width: 99%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th>Coating</th>
+        <th>Price</th>
+         
+         
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let price of prices;let i=index'>
+          <td>{{i+1}}</td>
+          <td>{{price.product}}</td>
+          <td>{{price.coat}}</td>
+          <td><input type="number" class="form-control" [(ngModel)]='price.price'> </td>
+            </tr>
+    </tbody>
+</table>
+ </div>
+
+
+
+ <div *ngIf='!opencheck'>
+  <h3>
+    List of RX Sale Prices
+  </h3>
+  <button type="button" class="btn btn-primary mr-1 mb-1" (click)='openNew()'>New</button>
+
+  <table class="table m-0" style="width: 50%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+       
+        <th>Open</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let name of names; let i=index'>
+        <td>{{i+1}}</td>
+        <td>{{name}}</td>
+        <td><i class="ft-edit font-medium-1" (click)='openOld(name)' ></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+ </div>
+ </div>
+
+ <div *ngIf='!authCheck'>
+<h1>You are not authorised to view this page</h1>
+ </div>

@@ -1,0 +1,87 @@
+
+ <ngx-spinner></ngx-spinner>
+ <ng-sidebar-container *ngIf='authCheck' >
+   <ng-sidebar [opened]="opened" mode="push" >
+     <h3>
+     Purchase Types
+   </h3>
+   <br>
+   <table style="width: 100%;">
+   <tr>
+     <td style="width: 35%;">
+       <span>Term</span>
+         </td>
+     <td style="width: 65%;">
+       <input class="form-control" type="text" ngDefaultControl  [(ngModel)]='nam' [disabled]='recordID > 0' >
+         </td>
+   </tr>
+  
+   <tr>
+     <td colspan="2">
+       &nbsp;
+     </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+       <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteUM()' >Delete</button>
+       <button type="button" class="btn btn-info mr-1 mb-1" *ngIf='recordID ==0' (click)='saveUM()' >{{saveStr}}</button>
+       <button type="button" class="btn btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+   </tr>
+   </table>
+
+   
+   </ng-sidebar>
+   
+   <div ng-sidebar-content>
+     
+     <nav>
+      
+     
+
+
+       <h3>
+           List of Purchase Terms
+       </h3>
+       
+       <table style="width: 100%;">
+       <tr>
+           <td align="left">
+               <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 40%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Term</th>
+               
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let typ of types; let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{typ.term}}</td>
+              
+               <td><i class="ft-edit font-medium-1" (click)='openOld(typ)' ></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+
+
+
+
+   </nav>
+
+   </div>
+ 
+
+ </ng-sidebar-container>
+ <div *ngIf='!authCheck'>
+   <h1>Your are not authorized to view this page</h1>
+ </div>

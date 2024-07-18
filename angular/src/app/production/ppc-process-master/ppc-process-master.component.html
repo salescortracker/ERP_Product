@@ -1,0 +1,57 @@
+
+<div *ngIf='opened'>
+  <h3>
+    Process Details
+</h3> 
+
+  <table style="width: 60%;">
+    <tr>
+      <td style="width: 35%;" align="right">Process</td>
+      <td style="width: 65%;"> <input type="text" class="form-control" [(ngModel)]='process'> </td>
+    </tr>
+    <tr>
+      <td style="width: 35%;" align="right">&nbsp;</td>
+      <td style="width: 65%;"> <input type="checkbox"  [(ngModel)]='qcChk' ><span>Quality Required</span></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="button" class="btn-lg btn-danger" *ngIf='recordId > 0' [disabled]='!delCheck' (click)='delete()'>Delete</button>
+        <button type="button" class="btn-lg btn-primary" [disabled]='!creCheck' (click)='save()'> <span *ngIf='recordId==0'>Save</span>  <span *ngIf='recordId>0'>Modify</span></button>
+        <button type="button" class="btn-lg btn-dark" (click)='close()'>Close</button>
+      </td>
+    </tr>
+  </table>
+</div> 
+<div *ngIf='!opened'>
+  <h3>
+    List of Processes
+</h3> 
+
+<button type="button" class="btn-lg btn-info" (click)='openNew()'>New</button>
+<table class="table m-0" style="width: 60%;">
+  <thead class="thead-light">
+    <tr>
+      <th>#</th>
+      <th>Process</th>
+      <th>Quality</th>
+  
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    <tr *ngFor='let pro of processes;let i=index'>
+      <th scope="row" >{{i+1}}</th>
+      <td>{{pro.processName}}</td>
+      <td> <span *ngIf='pro.qcRequired==1'>Required</span> <span *ngIf='pro.qcRequired!=1'>Not Required</span> </td>
+     
+
+     
+      <td align="center"><i class="ft-edit font-medium-1" (click)='openOld(pro)' ></i></td>
+      </tr>
+   
+  </tbody>
+</table>
+
+
+</div>

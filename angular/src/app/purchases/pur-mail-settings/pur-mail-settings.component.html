@@ -1,0 +1,30 @@
+<h3>Email Settings</h3>
+<table style="width: 70%;">
+<tr>
+    <td style="width: 30%;" align="right">From</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='frmmail'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Password</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='pwd'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">CC</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='cc'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Server</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='mailserver'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Port</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='portnumber'> </td>
+</tr>
+<tr>
+    <td style="width: 30%;" align="right">Image Path Online</td>
+    <td style="width: 70%;"> <input type="text" class="form-control" [(ngModel)]='img'> </td>
+</tr>
+<tr>
+    <td colspan="2"> <button type="button" class="btn-lg btn-primary" (click)='save()'>Save</button> </td>
+</tr>
+</table>

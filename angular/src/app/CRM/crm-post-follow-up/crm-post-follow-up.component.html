@@ -1,0 +1,264 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+    <h3>
+    Followup Details
+  </h3>
+  <br>
+  <table style="width: 80%;">
+
+   <tr>
+     <td style="width: 20%;" align="right">Sequence</td>
+     <td style="width: 70%;"> <input type="text" disabled class="form-control" style="width:50%" value ="{{seq}}">  </td>
+   </tr>
+
+   <tr>
+       <td style="width: 20%;" align="right">*Customer</td>
+       <td style="width: 70%;">
+        <ng-select id='cmbsupplier' [(ngModel)]='custid' (change)='findCustomerDetails()' >
+            <ng-option *ngFor="let sup of customers" [value]="sup.customerid">{{sup.customername}}</ng-option>
+        </ng-select>
+       </td>
+       <td style="width: 10%;"></td>
+   </tr>
+   <tr>
+       <td style="width: 20%;" align="right">*Mobile</td>
+       <td style="width: 70%;">
+         <input type="text" disabled class="form-control" [(ngModel)]='customer.mobile'>
+       </td>
+       <td style="width: 10%;"></td>
+  <tr>
+   <tr>
+       <td style="width: 20%;" align="right">Email</td>
+       <td style="width: 70%;">
+         <input type="text" disabled class="form-control" [(ngModel)]='customer.email'>
+       </td>
+       <td style="width: 10%;"></td>
+  <tr>
+   <tr>
+       <td style="width: 20%;" align="right">Prev Call</td>
+       <td style="width: 70%;">
+          <table style="width: 100%;">
+           <tr>
+               <td style="width: 35%;">
+                   <input type="text" class="form-control" [(ngModel)]='customer.prevseq' style="width: 100%;" disabled >
+        
+               </td>
+               <td style="width: 15%;">
+                   
+               </td>
+               <td style="width: 15%;" align="right">Date</td>
+               <td style="width: 35%;">
+                 <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='customer.prevdate' disabled>
+      
+             </td>
+           </tr>
+       </table>
+       
+       
+       </td>
+       <td style="width: 10%;">
+           
+   
+       </td>
+  <tr>
+   <tr>
+       <td style="width: 20%;" align="right">Prev Mode</td>
+       <td style="width: 70%;">
+          <table style="width: 100%;">
+           <tr>
+               <td style="width: 50%;">
+                   <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='customer.prevmode' disabled  >
+        
+               </td>
+             
+               <td style="width: 15%;" align="right">Amount</td>
+               <td style="width: 35%;">
+                 <input type="text" class="form-control" style="width: 100%;" value='{{customer.pendingamt | number:"0.2"}}' disabled>
+      
+             </td>
+           </tr>
+       </table>
+       
+       </td><td style="width: 10%;"></td>
+   </tr>
+   <tr>
+     <td style="width: 20%;" align="right">Prev Caller</td>
+     <td style="width: 70%;">
+        <table style="width: 100%;">
+         <tr>
+             <td style="width: 50%;">
+                 <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='customer.prevcaller' disabled  >
+      
+             </td>
+           
+             <td style="width: 15%;" align="right"> &nbsp;</td>
+             <td style="width: 35%;">
+               <input type="text" class="form-control" style="width: 100%;" disabled  >
+    
+           </td>
+         </tr>
+     </table>
+     
+     </td><td style="width: 10%;"></td>
+ </tr>
+
+   <tr>
+     <td style="width: 20%;" align="right">Prvious Comments</td>
+     <td style="width: 70%;">
+       <textarea disabled class="form-control" [(ngModel)]='customer.prevcommnets'  style="width: 100%;" rows="3">
+   
+       </textarea>
+     </td><td style="width: 10%;"></td>
+ </tr>
+   <tr>
+       <td style="width: 20%;" align="right">*Customer Comments</td>
+       <td style="width: 70%;">
+         <textarea class="form-control" style="width: 100%;" rows="3" [(ngModel)]='customercomments'></textarea>
+       </td><td style="width: 10%;"></td>
+   </tr>
+   <tr>
+       <td style="width: 20%;" align="right">*Caller Comments</td>
+       <td style="width: 70%;">
+         <textarea class="form-control"  style="width: 100%;" rows="3" [(ngModel)]='callercomments'></textarea>
+       </td><td style="width: 10%;"></td>
+   </tr>
+
+   <tr>
+       <td style="width: 20%;" align="right">*Type</td>
+       <td style="width: 70%;">
+           <select class="form-control" [(ngModel)]='currentcallmode'>
+               <option value="0">--Select--</option>
+               <option value="1">Tele Call</option>
+               <option value="2">Personal Visit</option>
+                
+           </select>
+         </td><td style="width: 10%;"></td>
+   </tr>
+   <tr>
+       <td style="width: 20%;" align="right">Next Call date</td>
+       <td style="width: 70%;">
+        <input type="date" class="form-control"   [value]="nextcalldate | date:'yyyy-MM-dd'" (input)="nextcalldate=parseDate($event.target.value)">
+         </td><td style="width: 10%;"></td>
+   </tr>
+   <tr>
+       <td style="width: 20%;" align="right">Next Call Mode</td>
+       <td style="width: 70%;">
+           <select class="form-control" [(ngModel)]='nextcallmode'>
+               <option value="0">--Select--</option>
+               <option value="1">Tele Call</option>
+               <option value="2">Personal Visit</option>
+           </select>
+         </td><td style="width: 10%;"></td>
+   </tr>
+
+
+
+
+  <tr>
+
+    <td>
+      &nbsp;
+    </td>
+    <td>
+       &nbsp;
+     </td>
+  </tr>
+  <tr>
+    <td>
+      <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteCall()' >Delete</button>
+      <button type="button" class="btn btn-info mr-1 mb-1"  (click)='save()' >Save</button>
+      <button type="button" class="btn btn-dark mb-1" (click)='close()'>Close</button>
+    </td>
+  </tr>
+  </table>
+
+
+
+  <ng-template #customContent let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <h6 class="modal-title">Pending Calls</h6>
+     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+         
+     <table class="table m-0" style="width: 99%;">
+       <thead class="thead-light">
+         <tr>
+           <th>#</th>
+           <th>Customer</th>
+           <th>Mobile</th>
+           <th>Mode</th>
+           <th>Open</th>
+         </tr>
+       </thead>
+       <tbody>
+         
+       </tbody>
+     </table>
+   </div>
+   
+ 
+ </ng-template>
+
+ </div>
+
+   
+   <div *ngIf='!opened'>
+    
+
+
+      <h3>
+          List of Followup
+      </h3>
+      
+      <table style="width: 90%;">
+      <tr>
+        <td style="width: 40%;">
+         
+
+            <input type="date" class="form-control"   [value]="listdate | date:'yyyy-MM-dd'" (input)="listdate=parseDate($event.target.value)">
+       </td>
+       <td style="width: 20%;">
+         <button type="button" class="btn btn-info mr-1 mb-1" (click)='listAdd()'>Show</button>
+       </td>
+          <td  style="width: 40%;" align="right">
+              <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+          </td>
+      </tr>
+      </table>
+      
+      <table class="table m-0" style="width: 90%;">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Seq</th>
+              <th>Customer</th>
+              <th>Caller</th>
+              <th>Next Date</th>
+              <th>Status</th>
+           
+            </tr>
+          </thead>
+          <tbody>
+           <tr *ngFor='let lst of list;let i=index'>
+            <td>{{i+1}}</td>
+            <td>{{lst.seq}}</td>
+            <td>{{lst.customerName}}</td>
+            <td>{{lst.nextCallDate | date:'dd-MMM-yy'}}</td>
+            <td> <span *ngIf='lst.nextCallId'>Forwarded</span> </td>
+           </tr>
+            
+           
+          </tbody>
+        </table>
+
+
+
+  </div>
+
+
+
+

@@ -1,0 +1,790 @@
+<ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+<h1>Employee Details</h1>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 12%;">
+        <img [src]='fileName' id='imgid' height="130px" width="100%">
+    </td> 
+             
+
+
+
+    <td style="width: 4%; background-color: gray; color: black;" align="left" valign="bottom">
+
+        <label for="file-upload" class="custom-file-upload">
+        <i class="ft-edit font-medium-1">
+        </i>
+        </label>
+
+            <input type="file"  id="file-upload" [(ngModel)]='fileobj' (change)='onSelectFile($event)'/>
+
+      
+        
+    </td>
+    <td style="width: 84%; background-color: gray; color: wheat;">
+        
+        <table style="width: 100%;">
+        <tr>
+            <td colspan="2" align="left" valign="middle">
+             
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%;" align="left" valign="middle"> 
+                
+            </td>
+            <td style="width: 80%;">
+                <h2 style="color: #fff;">   {{employee.Empname}} {{employee.Surname}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%;" align="left" valign="middle"> 
+                 
+            </td>
+            <td style="width: 80%;">
+                <h4 style="color: #fff;">   {{designation}}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 20%;">
+                &nbsp;
+            </td>
+            <td style="width: 80%;">
+                <h6 style="color: #fff;">  {{department}} <span *ngIf='department != ""'>Department</span></h6>
+            </td>
+        </tr>
+        </table>
+ 
+    </td>
+    
+</tr>
+
+</table>
+ 
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+<table style="width: 100%;">
+    <tr>
+        <td colspan="4">
+            <span *ngIf='empdupcheck'>
+                <font color=red size=3><b>This Employee number is already existed</b></font>
+            </span>
+        </td>
+    </tr>
+<tr>
+    <td style="width: 15%;" align="right">Employee no</td>
+    <td style="width: 20%;"> <input type="text" class="form-control" [(ngModel)]='employee.Empno' (input)='checkEmployee()'> </td>
+    <td style="width: 15%;" align="right">Employee Name</td>
+    <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='employee.Empname'> </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Sur Name</td>
+    <td style="width: 20%;"> <input type="text" class="form-control" [(ngModel)]='employee.Surname'> </td>
+    <td style="width: 15%;" align="right">Father Name</td>
+    <td style="width: 50%;"> <input type="text" class="form-control" [(ngModel)]='employee.Fathername'> </td>
+</tr>
+</table>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ngb-tabset type="pills">
+            <ngb-tab title="General Profile">
+              <ng-template ngbTabContent> 
+                  <div style=" border-style: solid; border-color: black;">
+                    <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 2%;">
+                            &nbsp;
+                        </td>
+                        <td style="width: 96%;">
+                         
+                <table style="width: 100%;">
+                    <tr>
+                        <td  colspan="5">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 14%;">Gender</td>
+                        <td colspan="2">Date of birth</td>
+                        <td style="width: 30%;">Model of Salary</td>
+                        <td style="width: 30%;">Marital Status</td>
+                    </tr>
+                <tr>
+                    <td style="width: 14%;" valign="top">
+                    <select class="form-control" [(NgModel)]='employee.Gender'>
+                        <option value="0">-Select-</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Transgender</option>
+                    </select>
+                    </td>
+                    <td colspan="2" valign="top">
+                         
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker [(ngModel)]='dob' 
+                              #d1="ngbDatepicker" style="width: 50%;">
+                            <div class="input-group-append">
+                              <div class="input-group-text" (click)="d1.toggle()">
+                                <i class="fa fa-calendar" style="cursor: pointer;"></i>
+                              </div>
+                            </div>
+                          </div>
+                    </td>
+                    <td style="width: 30%;" valign="top">
+                        <select class="form-control" [(ngModel)]='employee.ModeofPay'>
+                            <option value="">-Select-</option>
+                            <option value="1">Daily</option>
+                            <option value="2">Weekly</option>
+                            <option value="3">Monthly</option>
+                        </select>
+                    </td>
+                    <td style="width: 30%;" valign="top">
+                        <select class="form-control"  [(ngModel)]='employee.MaritalStatus'>
+                            <option value="">-Select-</option>
+                            <option value="1">Single</option>
+                            <option value="2">Married</option>
+                             
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3" style="background-color: silver;">Identification Marks</td>
+                    <td colspan="2" style="background-color: silver;">Address for communication</td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3">
+                        <div style="overflow-y: scroll; width:100%; height: 250px ">
+                            <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 90%;"><input type="text" placeholder="Identification Mark" class="form-control" [(ngModel)]='identification'> </td>
+                                <td style="width: 10%;"> <button type="button" class="btn btn-success round mr-1 mb-1" (click)='addIdenti()'>Add</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <table class="table table-sm m-0">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Mark</th>
+                                            <th>&nbsp;</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor='let iden of identifications;let i=index'>
+                                                <td>{{i+1}}</td>
+                                                <td>{{iden.Identit}}</td>
+                                                <td><i class="ft-trash-2 font-medium-1" (click)='removeIdenti(iden)'></i></td>
+                                            </tr>
+                                             
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </table>
+                           
+
+                        </div>
+                    
+                    </td>
+                    <td colspan="2"> 
+                        <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 10%;" align="right">Address</td>
+                            <td style="width: 45%;" rowspan="2"><textarea class="form-control" rows="3" [(ngModel)]='employee.Address'></textarea></td>
+                            <td style="width: 10%;" align="right">Zip</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Zip'></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;" align="right">&nbsp;</td>
+                             <td style="width: 10%;" align="right">*Mobile</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Mobile'></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;" align="right">Country</td>
+                            <td style="width: 45%;"><input type="text" class="form-control" [(ngModel)]='employee.Country'></td>
+                            <td style="width: 10%;" align="right">Tel</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Tel'></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;" align="right">State</td>
+                            <td style="width: 45%;"><input type="text" class="form-control" [(ngModel)]='employee.Stat'></td>
+                            <td style="width: 10%;" align="right">Email</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Email'></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;" align="right">District</td>
+                            <td style="width: 45%;"><input type="text" class="form-control" [(ngModel)]='employee.District'></td>
+                            <td style="width: 10%;" align="right">*Aadhar</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Aadhar'></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;" align="right">City</td>
+                            <td style="width: 45%;"><input type="text" class="form-control" [(ngModel)]='employee.City'></td>
+                            <td style="width: 10%;" align="right">PAN</td>
+                            <td style="width: 35%;" align="right"><input type="text" class="form-control" [(ngModel)]='employee.Pan'></td>
+                        </tr>
+                        </table>
+
+                    </td>
+                </tr>
+
+<tr>
+    <td style="width: 14%;">Blood Group</td>
+    <td style="width: 13%;">Height</td>
+    <td style="width: 13%;">Weight</td>
+    <td style="width: 30%;">Reference</td>
+    <td style="width: 30%;">Machine Code</td>
+</tr>
+
+<tr>
+    <td style="width: 14%;"> <select class="form-control" [(ngModel)]='employee.BloodGrp'> <option value="">--Select--</option> 
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+    </select>  </td>
+    <td style="width: 13%;"><input type="text" class="form-control"  [(ngModel)]='employee.Height'> </td>
+    <td style="width: 13%;"><input type="text" class="form-control"  [(ngModel)]='employee.Weight'></td>
+    <td style="width: 30%;"><input type="text" class="form-control"  [(ngModel)]='employee.Referenc'></td>
+    <td style="width: 30%;"><input type="text" class="form-control"  [(ngModel)]='employee.Pzip'></td>
+</tr>
+<tr>
+    <td colspan="5">&nbsp;</td>
+</tr>
+<tr>
+    <td colspan="5">&nbsp;</td>
+</tr>
+
+                </table>
+                   
+            </td>
+            <td style="width: 2%;">
+                &nbsp;
+            </td>
+        </tr>
+        </table>
+            </div>
+            
+            </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Account Profile">
+              
+              <ng-template ngbTabContent>
+                  
+                <div style=" border-style: solid; border-color: black;">
+                <table style="width: 100%;">
+                <td style="width: 45%;" valign="top">
+<table style="width: 100%;">
+<tr>
+    <td style="width: 25%;" align="right" valign="top">
+        Department
+    </td>
+    <td style="width: 75%;">
+        <div style="overflow-y: scroll; width:100%; height: 250px ">
+            
+            <span *ngFor='let obj1 of treeObj'  >
+                <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.subGroup}} </span> <br>
+    
+                <div  *ngIf='obj1.openCheck'>
+                
+                <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+                  <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                  <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span><br>
+                  
+                  <div  *ngIf='obj2.openCheck'>
+                  <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                    <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                  <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>      <span (click)='toggleVisible(obj3)'> {{obj3.subGroup}} </span> <br>
+                  </span>
+                  </div>
+    
+                </span>
+            </div>
+            </span>
+       
+       
+        </div>
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Designation</td>
+    <td style="width: 75%;"> 
+    <select class="form-control" [(ngModel)]='employee.Designation' (change)='findDesignation()'>
+
+        <option value="0">--Select--</option>
+        <option *ngFor='let des of designations' value="{{des.recordId}}">{{des.designation}}</option>
+    </select>
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Superior</td>
+    <td style="width: 75%;"> 
+        <ng-select [items]="employees" bindLabel="empname"  [(ngModel)]='superior'></ng-select>
+    </td>
+</tr>
+
+<tr>
+    <td style="width: 25%;" align="right">Emp no</td>
+    <td style="width: 75%;"> 
+    <input type="text" disabled class="form-control" [(ngModel)]='superior.empno'>
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Department</td>
+    <td style="width: 75%;"> 
+    <input type="text" disabled class="form-control" [(ngModel)]='superior.department'>
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Designation</td>
+    <td style="width: 75%;"> 
+    <input type="text" disabled class="form-control" [(ngModel)]='superior.designation'>
+    </td>
+</tr>
+<tr>
+    <td style="width: 25%;" align="right">Mobile</td>
+    <td style="width: 75%;"> 
+    <input type="text" disabled class="form-control" [(ngModel)]='superior.mobile'>
+    </td>
+</tr>
+</table>
+
+
+
+                </td>
+                <td style="width: 55%;" valign="top">
+                    <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 30%;" align="right">Basic Salary</td>
+                        <td style="width: 70%;"><input type="number" class="form-control" [(ngModel)]='employee.BasicPay'> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" align="right">Mode of payment</td>
+                        <td style="width: 70%;"> 
+                        <select class="form-control">
+                            <option value="0">--Select--</option>
+                            <option value="1">Cash</option>
+                            <option value="2">Cheque</option>
+                            <option value="3">Online</option>
+                        </select>
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" align="right">SB A/c No</td>
+                        <td style="width: 70%;"><input type="text" class="form-control"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" align="right">IFSC Code</td>
+                        <td style="width: 70%;"><input type="text" class="form-control"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" align="right">ESI No</td>
+                        <td style="width: 70%;"><input type="text" class="form-control"> </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 30%;" align="right">PF No</td>
+                        <td style="width: 70%;"><input type="text" class="form-control"> </td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">
+                            <div style="overflow-y: scroll; width:100%; height: 150px "> 
+                            <table class="table m-0" style="width: 100%;">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th style="width: 5%;">#</th>
+                                    <th style="width: 25%;">Name</th>
+                                    <th style="width: 25%;">Value</th>
+                                    <th style="width: 20%;">Type</th>
+                                    <th style="width: 25%;">Effect</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                  <tr *ngFor='let allow of allowances;let i=index'>
+                                      <th style="width: 5%;">{{i+1}}</th>
+                                      <td style="width: 25%;">{{allow.allowance}}</td>
+                                      <td style="width: 25%;"><input type="number" class="form-control" [(ngModel)]='allow.valu'> </td>
+                                      <td style="width: 20%;">
+                                      <span *ngIf='allow.allowanceCheck==1'>Allowance</span>
+                                      <span *ngIf='allow.allowanceCheck!=1'>Deduction</span>
+                                      </td>
+                                      <td style="width: 25%;">
+                                        <span *ngIf='allow.allowanceCheck==1'>Exact Value</span>
+                                        <span *ngIf='allow.allowanceCheck==2'>Lower</span>
+                                        <span *ngIf='allow.allowanceCheck==3'>Upper</span>
+                                        <span *ngIf='allow.allowanceCheck==4'>Round</span>
+                                      </td>
+                                  </tr>
+                                  
+                              
+                                </tbody>
+                            </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <div style="overflow-y: scroll; width:100%; height: 150px ">
+                                <table class="table m-0" style="width: 100%;">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 25%;">Code</th>
+                                        <th style="width: 25%;">Leave</th>
+                                        <th style="width: 20%;">Allowable</th>
+                                        <th style="width: 25%;">Type</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                      <tr *ngFor='let leave of leaves;let i=index'>
+                                          <th style="width: 5%;">{{i+1}}</th>
+                                          <td style="width: 25%;">{{leave.leaveCode}}</td>
+                                          <td style="width: 25%;">{{leave.leaveDescription}}</td>
+                                          <td style="width: 20%;"><input type="number" class="form-control" [(ngModel)] ='leave.valu'> </td>
+                                           <td style="width: 25%;">
+                                             <span *ngIf='leave.forwardType==1'>Within year</span>
+                                             <span *ngIf='leave.forwardType==2'>Carry forward</span>
+                                             <span *ngIf='leave.forwardType==3'>Paid leave</span>
+                                            
+                                           </td>
+                                      </tr>
+                                       
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </table>
+                </div>
+                
+             
+            
+            </ng-template>
+            </ngb-tab>
+            <ngb-tab title="HR Profile">
+              <ng-template ngbTabContent>
+                 
+                 
+                    <table style="width: 100%;">
+                        <tr>
+                            <td colspan="5" style="background-color: lightgray;">Qualification Details</td>
+                        </tr>
+                    <tr>
+                        <td style="width: 18%;">
+                        From
+                        </td>
+                        <td style="width: 9%;">
+                        To
+                        </td>
+                        <td style="width: 30%;">
+                        Qualification
+                        </td>
+                        <td style="width: 35%;">
+                        Board/University
+                        </td>
+                        <td style="width: 8%;">
+                             &nbsp;
+                            </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 18%;">
+                        <input type="number" class="form-control" [(ngModel)]='qual.Frmyear'>
+                        </td>
+                        <td style="width: 9%;">
+                            <input type="number" class="form-control" [(ngModel)]='qual.Toyear'>
+                        </td>
+                        <td style="width: 30%;">
+                            <input type="text" class="form-control" [(ngModel)]='qual.Qual'>
+                        </td>
+                        <td style="width: 35%;">
+                            <input type="text" class="form-control" [(ngModel)]='qual.Board'>
+                        </td>
+                        <td style="width: 8%;">
+                             <button class="btn btn-info" (click)='addQualification()'>Add</button>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div style="overflow-y: scroll; width:100%; height: 150px ">
+                                <table class="table m-0" style="width: 100%;">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 17%;">From</th>
+                                        <th style="width: 8%;">To</th>
+                                        <th style="width: 29%;">Qualification</th>
+                                        <th style="width: 34%;">Board/University</th>
+                                        <th style="width: 7%;">&nbsp;</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                      <tr *ngFor='let quali of qualifications;let i=index'>
+                                          <th style="width: 5%;">{{i+1}}</th>
+                                          <td style="width: 17%;">{{quali.Frmyear}}</td>
+                                          <td style="width: 8%;">{{quali.Toyear}}</td>
+                                          <td style="width: 29%;">{{quali.Qual}}
+                        </td>
+                                           <td style="width: 34%;">
+                                            {{quali.Board}}
+                                            
+                                           </td>
+                                           <td style="width: 7;" (click)='removeQualification(quali)'>
+                                            <i class="ft-trash font-medium-1">
+                                            </i>
+                                        </td>
+                                      </tr>
+                                       
+                                   
+                                    </tbody>
+                                </table>  
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+                    <br>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td colspan="5" style="background-color: lightgray;">Experience Details</td>
+                        </tr>
+                    <tr>
+                        <td style="width: 18%;">
+                        From
+                        </td>
+                        <td style="width: 9%;">
+                        To
+                        </td>
+                        <td style="width: 30%;">
+                            Designation
+                        
+                        </td>
+                        <td style="width: 35%;">
+                            Company
+                        </td>
+                        <td style="width: 8%;">
+                            &nbsp;
+                            </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 18%;">
+                        <input type="number" class="form-control" [(ngModel)]='exper.Frmyear'>
+                        </td>
+                        <td style="width: 9%;">
+                            <input type="number" class="form-control" [(ngModel)]='exper.Toyear'>
+                        </td>
+                        <td style="width: 30%;">
+                            <input type="text" class="form-control" [(ngModel)]='exper.Designation'>
+                        </td>
+                        <td style="width: 35%;">
+                            <input type="text" class="form-control" [(ngModel)]='exper.Organisation'>
+                        </td>
+                        <td style="width: 8%;">
+                             <button class="btn btn-info" (click) = 'addExperience()'>Add</button>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <div style="overflow-y: scroll; width:100%; height: 150px ">
+                                <table class="table m-0" style="width: 100%;">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 17%;">From</th>
+                                        <th style="width: 8%;">To</th>
+                                        <th style="width: 29%;">Designation</th>
+                                        <th style="width: 34%;"> Company</th>
+                                        <th style="width: 7%;">&nbsp;</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                      <tr *ngFor='let experi of experiences;let i=index'>
+                                          <th style="width: 5%;">{{i+1}}</th>
+                                          <td style="width: 17%;">{{experi.Frmyear}}</td>
+                                          <td style="width: 8%;">{{experi.Toyear}}</td>
+                                          <td style="width: 29%;"> {{experi.Designation}}
+                        </td>
+                                           <td style="width: 34%;">
+                                            {{experi.Organisation}}
+                                           </td>
+                                           <td style="width: 7;">
+                                            <i class="ft-trash font-medium-1" (click) = 'removeExperience(experi)'>
+                                            </i>
+                                        </td>
+                                      </tr>
+                                       
+                                   
+                                    </tbody>
+                                </table>  
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+                    
+             
+            </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Personal Profile">
+                <ng-template ngbTabContent>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td colspan="3" style="background-color: lightgray;">Family Details</td>
+                        </tr>
+                    <tr>
+                        <td style="width: 60%;">
+                        Name
+                        </td>
+                        <td style="width: 33%;">
+                        Relation
+                        </td>
+                       
+                        <td style="width: 7%;">
+                            &nbsp;
+                            </td>
+                    </tr>
+                    <tr>
+                        
+                        <td style="width: 60%;">
+                            <input type="text" class="form-control" [(ngModel)]='rela.Relativename'>
+                        </td>
+                        <td style="width: 33%;">
+                            <input type="text" class="form-control" [(ngModel)]='rela.Relation'>
+                        </td>
+                        <td style="width: 7%;">
+                             <button class="btn btn-info" (click) = 'addRelation()'>Add</button>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <div style="overflow-y: scroll; width:100%; height: 300px ">
+                                <table class="table m-0" style="width: 100%;">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 50%;">Name</th>
+                                        <th style="width: 38%;">Relation</th>
+                                       
+                                        <th style="width: 7%;">&nbsp;</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                      <tr *ngFor='let rel of relations;let i=index'>
+                                          <th style="width: 5%;">{{i+1}}</th>
+                                          <td style="width: 50%;">{{rel.Relativename}}</td>
+                                          <td style="width: 38%;">{{rel.Relation}}</td>
+                                          
+                                           <td style="width: 7;">
+                                            <i class="ft-trash font-medium-1" (click) = 'removeRelation(rel)'>
+                                            </i>
+                                        </td>
+                                      </tr>
+                                       
+                                   
+                                    </tbody>
+                                </table>  
+                            </div>
+                        </td>
+                    </tr>
+                    </table>
+                    
+        </ng-template>
+              </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table style="width: 100%;">
+<tr>
+    <td>
+        <button class="btn-lg btn-primary"  (click)='save()'>
+        <span *ngIf='recordId <= 0'>Save</span>
+        <span *ngIf='recordId > 0'>Modify</span>
+        </button>
+        <button class="btn-lg btn-dark"   (click)='close()'>Close</button>
+    </td>
+</tr>
+</table>
+ </div>
+
+ 
+
+
+ <div *ngIf='!opened'>
+    <h3>
+        List of Employees
+     </h3>
+     
+     <table style="width: 80%;">
+     <tr>
+         <td align="left" style="width: 50%;">
+             <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+         </td>
+         <td align="right" style="width: 50%;">
+          <div class="form-group has-search">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchItems()' >
+          </div>
+         </td>
+     </tr>
+     </table>
+     
+     <table class="table m-0" style="width: 80%;">
+         <thead class="thead-light">
+           <tr>
+             <th>#</th>
+             <th>Emp no</th>
+             <th>Name</th>
+             <th>Designation</th>
+             <th>Department</th>
+             <th>Mobile</th>
+             <th></th>
+           </tr>
+         </thead>
+         <tbody>
+          
+           <tr *ngFor='let emp of employees;let i=index'>
+             <th scope="row" >{{i+1}}</th>
+             <td>{{emp.empno}}</td>
+             <td>{{emp.empname}}</td>
+             <td>{{emp.designation}}</td>
+             <td>{{emp.department}}</td>
+             <td>{{emp.mobile}}</td>
+             <td><i *ngIf='!opened' class="ft-edit font-medium-1" (click)='openOld(emp)'></i></td>
+           </tr>
+          
+         </tbody>
+       </table>
+    </div>

@@ -1,0 +1,76 @@
+
+ <ngx-spinner></ngx-spinner>
+ <ng-sidebar-container>
+  <ng-sidebar [opened]="opened" mode="push" >
+      <h3>
+      Unit Details
+    </h3>
+    <br>
+    <table style="width: 40%;">
+    <tr>
+      <td style="width: 35%;">
+        <span>Unit</span>
+          </td>
+      <td style="width: 65%;">
+        <input type="text" ngDefaultControl class="form-control" [(ngModel)]='uom' >
+          </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteUM()' >Delete</button>
+        <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='saveUM()' >{{saveStr}}</button>
+        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+      </td>
+    </tr>
+    </table>
+ 
+
+</ng-sidebar>
+       
+      
+<div ng-sidebar-content>
+    
+  <nav>
+        <h3>
+            List of Units
+        </h3>
+        
+        <table style="width: 100%;">
+        <tr>
+            <td align="left">
+                <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+            </td>
+        </tr>
+        </table>
+        
+        <table class="table m-0" style="width: 40%;">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Unit</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let um of ums; let i=index'>
+                <th scope="row" >{{i+1}}</th>
+                <td>{{um.um}}</td>
+                <td><i class="ft-edit font-medium-1" *ngIf='!opened' (click)='openOld(um)' ></i></td>
+              </tr>
+             
+            </tbody>
+          </table>
+</nav>
+  </div>
+ </ng-sidebar-container>
+ 
+  <div *ngIf='!authCheck'>
+
+    <h1>You are not authorised to view this page</h1>
+  </div>

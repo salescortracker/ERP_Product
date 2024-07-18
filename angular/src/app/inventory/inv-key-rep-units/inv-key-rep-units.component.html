@@ -1,0 +1,66 @@
+
+
+  
+        <ngx-spinner></ngx-spinner>
+        <!--Light table starts-->
+        <section id="light" *ngIf='authCheck'>
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">List of Units</h3>
+          
+          
+                 
+          
+                  <div class="position-relative float-right" *ngIf='units'>
+                    <div ngbDropdown display="dynamic"  placement="bottom-right"  class="d-inline-block">
+                      <i class="ft-more-vertical- mt-1 dropdown-toggle" id="chatOptions" ngbDropdownToggle></i>
+                      <div ngbDropdownMenu aria-labelledby="chatOptions">
+                        <!--<a href="javascript:;" class="dropdown-item" [href]='pdfFile'target="_aa" >Download Pdf</a>-->
+                        <a href="javascript:;" class="dropdown-item" [href]='pdffile' target="_blank" >Download Pdf</a>
+                        <a href="javascript:;" class="dropdown-item" [href]='excelfile' target="_ aa">Download Excel</a>
+                 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="card-content" *ngIf='units'>
+                    <div class="card-body">
+                      
+                      <div class="table-responsive">
+                        <table class="table m-6">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th>Unit</th>
+                               
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor='let cat of units;let i=index' >
+                              <th scope="row">{{i+1}}</th>
+                              <td>{{cat.um}}</td>
+                              
+                            </tr>
+                            <tr *ngIf='units.length <= 0'>
+                              <td colspan="2" align="center"> <span style="color: brown; font-weight: bold; font-size: large;"> No records found </span> </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--Light table Ends-->
+        
+          
+         <span *ngIf='!authCheck'>
+          <h2>Please verify your authorization</h2>
+        </span>
+          
+          
+          

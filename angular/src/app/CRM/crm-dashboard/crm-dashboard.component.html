@@ -1,0 +1,278 @@
+<ngx-spinner></ngx-spinner>
+<div *ngIf='authCheck'>
+<div class="row ">
+    <div class="col-sm-12">
+        <div class="content-header">CRM Dashboard</div>
+   </div>
+  </div>
+
+  <div class="row">
+  <div class="col-xl-3 col-lg-6 col-12">
+    <div class="card card-inverse bg-primary">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">{{target1+target2 | number:'0.2'}}</h3>
+              <span>Direct Business {{target1 | number:'0.2'}}</span><br>
+              <span>Team Business {{target2 | number:'0.2'}}</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-arrow-up font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-12">
+    <div class="card card-inverse bg-warning">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">{{calls1+calls2}}</h3>
+              <span>Direct Calls {{calls1}}</span><br>
+              <span>Team Calls {{calls2}}</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-arrow-down font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-6 col-12">
+    <div class="card card-inverse bg-primary">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">
+                <span *ngIf='target > 0'>
+                  {{(target1+target2)/target*100 | number:'0.2'}}
+                </span>
+                % Achieved</h3>
+              <span>Pending Target                 
+                {{target-(target1+target2) | number:'0.2'}}</span><br>
+              <span>Pending Calls {{calls-(calls1+calls2) }}</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-arrow-down font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-12">
+    <div class="card card-inverse bg-warning">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">{{credits1+credits2 | number:'0.2'}}</h3>
+              <span>Immediate Credit {{credits1 | number:'0.2'}}</span><br>
+              <span>Longterm Credit {{credits2 | number:'0.2'}}</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-arrow-up font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+
+
+  
+  <section id="apexchart">
+    <div class="row">
+       
+      <!-- Bar Chart starts -->
+      <div class="col-xl-8 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Orders Chart</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="barChartOptions.series"
+                  [colors]="barChartOptions.colors"
+                  [chart]="barChartOptions.chart"
+                  [xaxis]="barChartOptions.xaxis"
+                  [yaxis]="barChartOptions.yaxis"
+                  [title]="barChartOptions.title"
+                  [dataLabels]="barChartOptions.dataLabels"
+                  [stroke]="barChartOptions.stroke"
+                  [grid]="barChartOptions.grid"
+                  [tooltip]="barChartOptions.tooltip"
+                  [plotOptions]="barChartOptions.plotOptions"
+                  [fill]="barChartOptions.fill"
+                  [legend]="barChartOptions.legend"
+                  [labels]="barChartOptions.labels"
+                  [markers]="barChartOptions.markers"
+                  [theme]="barChartOptions.theme"
+                  [responsive]="barChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+    
+    <div class="col-lg-4 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Employee wise Orders</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                    <apx-chart
+                    [series]="pieChartOptions.series"
+                    [colors]="pieChartOptions.colors"
+                    [chart]="pieChartOptions.chart"
+                    [xaxis]="pieChartOptions.xaxis"
+                    [yaxis]="pieChartOptions.yaxis"
+                    [title]="pieChartOptions.title"
+                    [dataLabels]="pieChartOptions.dataLabels"
+                    [stroke]="pieChartOptions.stroke"
+                    [grid]="pieChartOptions.grid"
+                    [tooltip]="pieChartOptions.tooltip"
+                    [plotOptions]="pieChartOptions.plotOptions"
+                    [fill]="pieChartOptions.fill"
+                    [legend]="pieChartOptions.legend"
+                    [labels]="pieChartOptions.labels"
+                    [markers]="pieChartOptions.markers"
+                    [theme]="pieChartOptions.theme"
+                    [responsive]="pieChartOptions.responsive"
+                  ></apx-chart>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+
+    </div>
+    </section>
+
+
+    <div class="row">
+<div class="col-lg-6 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Todays Calls</h4>
+        </div>
+        <div class="card-content">
+         
+
+            <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                 
+                    <div class="card-content">
+                      <div class="card-body">
+                       
+                        <div class="table-responsive">
+                          <table class="table m-0">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>#</th>
+                                <th>Customer</th>
+                                <th>Mobile</th>
+                                <th>Prev Comments</th>   
+                               </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor='let customer of telecalls; let i=index'>
+                                <th scope="row">{{i+1}}</th>
+                                <td> {{customer.customer}} </td>
+                                <td>{{customer.mobile}}</td>
+                                <td>{{customer.customercomments}}</td>
+                                
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-6 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Todays Enquiries</h4>
+        </div>
+        <div class="card-content">
+         
+
+            <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                 
+                    <div class="card-content">
+                      <div class="card-body">
+                       
+                        <div class="table-responsive">
+                          <table class="table m-0">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>#</th>
+                                <th>Customer</th>
+                                <th>Mobile</th>
+                                <th>Prev Comments</th>   
+                               </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor='let customer of enquiries; let i=index'>
+                                <th scope="row">{{i+1}}</th>
+                                <td> {{customer.customer}} </td>
+                                <td>{{customer.mobile}}</td>
+                                <td>{{customer.customercomments}}</td>
+                                
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<div *ngIf='!authCheck'>
+  <table style="width: 100%;">
+  <tr>
+    <td style="width: 15%;">&nbsp;</td>
+    <td style="width: 70%;"><img src='../../../assets/img/modules/purchases.png' style="width: 100%;"></td>
+    <td style="width: 15%;">&nbsp;</td>
+  </tr>
+  </table>
+    
+  </div>
+  
+  

@@ -1,0 +1,253 @@
+
+
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+  
+<h3>Purchase Request</h3>
+<table style="width: 100%; border-width: 1; border-style:solid;">
+    <tr>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 8%;">&nbsp;</td>
+        <td style="width: 4%;">&nbsp;</td>
+    </tr>
+    <tr>
+<tr>
+    <td colspan="2">*Transaction Date  </td>
+    <td colspan="9">&nbsp;</td>
+    <td colspan="2">Purchase Request# </td>
+</tr>
+<tr>
+    <td colspan="2">   <input type="date" class="form-control" [disabled]='!dateCheck'  [value]="header.Dat | date:'yyyy-MM-dd'" (input)="header.Dat=parseDate($event.target.value)"> 
+    </td>
+    <td colspan="8">&nbsp;</td>
+    <td colspan="3"> <input type="text" class="form-control" disabled [(ngModel)]='header.Seq'> </td>
+</tr>
+
+<tr>
+    <td  colspan="5"> *Select Employee </td>
+    <td  colspan="2"> Emp No </td>
+    <td  colspan="3"> Department </td>
+    <td  colspan="3"> Designation </td>
+</tr>
+<tr>
+    <td  colspan="5"> <!--  <ng-select [items]="employees" bindLabel="empname"  [(ngModel)]='employee'></ng-select> -->
+    <ng-select [(ngModel)]='empno' (change)='findEmployee($event)'> 
+        
+        <ng-option *ngFor="let emp of employees" [value]="emp.empid">{{emp.empname}}</ng-option>
+    </ng-select>
+    </td>
+    <td  colspan="2"> <input type="text" disabled class="form-control" [(ngModel)]='employee.empno'> </td>
+    <td  colspan="3"> <input type="text" disabled class="form-control" [(ngModel)]='employee.department'> </td>
+    <td  colspan="3"> <input type="text" disabled class="form-control" [(ngModel)]='employee.designation'> </td>
+</tr>
+<tr>
+    <td  colspan="5"> *Department </td>
+    <td  colspan="6"> Main Department </td>
+    <td  colspan="2"> &nbsp;</td>
+  
+</tr>
+<tr>
+    <td  colspan="5"> <select class="form-control" [(ngModel)]='department' (change)='findDepartment()'>
+        <option value="0">--Select--</option>
+        <option *ngFor='let dept of departments' value="{{dept.deptid}}"> {{dept.deptname}} </option>
+    </select> </td>
+    <td  colspan="6"> <input type="text" disabled class="form-control" value="{{maindept}}"> </td>
+    <td  colspan="2"> &nbsp;</td>
+  
+</tr>
+
+<tr>
+    <td colspan="13">&nbsp;</td>
+</tr>
+<tr>
+    <td  colspan="4"> *Material </td>
+    <td  colspan="5">  Preferable Supplier </td>
+    <td  style="width: 8%;"> *Qty </td>
+    <td  style="width: 8%;"> *UOM </td>
+    <td  colspan="2">  *Required By  </td>
+</tr>
+<tr>
+    <td  colspan="3">     <ng-select id='cmbmaterial'  (change)="changeMaterial($event)" >
+        <ng-option *ngFor="let mat of materials" [value]="mat.itemid">{{mat.itemname}}</ng-option>
+
+        
+    </ng-select>
+    </td>
+    <td style="width: 8%;"> <button type="button" class="btn-sm btn-info" (click)="openModal(customContent,2)">New</button> </td>
+    <td  colspan="4">     
+        <ng-select id='cmbsupplier'  (change)="changeSupplier($event)" >
+            <ng-option *ngFor="let sup of suppliers" [value]="sup.supid">{{sup.supplier}}</ng-option>
+        </ng-select>
+   
+    </td>
+    <td style="width: 8%;"> <button type="button" class="btn-sm btn-info" (click)="openModal(customContent,1)">New</button> </td>
+ 
+    <td  style="width: 8%;"> <input type="number" class="form-control" [(ngModel)]='qty'> </td>
+    <td  style="width: 8%;">   <select class="form-control" [(ngModel)]='umid'>
+        <option *ngFor='let uni of selectdMaterialUnits' value="{{uni.umid}}">{{uni.um}}</option>
+   
+   </select> </td>
+    <td  colspan="2">  <input type="date" class="form-control"   [value]="reqdby | date:'yyyy-MM-dd'" (input)="reqdby=parseDate($event.target.value)">  </td>
+</tr>
+<tr>
+    <td  colspan="5"> Material Group </td>
+    <td  colspan="4">  Supplier Group </td>
+    <td  style="width: 8%;"> Available </td>
+    <td  style="width: 8%;"> UOM </td>
+    <td  colspan="2">   
+    </td>
+</tr>
+<tr>
+    <td  colspan="5"> <input type="text" disabled class="form-control" [(ngModel)]='material.grpname'> </td>
+    <td  colspan="4">  <input type="text" disabled class="form-control" [(ngModel)]='supplier.partygroup'> </td>
+    <td  style="width: 8%;">  <input type="text" disabled class="form-control" [(ngModel)]='material.stock'> </td>
+    <td  style="width: 8%;">  <input type="text" disabled class="form-control" [(ngModel)]='material.um'> </td>
+    <td  colspan="2">  &nbsp; </td>
+</tr>
+<tr>
+    <td colspan="11">*Purpose</td>
+    <td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+    <td colspan="11"><input type="text" class="form-control" [(ngModel)]='purpose'> </td>
+    <td colspan="2"> <button type="button" class="btn btn-info" (click)='addItem()' style="width: 100%;">Add</button> </td>
+</tr>
+<tr>
+    <td colspan="13">
+        <div style="width: 100%; height: 300px; overflow-y: scroll ;">
+    
+       
+
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 4%;">#</th>
+                  
+                    <th style="width: 21%;">Material</th>
+                    <th style="width: 21%;">Pref Supplier</th>
+                   
+                   
+                    <th style="text-align: right; width: 7%;">Qty</th>
+                    <th style="width: 7%;">UOM</th>
+                    <th  style="width: 12%;">Required by</th>
+                    <th  style="width: 26%;">Purpose</th>
+                   
+                    <th style="width: 4%;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let item of totalItems;let i=index'>
+                        <th style="width: 4%;">{{i+1}}</th>
+                        <td style="width: 21%;">{{item.itemname}}</td>
+                        <td style="width: 21%;">{{item.supplier}}</td>
+                        <td align="right" style="width: 7%;">{{item.qty}}</td>
+                        <td style="width: 7%;">{{item.um}}</td>
+                        <td style="width: 12%;">{{item.reqdby | date:'dd-MMM-yy'}}</td>
+                        <td style="width: 24%;">{{item.purpose}}</td>
+                        <td style="width: 4%;"><i class="ft-trash font-medium-1" (click)='deleteItem(item)'></i></td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td colspan="13">
+
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+       <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+       <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+   
+    </td>
+</tr>
+</table>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title"> <span *ngIf='modeltype==1'>Suppliers</span>
+        <span *ngIf='modeltype==2'>Materials</span> </h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         
+        <app-pur-suppliers-child *ngIf='modeltype==1' (notify)='getNewSupplier($event)'></app-pur-suppliers-child>
+         <app-pur-materials-child *ngIf='modeltype==2' (notify)='getNewMaterial($event)'></app-pur-materials-child>
+    </div>
+    
+  
+  </ng-template>
+</div>
+<div *ngIf='!opened'>
+       <h3>
+           List of Purchase Requests
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+
+        <td align="right" style="width: 40%;">
+            <input type="date" class="form-control" [disabled]='!dateCheck'  [value]="listdate | date:'yyyy-MM-dd'" (input)="listdate=parseDate($event.target.value)"> 
+       
+        
+        </td>
+        <td align="left" style="width: 25%;">   <button *ngIf='!opened' type="button" class="btn-lg btn-info mr-1 mb-1" (click)='listAdd()'>Show</button> </td>
+
+           <td align="left" style="width: 25%;">
+               <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+         
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 100%;">
+           <thead class="thead-light">
+             <tr>
+               <th style="width: 5%;">#</th>
+               <th style="width: 10%;">Id</th>
+               <th style="width: 25%;">Employee</th>
+               <th style="width: 20%;">Department</th>
+               <th style="width: 15%;">User</th>
+               <th style="width: 15%;">Status</th>
+               
+               <th style="width: 5%;"></th>
+               <th style="width: 5%;"> </th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let req of requests;let i=index'>
+               <th scope="row" style="width: 5%;">{{i+1}}</th>
+               <td style="width: 10%;">{{req.seq}}</td>
+               <td style="width: 25%;">{{req.employee}}</td>
+               <td style="width: 20%;">{{req.departmentname}}</td>
+
+               <td style="width: 15%;">{{req.usr}}</td>
+               <td style="width: 15%;"> <span *ngIf='req.statu==1'> Pending </span> <span *ngIf='req.statu>=2'> Approved </span> </td>
+               
+               <td style="width: 5%;"><i *ngIf='!opened' class="ft-edit font-medium-1" (click)='openOld(req)'></i></td>
+               <td style="width: 5%;"><i *ngIf='!opened' class="ft-printer font-medium-1" (click)='confirmPrint(req)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+</div>
+
+ <div *ngIf='!authCheck'>
+<h1>You are not authorised to view this page</h1>
+ </div>

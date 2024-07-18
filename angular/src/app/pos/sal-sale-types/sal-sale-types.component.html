@@ -1,0 +1,88 @@
+
+ <ngx-spinner></ngx-spinner>
+  <div *ngIf='opened'>
+     <h3>
+     Sale Types
+   </h3>
+   <br>
+   <table style="width: 70%;">
+   <tr>
+     <td style="width: 35%;">
+       <span>Sale</span>
+         </td>
+     <td style="width: 65%;">
+       <input class="form-control" type="text" ngDefaultControl  [(ngModel)]='nam' [disabled]='recordID > 0' >
+         </td>
+   </tr>
+   <tr>
+    <td style="width: 35%;">
+      <span>Type</span>
+        </td>
+    <td style="width: 65%;">
+        <select class="form-control" [(ngModel)]='typ' >
+            <option value="1">Domestic</option>
+            <option value="2">Export</option>
+        </select>
+       
+        </td>
+  </tr>
+   <tr>
+     <td colspan="2">
+       &nbsp;
+     </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+       <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteUM()' >Delete</button>
+       <button type="button" class="btn btn-info mr-1 mb-1" [disabled]='!creCheck' (click)='saveUM()' >{{saveStr}}</button>
+       <button type="button" class="btn btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+   </tr>
+   </table>
+
+   
+  </div>
+      
+     
+
+  <div *ngIf='!opened'>
+       <h3>
+           List of Sale types
+       </h3>
+       
+       <table style="width: 100%;">
+       <tr>
+           <td align="left">
+               <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 40%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Sale</th>
+               <th>Type</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let typ of types; let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{typ.salType}}</td>
+               <td *ngIf='typ.exportType == 1'> Domestic </td>
+               <td *ngIf='typ.exportType != 1'> Export </td>
+               <td><i class="ft-edit font-medium-1" (click)='openOld(typ)' ></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+
+  </div>
+ 
+    
+ <div *ngIf='!authCheck'>
+   <h1>Your are not authorized to view this page</h1>
+ </div>

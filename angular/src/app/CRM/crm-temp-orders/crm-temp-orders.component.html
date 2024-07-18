@@ -1,0 +1,125 @@
+
+ <ngx-spinner></ngx-spinner>
+
+ 
+ <h3>
+    List of Orders
+</h3>
+
+<table style="width: 100%;">
+<tr>
+    <td align="left" style="width: 40%;">
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker [(ngModel)]='listdat'  enabled='datCheck'
+              #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <div class="input-group-text" (click)="d2.toggle()">
+                <i class="fa fa-calendar" style="cursor: pointer;"></i>
+              </div>
+            </div>
+          </div>
+        
+    </td>
+    <td style="width: 20%;">
+        <button type="button" class="btn btn-success mr-1 mb-1" (click)='showDetails()' >Show</button></td>
+        <td style="width: 40%;">&nbsp;</td>
+</tr>
+</table>
+<h3>Total orders {{orders.length}}</h3>
+<div  *ngFor='let ord of orders'>
+<table style="width: 100%;">
+    <tr style="background-color: black;color: white;" >
+        <td style="width: 9%;">SO Id</td>
+        <td style="width: 18%;">Customer</td>
+        <td  style="width: 9%;">Product</td>
+        <td style="width: 8%;">Shade</td>
+        <td style="width: 8%;">Side</td>
+        <td  style="width: 8%;">Add</td>
+        <td  style="width: 8%;">Cyl</td>
+        <td  style="width: 8%;">Sph</td>
+        <td style="width: 8%;">Dia</td>
+        <td  style="width: 8%;">Coating</td>
+       
+       
+       
+       
+        <td style="width: 8%;">Qty</td>
+    </tr>
+    <tr>
+        <td>{{ord.soid}}</td>
+        <td>{{ord.customer}}</td>
+        <td>{{ord.product}}</td>
+        <td>{{ord.shade}}</td>
+        <td>{{ord.sid}}</td>
+        <td>{{ord.addiPower}}</td>
+        <td>{{ord.cylindrical}}</td>
+        <td>{{ord.spherical}}</td>
+        <td>{{ord.dia}}</td>
+        <td>{{ord.coating}}</td>
+          <td>{{ord.qty}}</td>
+    </tr>
+</table>
+<table>
+<tr style="background-color: lightgray;">
+    <td style="width: 20%;">
+        Vendor
+    </td>
+    <td style="width: 14%;">
+        Product
+    </td>
+    <td style="width: 8%;">
+        Side
+    </td>
+    <td style="width: 8%;">Shade</td>
+    <td style="width: 8%;">Base</td>
+    <td style="width: 8%;">Add</td>
+    <td style="width: 8%;">Dia</td>
+    <td style="width: 8%;">Coat</td>
+    <td style="width: 8%;">Qual</td>
+    <td style="width: 10%;">Qty</td>
+</tr>
+
+<tr>
+    <td style="width: 20%;">
+         <select [(ngModel)]='ord.blavendor' (change)='findGIN(ord)'>
+             <option *ngFor='let vend of detuni.suppliers' value="{{vend}}">{{vend}}</option>
+         </select>
+    </td>
+    <td style="width: 14%;">
+        <select [(ngModel)]='ord.blaproduct' (change)='findGIN(ord)'>
+            <option *ngFor='let prod of detuni.products' value="{{prod}}">{{prod}}</option>
+        </select>
+    </td>
+    <td style="width: 8%;">
+        <select [(ngModel)]='ord.blasid' (change)='findGIN(ord)'>
+            <option *ngFor='let sid of detuni.sid' value="{{sid}}">{{sid}}</option>
+        </select>
+    </td>
+    <td style="width: 8%;"> <select [(ngModel)]='ord.blashade' (change)='findGIN(ord)'>
+        <option *ngFor='let shade of detuni.shade' value="{{shade}}">{{shade}}</option>
+    </select></td>
+    <td style="width: 8%;">
+        <select [(ngModel)]='ord.blbase' (change)='findGIN(ord)'>
+            <option *ngFor='let bas of detuni.baseP' value="{{bas}}">{{bas}}</option>
+        </select>
+    </td>
+    <td style="width: 8%;"> <select [(ngModel)]='ord.blaadd' (change)='findGIN(ord)'>
+        <option *ngFor='let add of detuni.addP' value="{{add}}">{{add}}</option>
+    </select></td>
+    <td style="width: 8%;"> <select [(ngModel)]='ord.bladia' (change)='findGIN(ord)'>
+        <option *ngFor='let dia of detuni.dia' value="{{dia}}">{{dia}}</option>
+    </select></td>
+    <td style="width: 8%;"> <select [(ngModel)]='ord.blacoat' (change)='findGIN(ord)'>
+        <option *ngFor='let coat of detuni.coat' value="{{coat}}">{{coat}}</option>
+    </select></td>
+    <td style="width: 8%;" (change)='findGIN(ord)'>
+        <select [(ngModel)]='ord.blaqual'>
+            <option *ngFor='let qual of detuni.qual' value="{{qual}}">{{qual}}</option>
+        </select>
+    </td>
+    <td style="width: 10%;">  {{ord.blaqty}} </td>
+</tr>
+</table>
+<br>
+</div>
+<input type="button" class="btn btn-info mr-1 mb-1"  value="Submit" (click)='save()'>

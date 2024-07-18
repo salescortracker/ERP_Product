@@ -1,0 +1,359 @@
+
+ <ngx-spinner></ngx-spinner>
+ 
+  <div *ngIf='opened'>
+<table style="width: 80%;">
+<tr>
+  <td style="width: 3%;">
+  &nbsp;
+  </td>
+  <td style="width: 94%;">
+   
+
+
+     <h3>
+     Journal Details
+   </h3>
+
+<br>
+<br>
+
+
+
+
+   <table style="width: 100%;">
+    <tr>
+      <td colspan="2">Transaction Date</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker [(ngModel)]='tradat'  enabled='datCheck'
+            #d1="ngbDatepicker" style="width: 50%;">
+          <div class="input-group-append">
+            <div class="input-group-text" (click)="d1.toggle()">
+              <i class="fa fa-calendar" style="cursor: pointer;"></i>
+            </div>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+    
+</table>
+
+ 
+<table style="width: 100%;">
+<tr>
+  <td style="width: 60%;"> Account </td>
+  <td style="width: 15%;">Debit</td>
+  <td style="width: 15%;">Credit</td>
+  <td style="width: 10%;">&nbsp;</td>
+</tr>
+<tr>
+  <td style="width: 60%;">  <ng-select [items]="transAccounts" bindLabel="accountName"  [(ngModel)]='accdetail'></ng-select> </td>
+  <td style="width: 15%;"> <input type="number" class="form-control" style="width: 100%;" [disabled] ='cre > 0' [(ngModel)]='deb' > </td>
+  <td style="width: 15%;"> <input type="number" class="form-control" style="width: 100%;" [disabled] ='deb > 0' [(ngModel)]='cre' > </td>
+  <td style="width: 10%;"> <input type="button" value="Add" class="btn btn-secondary mr-1 mb-1" (click)='addDetails()'> </td>
+</tr>
+<tr *ngIf="accdetail.accountName != ''"> 
+  <td style="width: 60%;">Group</td>
+  <td style="width: 15%;">Balance</td>
+  <td style="width: 15%;"> &nbsp;</td>
+  <td style="width: 10%;"> &nbsp;</td>
+</tr>
+<tr *ngIf="accdetail.accountName != ''">
+  <td style="width: 60%;"> <h5>{{accdetail.grp}}</h5> </td>
+  <td  colspan="2"> <h5 *ngIf="accdetail.balance >= 0"> <font color="blue"> Dr {{accdetail.balance | number:"0.2-2"}} </font> </h5> 
+    <h5 *ngIf= "accdetail.balance < 0"> <font color="red"> Cr  {{0-accdetail.balance | number:"0.2-2"}} </font> </h5>
+  
+  </td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td colspan="4">
+<div style="width: 100%;height: 250px;overflow-y: scroll;">
+
+  <table style="width: 100%;">
+  <tr style="color: white; background-color: black;">
+    <td style="width: 10%;">
+    #
+    </td>
+    <td style="width: 50%;">
+      Account
+      </td>
+      <td style="width: 15%;" align="right">
+        Debit
+        </td>
+        <td style="width: 15%;" align="right">
+            Credit
+            </td>
+        <td style="width: 10%;">
+          &nbsp;
+          </td>
+  </tr>
+  <tr *ngFor='let det of transdet;let i=index'>
+    <td style="width: 10%;">
+    {{i+1}}
+    </td>
+    <td style="width: 50%;">
+      {{det.accname}}
+      </td>
+      <td style="width: 15%;" align="right">
+       {{det.deb | number :"0.2-2"}}
+        </td>
+        <td style="width: 15%;" align="right">
+            {{det.cre | number :"0.2-2"}}
+             </td>
+        <td style="width: 10%;"  align="center">
+          <i _ngcontent-yya-c277="" class="ft-trash-2" (click)='deleteDetails(det)' ></i>
+          </td>
+  </tr>
+
+
+  </table>
+
+
+</div>
+
+  </td>
+</tr>
+<tr>
+  <td colspan="4">
+    <table style="width: 100%;">
+    
+  <tr>
+    <td style="width: 10%;">&nbsp;</td>
+    <td style="width: 50%;">Total</td>
+    <td style="width: 15%;" align="right"><h5>{{totalDeb | number:"0.2-2"}}</h5></td>
+    <td style="width: 15%;" align="right"><h5>{{totalCre | number:"0.2-2"}}</h5></td>
+    <td style="width: 10%;">&nbsp;</td>
+  </tr>
+    <tr>
+      <td colspan="5">
+       
+        <input type="text" style="width: 100%;" class="form-control" [(ngModel)]='narration' placeholder="Narration" > 
+      </td>
+    </tr>
+    </table>
+  </td>
+</tr>
+
+</table>
+
+
+              <ng-template #content let-c="close" let-d="dismiss" style="width: 800px;" >
+                <div class="modal-header">
+                  <h6 class="modal-title">{{modeofpay.substr(4,10)}} Details</h6>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+  
+  <div style="width: 100%; height: 140px; overflow-y: scroll;">
+
+
+  <div *ngIf='modeofpay=="PAY_CASH"'>
+<textarea rows="5" style="width: 100%;" placeholder="Cash description">
+</textarea>
+
+  </div>
+
+
+  
+  <div *ngIf='modeofpay=="PAY_CARD"' style="width: 100%;">
+    
+    <table style="width: 99%;">
+    <tr>
+        <td colspan="2">
+<input class="form-control" placeholder="Card #">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input class="form-control" placeholder="Card holder">
+
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 50%;">
+            <input type="date" class="form-control" placeholder="Validity">
+
+        </td>
+    </tr>
+    </table>
+    
+      </div>
+
+
+
+      <div *ngIf='modeofpay=="PAY_CHEQUE"' style="width: 100%;">
+        <table style="width: 99%;">
+        <tr>
+            <td colspan="2">
+    <input class="form-control" placeholder="Cheque #">
+    
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+    <input class="form-control" placeholder="Cheque holder">
+    
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+    <input class="form-control" placeholder="Cheque Bank">
+    
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">
+                <input type="date" class="form-control" placeholder="Validity">
+    
+            </td>
+        </tr>
+        </table>
+      </div>
+
+      <div *ngIf='modeofpay=="PAY_ONLINE"' style="width: 100%;">
+      
+        <table style="width: 99%;">
+          <tr>
+              <td colspan="2">
+      <input class="form-control" placeholder="Trans #">
+      
+              </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+    <input class="form-control" placeholder="A/c holder">
+    
+            </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+  <input class="form-control" placeholder="A/c Bank">
+  
+          </td>
+      </tr>
+        </table>
+      
+      </div>
+
+
+
+      <div *ngIf='modeofpay=="PAY_MOBILE_WALLET"' style="width: 100%;">
+      
+        <table style="width: 99%;">
+          <tr>
+              <td colspan="2">
+      <input class="form-control" placeholder="Mobile #">
+      
+              </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+    <input class="form-control" placeholder="Mobile holder">
+    
+            </td>
+        </tr>
+      
+        </table>
+      
+      </div>
+  
+  </div> 
+  
+  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                </div>
+              </ng-template>
+  
+            
+
+
+
+        
+              <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+              <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+
+<button type="button" class="btn-lg btn-dark mr-1 mb-1" (click)='close()'>Close</button>
+   <br>
+
+
+
+ 
+  </td>
+  <td style="width: 3%;">
+    &nbsp;
+    </td>
+</tr>
+</table>
+  </div>
+
+
+  <div *ngIf='!opened'>
+      
+       <h3>
+           List of Journals
+       </h3>
+       
+       <table style="width: 100%;">
+        <tr>
+            <td align="right" style="width: 30%;">
+                 
+    <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker [(ngModel)]='listdat'  enabled='datCheck'
+          #d2="ngbDatepicker">
+        <div class="input-group-append">
+          <div class="input-group-text" (click)="d2.toggle()">
+            <i class="fa fa-calendar" style="cursor: pointer;"></i>
+          </div>
+        </div>
+      </div>
+          
+            </td>
+            <td align="left" style="width: 30%;">
+                <button *ngIf='!opened' type="button" class="btn-lg btn-info mr-1 mb-1" (click)='listAdd()' >Show</button>
+            </td>
+           
+            <td align="right" style="width: 40%;">
+                <button *ngIf='!opened' type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+            </td>
+            
+        </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 100%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Detail</th>
+               <th>Narration</th>
+               <th>User</th>
+               
+               <th></th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let det of listdet;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{det.details}}</td>
+               <td>{{det.narration}}</td>
+               <td>{{det.username}}</td>
+               <td><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(det)'></i></td>
+             
+             </tr>
+            
+           </tbody>
+         </table>
+  </div>
+  

@@ -1,0 +1,94 @@
+<h4>Target Setting Details</h4>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 25%;">
+    Employee
+    </td>
+    <td style="width: 10%;">
+        ID
+        </td>
+    <td style="width: 25%;">
+        Designation
+        </td>
+    <td style="width: 15%;">
+    Year
+    </td>
+    <td style="width: 15%;">
+        Cycle
+        </td>
+        <td style="width: 10%;">&nbsp;</td>
+</tr>
+<tr>
+    <td style="width: 25%;">
+    <select class="form-control" [(ngModel)]='empno' (change)='findEmployee()'>
+        <option value="-1" >--Select--</option>
+        <option *ngFor='let emp of employees' value="{{emp.recordId}}" >{{emp.empname}}</option>
+    </select>
+
+    </td>
+    <td style="width: 10%;">
+        <input type="text" class="form-control" disabled [(ngModel)]='empid'>
+        </td>
+    <td style="width: 25%;">
+        <input type="text" class="form-control" disabled [(ngModel)]='desig'>
+        </td>
+    <td style="width: 15%;">
+    <input type="number" class="form-control" [(ngModel)]='year'>
+    </td>
+    <td style="width: 15%;">
+        <select class="form-control" [(ngModel)]='cyc'>
+            <option value="-1" >--Select--</option>
+            <option *ngFor='let cy of cycles' value="{{cy.id}}" >{{cy.text}}</option>
+        </select>
+        </td>
+        <td style="width: 10%;"> <button class="btn-info" (click)='onShow()'>Show</button>  </td>
+</tr>
+</table>
+<div *ngIf='totalitems'>
+    <td style="width: 10%;"> <button class="btn-lg btn-primary" (click)='save()'>Submit</button>  </td>
+<table class="table m-0" style="width: 100%;" *ngIf='+this.target==1'>
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 25%;">Category</th>
+        <th style="width: 35%;">Product</th>
+        <th style="width: 20%;">Target</th>
+        <th style="width: 15%;">Calls</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let item of totalitems;let i=index'>
+        <th scope="row" style="width: 5%;">{{i+1}}</th>
+        <td style="width: 25%;">{{item.category}}</td>
+        <td style="width: 35%;">{{item.itemname}}</td>
+        <td style="width: 20%;"> <input type="number" class="form-control" [(ngModel)]='item.target' > </td>
+        <td style="width: 15%;"> <input type="number" class="form-control" [(ngModel)]='item.calls' > </td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+  
+<table class="table m-0" style="width: 70%;" *ngIf='+this.target > 1'>
+    <thead class="thead-light">
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 50%;">Category</th>
+       
+        <th style="width: 25%;">Target</th>
+        <th style="width: 20%;">Calls</th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let item of totalitems;let i=index'>
+        <th scope="row" style="width: 5%;">{{i+1}}</th>
+        <td style="width: 50%;">{{item.category}}</td>
+         <td style="width: 25%;"> <input type="number" class="form-control" [(ngModel)]='item.target' > </td>
+        <td style="width: 20%;"> <input type="number" class="form-control" [(ngModel)]='item.calls' > </td>
+      </tr>
+     
+    </tbody>
+  </table>
+  </div>

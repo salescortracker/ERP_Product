@@ -1,0 +1,201 @@
+
+ <ngx-spinner></ngx-spinner>
+ <ng-sidebar-container *ngIf='authCheck'>
+   <ng-sidebar [opened]="opened" mode="push" >
+     <h3>
+    Product Details
+   </h3>
+   <br>
+   <table style="width: 100%;">
+     <tr>
+       <td style="width: 25%;">
+          Product Code
+      </td>
+      <td style="width: 75%;">
+      <input type="text" class="form-control" style="width: 40%;" [(ngModel)]='product.ProductCode'>
+      </td>
+     </tr>
+     <tr>
+      <td style="width: 25%;">
+         Product 
+     </td>
+     <td style="width: 75%;">
+     <input type="text" class="form-control" [(ngModel)]='product.ProductName'>
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+        Installation in days
+     </td>
+     <td style="width: 75%;">
+     <input type="number" class="form-control" style="width: 40%;" [(ngModel)]='product.MaxInstallationTime'> 
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+        Training in days
+     </td>
+     <td style="width: 75%;">
+     <input type="number" class="form-control" style="width: 40%;" [(ngModel)]='product.MaxTrainingTime'> 
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+        Product Type
+     </td>
+     <td style="width: 75%;">
+     <select class="form-control" [(ngModel)]='product.ProductType'>
+       <option value="-">--Select Type--</option>
+       <option value="Desktop">Desktop</option>
+       <option value="Online">Online</option>
+
+     </select>
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+       Description
+     </td>
+     <td style="width: 75%;">
+      <textarea class="form-control" rows="3" style="width: 100%;" [(ngModel)]='product.productDescription'></textarea>
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+       Price Type
+     </td>
+     <td style="width: 75%;">
+      <select class="form-control" [(ngModel)]='product.priceType'>
+        <option value="0">--Select Type--</option>
+        <option value="1">Fixed</option>
+        <option value="2">As per modules</option>
+ 
+      </select>
+     </td>
+    </tr>
+    <tr>
+      <td style="width: 25%;">
+        Price
+     </td>
+     <td style="width: 75%;">
+     <input type="number" class="form-control" style="width: 40%;" [(ngModel)]='product.price'> 
+     </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <table style="width: 100%;">
+        <tr style="background-color: gray; color: white;">
+          <td style="width: 20%;">Module</td>
+          <td style="width: 45%;">Description</td>
+          <td style="width: 15%;">Training days</td>
+          <td style="width: 15%;">Price</td>
+          <td style="width: 5%;">&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="width: 20%;"><input type="text" class="form-control" [(ngModel)] = 'modulename'>  </td>
+          <td style="width: 45%;"><textarea style="width: 100%;" rows="2" [(ngModel)] = 'description'></textarea> </td>
+          <td style="width: 15%;"><input type="number" class="form-control" [(ngModel)] = 'traindays'></td>
+          <td style="width: 15%;"><input type="number" class="form-control" [(ngModel)] = 'moduleprice'></td>
+          <td style="width: 5%;"><button class="btn btn-info" (click)='addModule()'>Add</button> </td>
+        </tr>
+        </table>
+        <table class="table m-0" style="width: 100%;">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Module</th>
+              <th>Description</th>
+             <th>Train in days</th>
+              <th>Price</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+            <tr *ngFor='let module of productModules;let i=index'>
+              <th scope="row" >{{i+1}}</th>
+              <td>{{module.ModuleName}}</td>
+              <td>{{module.ModuleDescription}}</td>
+              <td>{{module.TrainingDays}}</td>
+              <td>{{module.Price | number:'0.2'}}</td>
+              <td> <i class="ft-trash-2 font-medium-1" (click)='deleteModule(module)' ></i></td>
+              </tr>
+           
+          </tbody>
+        </table>
+
+      </td>
+    </tr>
+   <tr>
+     <td colspan="2">
+       <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+       <button type="button" class="btn btn-info mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+       <button type="button" class="btn btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+   </tr>
+   </table>
+
+   
+   </ng-sidebar>
+   
+   <div ng-sidebar-content>
+     
+     <nav>
+      
+     
+
+
+       <h3>
+           List of Products
+       </h3>
+       
+       <table style="width: 80%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+            <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+           </td>
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 90%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Code</th>
+               <th>Product</th>
+               <th>Type</th>
+               <th>Price</th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let pro of products;let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{pro.productCode}}</td>
+               <td>{{pro.productName}}</td>
+               <td>{{pro.productType}}</td>
+               <td>{{pro.price | number:'0.2'}}</td>
+               </tr>
+            
+           </tbody>
+         </table>
+
+
+
+
+   </nav>
+
+   </div>
+ 
+
+ </ng-sidebar-container>
+
+ <span *ngIf='!authCheck'>
+   <h2>Please verify your authorization</h2>
+ </span>

@@ -1,0 +1,18 @@
+<ngx-spinner></ngx-spinner>
+ 
+<h3>
+    System Verification
+  </h3>
+<table style="width: 30%;">
+<tr>
+    <td> 
+        <div class="checkbox">
+            <input type="checkbox" id="checkbox2" [(ngModel)]='verification'>
+            <label for="checkbox2"><span>System Verification Required</span></label>
+          </div>
+    </td>
+</tr>
+<tr>
+    <td> <button class="btn btn-primary" (click)='setVerification()' >Save</button>  </td>
+</tr>
+</table>

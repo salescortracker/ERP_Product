@@ -1,0 +1,254 @@
+
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='authcheck'>
+
+<h3>Material Details</h3>
+
+
+<table style="width: 99%;">
+
+   <tr>
+       <td style="width: 40%;">
+
+           <div class="card" style="height: 530px;">
+               <div class="card-header">
+                   <h5 class="card-title">Select Material Group</h5>
+               </div>
+               <div class="card-content">
+                   <div class="card-body">
+
+           <div style="width: 100%; height: 450px; border-color: black; border-style: solid; border-width:thin; height: 450px; overflow-y: scroll;">
+           
+               <span *ngFor='let obj1 of treeObj'  >
+                   <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                   <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='toggleVisible(obj1)'>  {{obj1.subGroup}} </span> <br>
+       
+                   <div  *ngIf='obj1.openCheck'>
+                   
+                   <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+                     <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                     <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span><br>
+                     
+                     <div  *ngIf='obj2.openCheck'>
+                     <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                       <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                     <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>      <span (click)='toggleVisiblePlus(obj3)'> {{obj3.subGroup}} </span> <br>
+                     </span>
+                     </div>
+       
+                   </span>
+       
+
+           </div>
+               </span>
+           </div>
+                   </div>
+               </div>
+           </div>
+           
+
+          
+
+
+       </td>
+
+
+       <td style="width: 60%;">
+
+           <div class="card" style="height: 530px;">
+               <div class="card-header">
+                   <h5 class="card-title">Details</h5>
+               </div>
+               <div class="card-content">
+                   <div class="card-body">
+
+           <div style="width: 100%; height: 445px; border-color: black; border-style: solid; border-width:thin;">
+      <table style="width:100%">
+       <tr>
+           <td style="width: 25%;" align="right"> 
+             <span>  Material Code</span>
+           </td>
+           <td style="width: 25%;" align="left">
+               <input type="text" class="form-control" [(ngModel)]='item.Itemid' (input)='findDuplicate(1)'>
+           </td>
+           <td colspan="2" >
+               <span> <font color=red>
+                  <b> {{checkDup}} </b> </font> </span>
+           </td>
+           
+       </tr>
+      
+       <tr>
+           <td style="width: 25%;" align="right" valigh="middle">
+           <span>  Material Name </span>
+           </td>
+           <td colspan="3" align="left">
+               <input type="text" class="form-control" [(ngModel)]='item.ItemName' (input)='findDuplicate(2)'>
+           </td>
+       </tr>
+       
+       <tr>
+           <td style="width: 25%;" align="right">
+               <span>  Material Group</span>
+           </td>
+           <td colspan="3" align="left">
+               <input type="text" class="form-control" disabled [(ngModel)]='grop' >
+           </td>
+       </tr>
+       
+       <tr>
+           <td style="width: 25%;" align="right">
+               <span>  Std Price</span>
+           </td>
+           <td style="width: 25%;" align="left">
+               <input type="number" class="form-control" [(ngModel)]='item.StdRate'>
+           </td>
+           <td style="width: 25%;" align="right">
+               <span>  Reorder Qty</span>
+           </td>
+           <td style="width: 25%;" align="left">
+               <input type="number" class="form-control" [(ngModel)]='item.ReOrderQty'>
+           </td>
+       </tr>
+       
+       <tr>
+           <td style="width: 25%;">
+               &nbsp;
+           </td>
+           <td style="width: 25%;" align="left">
+             
+ <div class="custom-control custom-checkbox">
+   <input type="checkbox" class="custom-control-input" name="customCheck" id="custom-check-2" [(ngModel)]='shelflife'>
+   <label class="custom-control-label" for="custom-check-2"><span>Shelf Life</span></label>
+ </div>
+           </td>
+           <td style="width: 25%;" align="left">
+               &nbsp;
+           </td>
+           <td style="width: 25%;">
+               <div class="custom-control custom-checkbox">
+                   <input type="checkbox" class="custom-control-input" checked name="customCheck" id="custom-check-1" [(ngModel)]='invreqd'>
+                   <label class="custom-control-label" for="custom-check-1"><span>Inventory</span></label>
+                 </div>
+ 
+           </td>
+       </tr>
+       <tr>
+           <td style="width: 25%;" align="right">Status</td>
+           <td style="width: 25%;">
+
+               <select class="form-control" [(ngModel)]='item.Statu'>
+                   <option value="1">Active</option>
+                   <option value="2">Inactive</option>
+               </select>
+           </td>
+           <td style="width: 25%;" align="right">Costing type</td>
+           <td style="width: 25%;">
+
+               <select class="form-control" [disabled]='!costingtypecheck' [(ngModel)]='item.CostingType'>
+                   <option value="-1">--Select--</option>
+                   <option value="1">Allow Negative</option>
+                   <option value="2">FIFO</option>
+                   <option value="3">LIFO</option>
+                   <option value="4">Batch System</option>
+                   <option value="5">GIN System</option>
+               </select>
+           </td>
+       </tr>
+      
+<tr>
+   <td colspan="4">
+       <table style="width:100%">
+       <tr>
+           <td style="width: 25%;">
+               <span>  Unit</span>
+           </td>
+           <td style="width: 25%;">
+               <span>  Conversion Factor</span>
+           </td>
+           <td style="width: 25%;">
+               <span>  Std UM</span>
+           </td>
+           <td style="width: 25%;">
+           &nbsp;
+           </td>
+       </tr>
+
+       <tr>
+           <td style="width: 25%;">
+       
+<select class="form-control" [(ngModel)]='mainum'>
+
+   <option *ngFor='let um of ums' value="{{um.recordId}}">{{um.um}}</option>
+</select>
+           
+           </td>
+           <td style="width: 25%;">
+          <input type="number"  [(ngModel)]='conve' class="form-control">
+           </td>
+           <td style="width: 25%;">
+           
+               <select class="form-control" [(ngModel)]='stdum' [disabled]='umslist.length > 0'>
+
+                   <option *ngFor='let um of ums' value="{{um.recordId}}">{{um.um}}</option>
+               </select>
+           
+           </td>
+           <td style="width: 25%;">
+               <button type="button" class="btn btn-success round mr-1 mb-1" (click)='addUM()'>Add</button>
+           </td>
+       </tr>
+       </table>
+   </td>
+</tr>
+<tr>
+   <td colspan="4">
+       <div style="overflow-y: scroll; width:100%; height: 120px ">
+       <table style="width: 100%;">
+           <tr style="background-color:navy;color: yellow;">
+               <td style="width: 5%;">#</td>
+               <td style="width: 30%;">Unit</td>
+               <td style="width: 30%;">Conversion</td>
+               <td style="width: 30%;">Std UM</td>
+               <td style="width: 5%;"></td>
+           </tr>
+           <tr *ngFor='let det of umslist;let i=index'>
+               <td style="width: 5%;">{{i+1}}</td>
+               <td style="width: 30%;">{{det.mainum}}</td>
+               <td style="width: 30%;">{{det.conve}}</td>
+               <td style="width: 30%;">{{det.stdum}}</td>
+               <td style="width: 5%;">  <i class="ft-trash-2 font-medium-1" (click)='deleteUM(det)'></i></td>
+           </tr>
+       </table>
+
+   </div>
+ 
+   </td>
+</tr>
+
+       </table>
+   </div>
+
+                   </div>
+               </div>
+           </div>
+           
+
+       </td>
+   </tr>
+
+   <tr>
+       <td colspan="2">
+             <button type="button" class="btn-lg btn-primary mr-1 mb-1" (click)='save()' >Save</button>
+          </td>
+   </tr>
+
+</table>
+ </div>
+
+  
+ 
+<div  *ngIf='!authcheck'>
+   <h1>You are not authorised to view this page</h1>
+    </div>

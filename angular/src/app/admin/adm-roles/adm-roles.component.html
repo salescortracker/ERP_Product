@@ -1,0 +1,848 @@
+<ngx-spinner></ngx-spinner>
+
+
+
+
+
+<ng-sidebar-container>
+  <ng-sidebar [opened]="crecheck" mode="push">
+ 
+    <h3>
+        Role Details
+      </h3>
+      <table style="width: 90%;">
+        <tr>
+            <td style="width: 100%;">
+            <input type="text" class="form-control" placeholder="Role Name" [(ngModel)]='rolename' [disabled] ='rolenamedisable'>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100%;">
+                <select class="form-control" [(ngModel)]='menuname'>
+                    <option value=" ">--Select--</option>
+                    <option *ngFor='let mod of modules' value={{mod.modulename}}>{{mod.modulename}}</option>
+                </select>
+                </td>
+        </tr>
+        <tr>
+            <td style="width: 100%;">
+
+<!--Front Office Menu Starts-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Front Office"'>
+  <ul>
+    <li *ngFor='let chi1 of foMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+<!--Front Office Menu Ends-->
+
+
+
+              <!--Accounts Menu Starts-->
+            <div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Accounts"'>
+              <ul>
+                <li *ngFor='let chi1 of accMenu'>
+                  <table>
+                    <tr>
+                       <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+                       <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+                    
+                       <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+                      <td>{{chi1.menu}}</td>
+                    </tr>
+                  </table>
+                  <ul>
+                    <div *ngIf='chi1.opencheck'>
+                    <li *ngFor='let chi2 of chi1.children' >
+                      
+                      <table>
+                        <tr>
+                          <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+                          <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+                       
+                          <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+                          <td>{{chi2.menu}}</td>
+                        </tr>
+                      </table>
+                      <ul>
+                        <div *ngIf='chi2.opencheck'>
+                        <li *ngFor='let chi3 of chi2.children'>
+                          
+                          <table>
+                            <tr>
+                              <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                              <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                           
+                              <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                              <td>{{chi3.menu}}</td>
+                            </tr>
+                          </table>
+                          <ul>
+                            <div  *ngIf='chi3.opencheck'>
+                            <li *ngFor='let chi4 of chi3.children'>
+                             
+                              <table>
+                                <tr>
+                                  <td><i class="ft-minus font-medium-1"></i></td>
+                                 
+                                  <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                                  <td>{{chi4.menu}}</td>
+                                </tr>
+                              </table>
+                            
+                            </li>
+                          </div>
+                          </ul>
+                          
+                        </li>
+                      </div>
+                      </ul>
+                    
+                    </li>
+                  </div>
+                  </ul>
+                </li>
+               
+              </ul>
+            </div> 
+<!--Account Menu Ends-->
+
+
+
+
+
+
+
+
+
+            <!--Purchases Menu-->
+            <div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Purchases"'>
+              <ul>
+                <li *ngFor='let chi1 of purMenu'>
+                  <table>
+                    <tr>
+                       <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+                       <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+                    
+                       <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+                      <td>{{chi1.menu}}</td>
+                    </tr>
+                  </table>
+                  <ul>
+                    <div *ngIf='chi1.opencheck'>
+                    <li *ngFor='let chi2 of chi1.children' >
+                      
+                      <table>
+                        <tr>
+                          <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+                          <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+                       
+                          <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+                          <td>{{chi2.menu}}</td>
+                        </tr>
+                      </table>
+                      <ul>
+                        <div *ngIf='chi2.opencheck'>
+                        <li *ngFor='let chi3 of chi2.children'>
+                          
+                          <table>
+                            <tr>
+                              <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                              <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                           
+                              <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                              <td>{{chi3.menu}}</td>
+                            </tr>
+                          </table>
+                          <ul>
+                            <div  *ngIf='chi3.opencheck'>
+                            <li *ngFor='let chi4 of chi3.children'>
+                             
+                              <table>
+                                <tr>
+                                  <td><i class="ft-minus font-medium-1"></i></td>
+                                 
+                                  <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                                  <td>{{chi4.menu}}</td>
+                                </tr>
+                              </table>
+                            
+                            </li>
+                          </div>
+                          </ul>
+                          
+                        </li>
+                      </div>
+                      </ul>
+                    
+                    </li>
+                  </div>
+                  </ul>
+                </li>
+               
+              </ul>
+            </div> 
+
+
+
+
+<!--CRM MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="CRM"'>
+  <ul>
+    <li *ngFor='let chi1 of crmMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+<!--Production MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Production"'>
+  <ul>
+    <li *ngFor='let chi1 of productionMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+
+<!--QC MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="QC"'>
+  <ul>
+    <li *ngFor='let chi1 of qcMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+
+<!--Inventory MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Inventory"'>
+  <ul>
+    <li *ngFor='let chi1 of inventoryMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+<!--Sales MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Sales"'>
+  <ul>
+    <li *ngFor='let chi1 of salesMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+
+<!--HRD MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="HRD"'>
+  <ul>
+    <li *ngFor='let chi1 of hrdMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+
+<!--Maintenance MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Maintenance"'>
+  <ul>
+    <li *ngFor='let chi1 of maintMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+
+
+<!--Analysis MENU-->
+<div style="width:100%;overflow-y: scroll; height: 400px;" *ngIf='menuname=="Analysis"'>
+  <ul>
+    <li *ngFor='let chi1 of analyMenu'>
+      <table>
+        <tr>
+           <td *ngIf='chi1.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+           <td *ngIf='!chi1.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi1)'></i></td>
+        
+           <td><input type="checkbox" [(ngModel)] = 'chi1.actualcheck' (change)='makeSubCheckings(chi1)'> </td>
+          <td>{{chi1.menu}}</td>
+        </tr>
+      </table>
+      <ul>
+        <div *ngIf='chi1.opencheck'>
+        <li *ngFor='let chi2 of chi1.children' >
+          
+          <table>
+            <tr>
+              <td *ngIf='chi2.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+              <td *ngIf='!chi2.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi2)'></i></td>
+           
+              <td><input type="checkbox" [(ngModel)] = 'chi2.actualcheck' (change)='makeSubCheckings(chi2)'> </td>
+              <td>{{chi2.menu}}</td>
+            </tr>
+          </table>
+          <ul>
+            <div *ngIf='chi2.opencheck'>
+            <li *ngFor='let chi3 of chi2.children'>
+              
+              <table>
+                <tr>
+                  <td *ngIf='chi3.opencheck'><i class="ft-minus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+                  <td *ngIf='!chi3.opencheck'><i class="ft-plus font-medium-1" (click)='toggleTreeView(chi3)'></i></td>
+               
+                  <td><input type="checkbox" [(ngModel)] = 'chi3.actualcheck' (change)='makeSubCheckings(chi3)'> </td>
+                  <td>{{chi3.menu}}</td>
+                </tr>
+              </table>
+              <ul>
+                <div  *ngIf='chi3.opencheck'>
+                <li *ngFor='let chi4 of chi3.children'>
+                 
+                  <table>
+                    <tr>
+                      <td><i class="ft-minus font-medium-1"></i></td>
+                     
+                      <td><input type="checkbox" [(ngModel)] = 'chi4.actualcheck'> </td>
+                      <td>{{chi4.menu}}</td>
+                    </tr>
+                  </table>
+                
+                </li>
+              </div>
+              </ul>
+              
+            </li>
+          </div>
+          </ul>
+        
+        </li>
+      </div>
+      </ul>
+    </li>
+   
+  </ul>
+</div> 
+
+            </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="button" class="btn-lg btn-primary mr-1 mb-1"  (click)='Save()' >Save</button>
+             <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+     
+
+          </td>
+        </tr>
+      </table>
+  </ng-sidebar>
+  
+
+
+  <div ng-sidebar-content>
+      
+    <nav>
+  <h3>
+      List of Roles
+    </h3>
+    <button type="button" *ngIf='!crecheck' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+                 
+    <table class="table m-0" style="width: 80%;">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Role</th>
+          
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor='let role of rolesList;let i=index'>
+              <td>{{i+1}}</td>
+              <td>{{role}}</td>
+              <td><i class="ft-edit font-medium-1" *ngIf='!crecheck' (click)='openOld(role)'></i></td>
+          </tr>
+          
+          </tbody>
+    </table>
+    </nav>
+  </div>
+</ng-sidebar-container>

@@ -1,0 +1,282 @@
+<ngx-spinner></ngx-spinner>
+
+<div *ngIf='opened'>
+
+<h3>Interview Details</h3>
+<table style="width: 90%;">
+<tr>
+    <td style="width: 15%;" align="right">Interview Date</td>
+    <td style="width: 35%;"> <input type="date" class="form-control"   [value]="header.InterviewDate | date:'yyyy-MM-dd'" (input)="header.InterviewDate=parseDate($event.target.value)"> </td>
+    <td style="width: 25%;">&nbsp;</td>
+    <td style="width: 25%;">&nbsp;</td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Venue</td>
+    <td colspan="3"> <input type="text" class="form-control" [(ngModel)]='header.Venue'> </td>
+
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Designation</td>
+    <td style="width: 35%;"> <select class="form-control" [(ngModel)]='header.Designation' (change)='getDesignation()'>
+        <option value="0">--Select Designation--</option>
+        <option *ngFor='let des of designations' value="{{des.RecordId}}">{{des.Designation}}</option>
+    </select> </td>
+    <td style="width: 25%;"> <input type="text" class="form-control" [(ngModel)]='department' disabled> </td>
+    <td style="width: 25%;"> <button type="button" class="btn btn-info" (click)='getResume()'>Show Resume</button> </td>
+</tr>
+<tr>
+    <td style="width: 15%;">&nbsp;</td>
+     <td colspan="3">
+        <div style="overflow-y: scroll; width:100%; height: 250px ">
+            <table class="table table-sm m-0">
+                <thead>
+                    <th>#</th>
+                    <th>Seq</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>Expected</th>
+                    <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let resu of resume;let i=index'>
+                        <td> <input type="checkbox" [(ngModel)]='resu.chk'>  </td>
+                        <td>{{resu.seq}}</td>
+                        <td>{{resu.dat | date:'dd-MMM-yy'}}</td>
+                        <td>{{resu.nameOfCandidate}}</td>
+                        <td>{{resu.mobile}}</td>
+                        <td>{{resu.expectedSalary | number:'0.2'}}</td>
+                        <td><i class="ft-edit font-medium-1" (click)='openCandidate(customContent,resu)'></i></td>
+                    </tr>
+                     
+                </tbody>
+            </table>
+        </div>
+
+     </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Description</td>
+    <td colspan="3">  <textarea class="form-control" rows="3" [(ngModel)]='header.Descriptio'></textarea> </td>
+
+</tr>
+<tr>
+    <td colspan="4" > &nbsp;</td>
+</tr>
+<tr>
+    <td colspan="4" style="background-color: lightgray;" align="center">Interview Panel</td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Employee</td>
+    <td style="width: 35%;">     <ng-select id='cmbemploy' [items]="employees" bindLabel="empname" [(ngModel)]='employ'></ng-select>
+    </td>
+    <td style="width: 25%;"> <input type="text" class="form-control" disabled [(ngModel)]='employ.designation' > </td>
+    <td style="width: 25%;"> 
+        <table style="width: 100%;">
+        <tr>
+            <td style="width: 70%;"><input type="text" class="form-control" disabled [(ngModel)]='employ.department' > </td>
+        <td style="width: 30%;"> <button type="button" class="btn btn-info" (click)='addEmployee()'>Add</button> </td>
+        </tr>
+        
+        </table>
+       
+
+</tr>
+<tr>
+    <td style="width: 15%;">&nbsp;</td>
+    <td colspan="3">
+       <div style="overflow-y: scroll; width:100%; height: 250px ">
+
+        <table class="table table-sm m-0">
+            <thead>
+                <th>#</th>
+                <th>Emp no</th>
+                <th>Employee</th>
+                <th>Designation</th>
+                <th>Department</th>
+                <th>Mobile</th>
+                <th>&nbsp;</th>
+            </thead>
+            <tbody>
+                <tr *ngFor='let resu of emppanel;let i=index'>
+                    <td> {{i+1}} </td>
+                    <td>{{resu.empno}}</td>
+                    <td>{{resu.empname}}</td>
+                    <td>{{resu.designation}}</td>
+                    <td>{{resu.department}}</td>
+                    <td>{{resu.mobile}}</td>
+                    <td><i class="ft-trash font-medium-1" (click)='deleteEmployee(resu)'></i></td>
+                </tr>
+                 
+            </tbody>
+        </table>
+       </div>
+
+    </td>
+</tr>
+<tr>
+    <td colspan="4">
+        <button *ngIf='recordId > 0' [disabled]='!delCheck' type="button" class="btn-lg btn-danger">Cancel</button>
+        <button type="button" [disabled]='!creCheck' class="btn-lg btn-primary" (click)='save()' > <span *ngIf='recordId==0'>Save</span>
+            <span *ngIf='recordId>0'>Modify</span>
+        </button>
+        <button type="button" class="btn-lg btn-dark" (click)='close()'>Close</button>
+    </td>
+</tr>
+</table>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Candidate info</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         
+         <font face="Arial" size=3>
+           <table style="width:100%">
+        <tr>
+            <td colspan="3">
+                <h4> {{candidatedet.header.nameOfCandidate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{candidatedet.header.mobile}}  </h4>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4" style="width: 25%;">  <img [src]='fileName' id='imgid' height="130px" width="100%">  </td>
+            <td style="width: 15%;" align="right">Father Name :</td>
+            <td style="width: 60%"> <b> &nbsp;&nbsp;&nbsp; {{candidatedet.header.fatherName}}</b> </td>
+        </tr>
+        <tr>
+                      <td style="width: 15%;" align="right">Gender :</td>
+            <td style="width: 60%"> <b> &nbsp;&nbsp;&nbsp;<span *ngIf='candidatedet.header.gender==1'>Male</span>
+                <span *ngIf='candidatedet.header.gender==2'>Female</span>
+                <span *ngIf='candidatedet.header.gender>2'>Transgender</span></b>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 15%;" align="right">Marital Status :</td>
+  <td style="width: 60%"> <b> &nbsp;&nbsp;&nbsp;<span *ngIf='candidatedet.header.maritalStatus==1'>Single</span>
+      <span *ngIf='candidatedet.header.maritalStatus==2'>Married</span></b>
+      
+  </td>
+</tr>
+<tr>
+    <td style="width: 15%;" align="right">Expected Salary :</td>
+<td style="width: 60%">  <b> &nbsp;&nbsp;&nbsp;{{candidatedet.header.expectedSalary | number:'0.2'}}</b>  </td>
+</tr>
+        </table>
+   
+
+    <table style="width: 100%;">
+    <tr>
+        <td style="width: 50%;vertical-align: top; border-color: black; border-style: double; border-width: 1;">
+        <table style="width: 100%;">
+        <tr>
+            <td colspan="4" align="center" style="background-color: lightgray;">Curriculum Details</td>
+        </tr>
+        <tr style="font-weight: bolder;">
+            <td style="width: 15%;">From</td>
+            <td style="width: 10%;">To</td>
+            <td style="width: 35%;">Qualification</td>
+            <td style="width: 40%;">Board/University</td>
+        </tr>
+        <tr *ngFor='let cur of candidatedet.curriculum'>
+            <td style="width: 15%;">{{cur.fromYear}}</td>
+            <td style="width: 10%;">{{cur.toYead}}</td>
+            <td style="width: 35%;">{{cur.qualification}}</td>
+            <td style="width: 40%;">{{cur.board}}</td>
+
+        </tr>
+        </table>
+        </td>
+
+        <td style="width: 50%; vertical-align: top; border-color: black; border-style: double; border-width: 1;">
+            
+            <table style="width: 100%;">
+                <tr>
+                    <td colspan="4" align="center" style="background-color: lightgray;">Experience Details</td>
+                </tr>
+                <tr style="font-weight: bolder;">
+                    <td style="width: 15%;">From</td>
+                    <td style="width: 10%;">To</td>
+                    <td style="width: 35%;">Designation</td>
+                    <td style="width: 40%;">Company</td>
+                </tr>
+                <tr *ngFor='let cur of candidatedet.experience'>
+                    <td style="width: 15%;">{{cur.fromYear}}</td>
+                    <td style="width: 10%;">{{cur.toYead}}</td>
+                    <td style="width: 35%;">{{cur.designation}}</td>
+                    <td style="width: 40%;">{{cur.organisation}}</td>
+        
+                </tr>
+                </table>
+        </td>
+    </tr>
+    </table>
+</font>
+        
+    </div>
+      
+  
+   
+    
+ </ng-template>
+    
+</div>
+
+
+ <div *ngIf='!opened'>
+
+    <h3>
+        List of Interview Details
+    </h3>
+    
+    <table style="width: 100%;">
+     <tr>
+         <td align="right" style="width: 30%;">
+    
+          &nbsp;
+         </td>
+         <td align="left" style="width: 30%;">
+            &nbsp;
+               </td>
+        
+         <td align="right" style="width: 40%;">
+             <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+         </td>
+         
+     </tr>
+    </table>
+    
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Seq</th>
+            <th>Date</th>
+            <th>Designation</th>
+            <th>Department</th>
+            <th>Venue</th>
+             
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor='let inter of interviews;let i=index'>
+            <th>{{i+1}}</th>
+            <td>{{inter.seq}}</td>
+            <td>{{inter.dat | date:'dd-MMM-yy'}}</td>
+            <td>{{inter.designation}}</td>
+            <td>{{inter.department}}</td>
+            <td>{{inter.venue}}</td>
+            <td> &nbsp; </td>
+         </tr>
+         
+         
+        </tbody>
+      </table>
+
+
+ </div>

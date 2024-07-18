@@ -1,0 +1,290 @@
+
+  <div class="col-sm-12">
+      <div class="content-header">Purchase  Dashboard</div>
+ </div>
+ <div *ngIf='authCheck'>
+ <div class="row ">
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-info bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media">
+            <div class="media-body info text-left">
+              <h3 class="font-large-1 info mb-0">{{activesups+inactivesups}}</h3>
+              <span>Total Suppliers</span><br>
+              <span>Active {{activesups}}</span><br>
+              <span>Inactive {{inactivesups}}</span>
+            </div>
+            <div class="media-right info text-right">
+              <i class="ft-check-square font-large-1"></i>
+            </div>
+          </div>
+        </div>
+         
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-warning bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">{{approvedrequests+pendingrequests}}</h3>
+                <span>Total Requests</span><br>
+                <span>Approved {{approvedrequests}}</span><br>
+                <span>Pending {{pendingrequests}}</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-check-square font-large-1"></i>
+              </div>
+            </div>
+         
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-primary bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media">
+            <div class="media-body info text-left">
+              <h3 class="font-large-1 info mb-0">{{materialpurchases+otherpurchases}}</h3>
+              <span>Total Purchases</span><br>
+              <span>Materials {{materialpurchases}}</span><br>
+              <span>Others {{otherpurchases}}</span>
+            </div>
+            <div class="media-right info text-right">
+              <i class="ft-check-square font-large-1"></i>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-success bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media">
+            <div class="media-body info text-left">
+              <h3 class="font-large-1 info mb-0">{{totalcredit}}</h3>
+              <span>Supplier Credit</span><br>
+              <span>Delayed {{delayedcredit}}</span><br>
+              <span>&nbsp;</span>
+            </div>
+            <div class="media-right info text-right">
+              <i class="ft-dollar-sign font-large-1"></i>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-info bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media">
+            <div class="media-body info text-left">
+              <h3 class="font-large-1 info mb-0">{{activeorders+expiredorders}}</h3>
+              <span>Pending Purchase Orders</span><br>
+              <span>Active {{activeorders}}</span><br>
+              <span>Expired {{expiredorders}}</span>
+            </div>
+            <div class="media-right info text-right">
+              <i class="ft-check-square font-large-1"></i>
+            </div>
+          </div>
+        </div>
+         
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+    <div class="card bg-warning bg-lighten-3">
+      <div class="card-content">
+        <div class="card-body py-0">
+          
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">{{activeordervalue+expiredordervalue}}</h3>
+                <span>Pending PO Cost</span><br>
+                <span>Active {{activeordervalue}}</span><br>
+                <span>Expired {{expiredordervalue}}</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-dollar-sign font-large-1"></i>
+              </div>
+            </div>
+         
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+   
+    <div class="row">
+       <!-- Bar Chart starts -->
+    <div class="col-xl-8 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Purchases Chart</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <apx-chart
+                [series]="barChartOptions.series"
+                [colors]="barChartOptions.colors"
+                [chart]="barChartOptions.chart"
+                [xaxis]="barChartOptions.xaxis"
+                [yaxis]="barChartOptions.yaxis"
+                [title]="barChartOptions.title"
+                [dataLabels]="barChartOptions.dataLabels"
+                [stroke]="barChartOptions.stroke"
+                [grid]="barChartOptions.grid"
+                [tooltip]="barChartOptions.tooltip"
+                [plotOptions]="barChartOptions.plotOptions"
+                [fill]="barChartOptions.fill"
+                [legend]="barChartOptions.legend"
+                [labels]="turnoverLabels"
+                [markers]="barChartOptions.markers"
+                [theme]="barChartOptions.theme"
+                [responsive]="barChartOptions.responsive"
+              ></apx-chart>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Bar Chart ends -->
+
+  
+<div class="col-lg-4 col-12">
+  <div class="card">
+      <div class="card-header">
+          <h4 class="card-title">Category wise Purchases</h4>
+      </div>
+      <div class="card-content">
+          <div class="card-body">
+                <apx-chart
+                [series]="pieChartOptions.series"
+                [colors]="pieChartOptions.colors"
+                [chart]="pieChartOptions.chart"
+                [xaxis]="pieChartOptions.xaxis"
+                [yaxis]="pieChartOptions.yaxis"
+                [title]="pieChartOptions.title"
+                [dataLabels]="pieChartOptions.dataLabels"
+                [stroke]="pieChartOptions.stroke"
+                [grid]="pieChartOptions.grid"
+                [tooltip]="pieChartOptions.tooltip"
+                [plotOptions]="pieChartOptions.plotOptions"
+                [fill]="pieChartOptions.fill"
+                [legend]="pieChartOptions.legend"
+                [labels]="pieChartOptions.labels"
+                [markers]="pieChartOptions.markers"
+                [theme]="pieChartOptions.theme"
+                [responsive]="pieChartOptions.responsive"
+              ></apx-chart>
+          </div>
+      </div>
+  </div>
+</div>
+
+</div>
+ 
+    <div class="row">
+       
+      <!-- Bar Chart starts -->
+      <div class="col-xl-6 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Top 10 Suppliers for Purchases</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <div style="width: 100%; height: 300px; overflow-y: scroll ;">
+                  <table class="table m-6">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Supplier</th>
+                        <th style="text-align: right;">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor='let sup of suppurchases;let i=index' >
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{sup.name}}</td>
+                        <td align="right"> {{sup.busi | number:'0.2'}}</td>
+                      
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+
+
+     <!-- Bar Chart starts -->
+     <div class="col-xl-6 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Top 10 Credits</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <div style="width: 100%; height: 300px; overflow-y: scroll ;">
+                  <table class="table m-6">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Supplier</th>
+                        <th style="text-align: right;">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor='let sup of supcredits;let i=index' >
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{sup.name}}</td>
+                        <td align="right"> {{sup.busi | number:'0.2'}}</td>
+                      
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Bar Chart ends -->
+  </div>
+
+</div>
+
+<div *ngIf='!authCheck'>
+<table style="width: 100%;">
+<tr>
+  <td style="width: 15%;">&nbsp;</td>
+  <td style="width: 70%;"><img src='../../../assets/img/modules/purchases.png' style="width: 100%;"></td>
+  <td style="width: 15%;">&nbsp;</td>
+</tr>
+</table>
+  
+</div>
+

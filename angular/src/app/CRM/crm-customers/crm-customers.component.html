@@ -1,0 +1,628 @@
+<ngx-spinner></ngx-spinner>
+
+ 
+<div *ngIf='opened'>    <h3>{{actype}} Details</h3>
+     
+
+
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 30%;"> <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Select Group</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+<div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 720px; overflow-y: scroll;">
+              <span *ngFor='let obj1 of treeObj'  >
+                  <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                  <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i> <a>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.subGroup}} </span> </a> <br>
+      
+                  <div  *ngIf='obj1.openCheck'>
+                  
+                  <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+                    <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                    <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <a><span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span></a><br>
+                    
+                    <div  *ngIf='obj2.openCheck'>
+                    <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                      <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                    <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>    <a> <span (click)='toggleVisible(obj3)'> {{obj3.subGroup}} </span></a> <br>
+                    </span>
+                    </div>
+      
+                  </span>
+              </div>
+              </span>
+      
+          </div>
+
+
+              </div>
+              </div>
+     </div> </td>
+    <td style="width: 70%;">
+ 
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Customer Details</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+
+                    <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 720px; overflow-y: scroll;">
+                      
+                        
+    <ngb-tabset type="pills">
+        <ngb-tab title="General Profile">
+          <ng-template ngbTabContent> 
+             
+
+
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 9%;" align="right">Code</td>
+                    <td colspan="3"> <input type="text" style="width: 40%;" class="form-control" id="basicInput"  [(ngModel)]='supplier.PartyCode' placeholder="Customer Code"></td>
+                </tr>
+                <tr>
+                    <td style="width: 9%;" align="right">Customer</td>
+                    <td colspan="3"> <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.PartyName'  placeholder="Customer"></td>
+                </tr>
+                <tr>
+                    <td style="width: 9%;" align="right">Group</td>
+                    <td colspan="3">  <input type="text" class="form-control" id="basicInput" [(ngModel)]='partygrp' placeholder="Customer Group" disabled></td>
+                </tr>
+               
+
+
+
+             
+<tr>
+<td style="width: 9%;" align="right">Status</td>
+<td colspan="3"> <select class="form-control" [(ngModel)]='supplier.Statu'> <option value="1">Active</option> <option value="2">Inactive</option>  </select>
+</td>
+</tr>    
+<tr>
+    <td colspan="4">&nbsp;</td>
+</tr>       
+<tr>
+    <td colspan="4" style="background-color: lightgray;">Contact Information</td>
+</tr>       
+
+<tr>
+
+<td style="width: 9%;" align="right">Contact</td>
+<td colspan="3">     <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactPerson' placeholder="Contact Person">
+                 
+</td>
+</tr>   
+</table>
+
+
+<table style="width: 100%;">
+    <tr>
+        <td style="width:9%" align="right">Designation</td>
+        <td style="width:24%" >        <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactDesignation'  placeholder="Designation">
+        </td>
+        <td style="width:9%" align="right">Email</td>
+        <td style="width:24%" >      <input type="email" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactEmail' placeholder="Email">
+        </td>
+        <td style="width:9%" align="right">Mobile</td>
+        <td style="width:25%" >     <input type="text" class="form-control" id="basicInput"  [(ngModel)]='supplier.ContactMobile' placeholder="Mobile">
+        </td>
+    </tr>
+    <tr>
+        <td style="width:9%" align="right">Pref Language</td>
+        <td style="width:24%" >        <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.PrefLanguage'  placeholder="Prefereable Language">
+        </td>
+        <td colspan="4">&nbsp;   </td>
+    </tr>
+ 
+<tr>
+    <td colspan="6">&nbsp;</td>
+</tr>
+     
+       
+         
+         
+            <tr>
+              <td style="width:9%">&nbsp;</td>
+              <td  style="width:24%" > 
+                  <div class="custom-control custom-checkbox">
+                      <input type="checkbox" id="checkbox4" [(ngModel)]='supplier.EximCheck'>
+                      <label><span>Authorised ExIm</span></label>
+                      </div>
+              </td>
+              <td style="width:9%" align="right">Air Dest</td>
+              <td style="width:24%" >    <input type="text" [disabled]='!supplier.EximCheck' class="form-control" id="basicInput"  placeholder="Air Destination" [(ngModel)]='supplier.AirDestination'>
+              </td>
+              <td style="width:9%" align="right">Sea Dest</td>
+              <td style="width:25%" >    <input type="text" [disabled]='!supplier.EximCheck' class="form-control" id="basicInput"  placeholder="Sea Destination"  [(ngModel)]='supplier.SeaDestination'>
+              </td>
+          </tr>   
+          <tr>
+              <td colspan="6">&nbsp;</td>
+          </tr>     
+          <tr>
+            <td colspan="6" style="background-color: lightgray;">Delivery Information</td>
+        </tr> 
+
+        <tr>
+            <td style="width:9%" align="right">Lead Time</td>
+            <td style="width:24%" >          <input type="number" class="form-control" id="basicInput"  [(ngModel)]='supplier.LeadTime'  placeholder="Lead Time">
+            </td>
+            <td style="width:9%" align="right">Reminder -1</td>
+            <td style="width:24%" >          <input type="number" class="form-control" id="basicInput" [(ngModel)]='supplier.OrderReminder1' placeholder="Reminder-1 in days">
+            </td>
+            <td style="width:9%" align="right">Reminder -2</td>
+            <td style="width:25%" >          <input type="number" class="form-control" id="basicInput" [(ngModel)]='supplier.OrderReminder2' placeholder="Reminder-2 in days">
+            </td>
+        </tr>
+          <tr>
+                 <td style="width:9%" align="right">Employee</td>
+              <td colspan="5" >        
+                  <select class="form-control" id="basicInput" [(ngModel)]='empno' (change)='getEmployeeDet()'> <option value="0" >Select Employee</option>  
+                      
+                      <option *ngFor='let emp of employees' value="{{emp.recordId}}">{{emp.empname}}</option>
+                      
+                      </select>
+              </td>
+        </tr>
+        <tr>
+            
+                <td style="width:9%" align="right">&nbsp;</td> 
+                <td colspan="5">
+                    <table style="width: 100%;">
+                    <tr>
+                        <td style="width:13%;" align="right">Mobile</td>
+                        <td style="width:20%;"> <input type="text" class="form-control" disabled [(ngModel)]='empdet.mobile'> </td>
+                        <td style="width:13%;" align="right">Department</td>
+                        <td style="width:20%;"> <input type="text" class="form-control" disabled  [(ngModel)]='empdet.department'> </td>
+                     
+                        <td style="width:13%;" align="right">Designation</td>
+                        <td style="width:21%;"> <input type="text" class="form-control" disabled  [(ngModel)]='empdet.designation'> </td>
+                     
+                    </tr>
+                    </table>
+                </td>
+             
+        </tr>
+          <tr>
+              <td style="width:9%" align="right">Bank</td>
+              <td colspan="5" >        
+                  <select class="form-control" id="basicInput" [(ngModel)]='BankForSecurity'> <option value="0" >Bank for Security</option>  
+                      
+                      <option *ngFor='let bank of banks' value="{{bank.recordid}}">{{bank.accname}}</option>
+                      
+                      </select>
+              </td>
+              
+                    </tr>  
+                   
+                    <tr>
+                        <td style="width:9%" align="right">Main Customer</td>
+                        <td colspan="5" >        
+                            <select class="form-control" id="basicInput" [(ngModel)]='supplier.MainCustomer'> <option value="0" >--Select Main Customer--</option>  
+                                
+                                <option *ngFor='let cust of totalparties' value="{{cust.recordId}}">{{cust.partyName}}</option>
+                                
+                                </select>
+                        </td>
+                        
+                              </tr>  
+
+
+                    <tr>
+                        <td colspan="6">&nbsp;</td>
+                    </tr>
+               
+                    <tr>
+                      <td style="width:9%" align="right">User Code</td>
+                      <td style="width:24%" >     <input type="text" class="form-control" id="basicInput"  [(ngModel)]='supplier.PartyUserName' placeholder="User Code">
+                            
+                      </td>
+                      
+                      <td colspan="2" > <select class="form-control" [(ngModel)]='supplier.DefaultPurchaseorSaleType'>
+                          <option value=" ">--Select Default Sale Type--</option>
+                          <option value="GEN">General</option>
+                          <option value="CEN">Central</option>
+                          <option value="IMP">Imports</option>
+                      </select>
+                      </td>
+
+                          <td colspan="2" >        <input type="checkbox" id="checkbox3" [(ngModel)]='supcuschk'>
+                              <label><span>Also Supplier</span></label>      
+                          </td>
+                          
+                                 
+                      
+                  </tr>      
+            
+              
+                  </table>
+
+
+
+
+          </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Addresses Info">
+            <ng-template ngbTabContent> 
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="4">
+                            <div style="width: 100%; height: 450px; overflow-y: scroll ;">
+    
+                                <table class="table m-0" style="width: 100%;">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 85%;">Address</th>
+                                         
+                                        <th style="width: 10%;"> <button type="button" class="btn-sm btn-info" style="width: 100%;" (click)="openModal(customContent,1,null)">Add</button> </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                     
+                                      <tr *ngFor='let addr of addresses;let i=index'>
+                                        <th scope="row" style="width: 5%;" >{{i+1}}</th>
+                                        <td style="width: 85%;">{{addr.AddressName}}</td>
+                                        <td style="width: 10%;"> <button type="button" class="btn-sm btn-success" style="width: 100%;" (click)="openModal(customContent,2,addr)">Show</button></td>
+                                               </tr>
+                                     
+                                    </tbody>
+                                  </table>
+                          
+                          
+                            </div>
+    
+                        </td>
+                    </tr>
+    </table>
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab title="Payment Info">
+            <ng-template ngbTabContent> 
+                
+                <table style="width: 100%;">
+                <tr>
+                    <td style="width:15%" align="right">Credit Limit</td>
+      <td style="width:35%" >     <input type="number" class="form-control" id="basicInput"  [(ngModel)]='supplier.CrAmt' placeholder="Credit Amount">
+      </td>
+                    <td style="width: 15%;" align="right">Restriction Mode</td>
+                    <td style="width: 35%;">
+                        <select class="form-control" id="basicInput" [(ngModel)]='supplier.RestrictMode'> <option value="0">Select Restriction Mode</option>  <option value="1">None</option> <option value="2">Instruction</option> <option value="3">Restriction</option> </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width:15%" align="right">Credit Days</td>
+      <td style="width:35%" >     <input type="number" class="form-control" id="basicInput" placeholder="Credit Days" [(ngModel)]='supplier.CrDay'>
+      </td>
+                    <td style="width: 15%;" align="right">Reminder -1 </td>
+                    <td style="width: 35%;">
+                        <input type="number" class="form-control" placeholder="Payment first reminder in days" [(ngModel)]='supplier.PaymentReminder1'>
+                        
+                        </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" align="right">Reminder -2 </td>
+                    <td style="width: 35%;">
+                        <input type="number" class="form-control" placeholder="Payment second reminder in days"  [(ngModel)]='supplier.PaymentReminder2'>
+                        
+                        </td>
+                        <td style="width: 15%;" align="right">Reminder -3 </td>
+                        <td style="width: 35%;">
+                            <input type="number" class="form-control" placeholder="Payment third reminder in days"  [(ngModel)]='supplier.PaymentReminder3'>
+                            
+                            </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" align="right">Payment Mode </td>
+                    <td style="width: 35%;">
+                        <select class="form-control" id="basicInput"  [(ngModel)]='supplier.DefaultPaymentMode'> <option value="0">Select Payment Mode</option>
+                              <option value="CASH">Cash</option> <option value="CHEQUE">Cheque</option> <option value="ONLINE">Online</option> <option value="CREDIT">Credit</option> </select>
+             
+                        </td>
+                         <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" align="right">Price List </td>
+                    <td style="width: 35%;">
+                        <select class="form-control" [(ngModel)]='supplier.Pricelist'>
+                            <option value=" ">--Select Price--</option>
+                            <option *ngFor='let name of pricelists' value="{{name}}">{{name}}</option>
+                          </select>    
+                        </td>
+                        <td style="width: 15%;" align="right">Discount List </td>
+                        <td style="width: 35%;">
+                            <select class="form-control" [(ngModel)]='supplier.Discountlist'>
+                                <option value=" ">--Select Discount--</option>
+                                <option *ngFor='let name of discountlists' value="{{name}}">{{name}}</option>
+                              </select>       
+                            </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background-color: lightgray;">KYC</td>
+                </tr>
+
+                <tr>
+                    <td style="width: 15%;" align="right">A/c Number </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="form-control"  [(ngModel)]='supplier.KycAcnumber'>
+                        
+                        </td>
+                        <td style="width: 15%;" align="right">A/c Holder </td>
+                        <td style="width: 35%;">
+                            <input type="text" class="form-control"  [(ngModel)]='supplier.KycAcholder'>
+                            
+                            </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" align="right">Bank name </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="form-control" [(ngModel)]='supplier.KycAcbank'>
+                        
+                        </td>
+                        <td style="width: 15%;" align="right">Bank Branch </td>
+                        <td style="width: 35%;">
+                            <input type="text" class="form-control"  [(ngModel)]='supplier.KycAcbranch'>
+                            
+                            </td>
+                </tr>
+                <tr>
+                    <td style="width: 15%;" align="right">IFSC  </td>
+                    <td style="width: 35%;">
+                        <input type="text" class="form-control" [(ngModel)]='supplier.KycAcifsc'>
+                        
+                        </td>
+                       <td colspan="2">&nbsp;</td>
+                </tr>
+
+                </table>
+
+
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab title="Department Info">
+            <ng-template ngbTabContent> 
+                 
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 10%;" align="right">
+                        Department
+                        </td>
+                        <td style="width: 35%;" >
+                            <input type="text" class="form-control" [(ngModel)]='department'>
+                            </td>
+                        <td style="width: 10%;" align="right">
+                            Department Id
+                            </td>
+                            <td style="width: 35%;" >
+                                <input type="text" class="form-control" [(ngModel)]='departmentid'>
+                                </td>
+                                <td style="width: 10%;">
+                                <button type="button" class="btn-sm btn-info" style="width: 100%;" (click)='addDepartment()'>Add</button>
+                                </td>
+                    </tr>
+                    </table>
+                    <div style="width: 100%; height: 400px; overflow-y: scroll ;">
+                        <table class="table m-0" style="width: 100%;">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>#</th>
+                                <th>Department</th>
+                                <th>Detail</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                             
+                              <tr *ngFor='let dep of departments;let i=index'>
+                                <th scope="row" >{{i+1}}</th>
+                                <td>{{dep.Department}}</td>
+                                <td>{{dep.DepartmentDetails}}</td>
+                              
+                                 <td><i class="ft-trash font-medium-1"(click)='deleteDepartment(dep)'></i></td>
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+          
+          
+                          </div>
+
+
+            </ng-template>
+          </ngb-tab>
+    </ngb-tabset>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td colspan="2"> <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!crecheck' (click)='save()'>{{savestr}}</button>
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" [disabled]='!delcheck' (click)='delete()' *ngIf='recordid!=0' >Delete</button>
+        <button type="button" class="btn-lg btn-dark mr-1 mb-1" (click)='close()'>Close</button>
+   </td>
+</tr>
+</table>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Address</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         
+              <table style="width: 100%;">
+                <tr>
+                    <td style="width: 9%;" align="right">Name</td>
+                    <td colspan="3"> <input type="text" class="form-control" [(ngModel)]='address.nam'> </td>
+                </tr>
+                <tr>
+                            
+                    <td style="width: 9%;" align="right">Address</td>
+                    <td style="width: 41%;" rowspan="2">  <textarea id="projectinput8" rows="3" class="form-control" name="comment" placeholder="Address" [(ngModel)]='address.addr'></textarea> </td>
+                    <td style="width: 9%;" align="right">ZIP</td>
+                    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Zip" [(ngModel)]='address.zip' ></td>
+            </tr>
+            <tr>
+                <td style="width: 9%;" align="right">&nbsp;</td>
+                <td style="width: 9%;" align="right">Mobile</td>
+                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Mobile" [(ngModel)]='address.mobile' ></td>
+        
+            </tr>
+            <tr>
+                
+                <td style="width: 9%;" align="right">Country</td>
+                <td style="width: 41%;">     <select class="form-control" [(ngModel)]='address.country'  (change)='changeCountry()'>
+                    <option value="-1">--Select Country--</option>
+                    <option *ngFor='let country of countries' value={{country.cntname}}>{{country.cntname}}</option>
+            </select>  </td>
+                <td style="width: 9%;" align="right">Tel</td>
+                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Telephone" [(ngModel)]='address.tel'></td>
+        </tr>
+        <tr>
+                
+            <td style="width: 9%;" align="right">State</td>
+            <td style="width: 41%;">    
+                <select class="form-control" [(ngModel)]='address.stat'>
+                    <option value=" ">--Select State--</option>
+                    <option *ngFor='let sta of selectedstates' value="{{sta.stateName}}">{{sta.stateName}}</option>
+                    
+
+                  </select>
+            </td>
+            <td style="width: 9%;" align="right">Fax</td>
+            <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Fax" [(ngModel)]='address.fax'></td>
+    </tr>
+    <tr>
+                
+        <td style="width: 9%;" align="right">District</td>
+        <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="District" [(ngModel)]='address.district'></td>
+        <td style="width: 9%;" align="right">Email</td>
+        <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Email" [(ngModel)]='address.email'></td>
+</tr>
+<tr>
+                
+    <td style="width: 9%;" align="right">City</td>
+    <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="City" [(ngModel)]='address.city'></td>
+    <td style="width: 9%;" align="right">Web</td>
+    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Web" [(ngModel)]='address.web'></td>
+</tr>
+
+<tr>
+    <td style="width: 9%;" align="right">Status</td>
+    <td colspan="3"> <select class="form-control" [(ngModel)]='address.statu'>
+        <option value="1">Active</option> <option value="2">Inactive</option>
+    </select>  </td>
+</tr>
+<tr>
+    <td colspan="4">
+        <button *ngIf='address.id==0' class="btn btn-info" (click)='addAddress()'>Add</button>
+        <button *ngIf='address.id !=0' class="btn btn-info" (click)='updateAddress()'>Modify</button>
+        <button *ngIf='address.id !=0' class="btn btn-danger" (click)='deleteAddress()'>Delete</button>
+        <button class="btn btn-dark" (click)='closeAddress()'>Close</button>
+ 
+   
+    </td>
+</tr>
+
+            </table>
+         
+    </div>
+    
+  
+  </ng-template>
+
+
+</div>
+ 
+  
+<div *ngIf='!opened'>
+    <h3>
+        List of Customers
+    </h3>
+    
+    <table style="width: 100%;">
+    <tr>
+        <td align="left" style="width: 50%;">
+            <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+        </td>
+        <td align="right" style="width: 50%;">
+         <div class="form-group has-search">
+           <span class="fa fa-search form-control-feedback"></span>
+           <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchParties()' >
+         </div>
+        </td>
+    </tr>
+    </table>
+    <ngb-pagination [collectionSize]="totalpages" (pageChange)="loadPage($event)" [(page)]="page4" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th  style="width: 30%;">{{actype}}</th>
+            <th  style="width: 15%;">Group</th>
+            <th  style="width: 21%;">Contact Person</th>
+            <th style="width: 12%;">Contact Mobile</th>
+            <th  style="width: 12%;">Status</th>
+            <th  style="width: 5%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let party of parties;let i=index'>
+            <th scope="row"  style="width: 5%;">{{i+1+((pageno-1)*PAGESIZE)}}</th>
+            <td  style="width: 30%;">{{party.partyName}}</td>
+            <td  style="width: 15%;">{{party.partyGroupName}}</td>
+            <td  style="width: 21%;">{{party.contactPerson}}</td>
+            <td  style="width: 12%;">{{party.contactMobile}}</td>
+            <td  style="width: 12%;">{{party.status}}</td>
+             <td style="width: 5%;"><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(party)'></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+    </div>
+ 
+
+
+
+
+
+
+
+
+
+

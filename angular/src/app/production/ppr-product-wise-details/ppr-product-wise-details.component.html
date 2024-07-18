@@ -1,0 +1,231 @@
+<ngx-spinner></ngx-spinner>
+<h3> Product wise Complete Details</h3>
+<table style="width: 100%;">
+    <tr>
+        <td style="width:35%">
+        Product
+        </td>
+        <td style="width: 30%;">Group</td>
+        <td style="width: 11%;">UOM</td>
+        <td style="width: 12%;">Min Qty</td>
+        <td style="width: 12%;">Max Qty</td>
+    </tr>
+    <tr>
+        <td style="width:35%">
+            <ng-select [items]="products" bindLabel="itemname" [(ngModel)]='product' (change)='getMaterialCompleteInfo()' [disabled]='productDisableCheck()'> </ng-select>
+
+        </td>
+        <td style="width: 30%;"><input type="text" class="form-control" disabled [(ngModel)]='product.grpname' ></td>
+        <td style="width: 11%;"><input type="text" class="form-control" disabled [(ngModel)]='product.um' > </td>
+        <td style="width: 12%;"> <input type="number" class="form-control" [(ngModel)]='minbatch'>  </td>
+        <td style="width: 12%;"> <input type="number" class="form-control" [(ngModel)]='maxbatch'>  </td>
+    </tr>
+     
+</table>
+
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ngb-tabset type="pills">
+
+            <ngb-tab title="Material Info">
+              <ng-template ngbTabContent> 
+                  <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+                     <table style="width: 100%;">
+                    <tr>
+                      <td style="width:35%">
+                        Material
+                        </td>
+                        <td style="width: 30%;">Group</td>
+                        <td style="width: 12%;">Qty</td>
+                        <td style="width: 12%;">UOM</td>
+                        
+                        <td style="width: 11%;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 35%;">
+                            <ng-select [items]="materials" bindLabel="itemname" [(ngModel)]='material' > </ng-select>
+
+                        </td>
+                        <td style="width: 30%;"><input type="text" class="form-control" disabled [(ngModel)]='material.grpname' ></td>
+                        <td style="width: 12%;"> <input type="number" class="form-control" [(ngModel)]='materialqty'>  </td>
+                        <td style="width: 12%;"> <input type="text" disabled class="form-control" [(ngModel)]='material.um'>  </td>
+                     
+                        <td style="width: 11%;"><button class="btn-info" (click)='addMaterial()'>Add</button></td>
+                    </tr>
+                    </table>
+                    <table class="table m-0" style="width: 100%;">
+                        <thead class="thead-light">
+                          <tr>
+                            <th style="width: 5%;">#</th>
+                          
+                            <th style="width: 35%;">Material</th>
+                            <th style="width: 30%;">Group</th>
+                            <th style="width: 12%; text-align: right;">Qty</th>
+                            <th style="width: 12%; text-align: right;">UOM</th>
+                            
+                            <th style="width: 6%;">&nbsp;</th>
+                           
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor='let mat of proWiseMaterials;let i=index'>
+                            <th style="width: 5%;">{{i+1}}</th>
+                            <td style="width: 35%;">{{mat.itemname}}</td>
+                            <td style="width: 30%;">{{mat.grpname}}</td>
+                            <td style="width: 12%;" align="right">{{mat.qty}}</td>
+                            <td style="width: 12%;" align="right">{{mat.um}}</td>
+                            <td style="width: 6%;"><i class="ft-trash font-medium-1" (click)='deleteMaterial(mat)' ></i></td>
+                          </tr>
+                        </tbody>
+                        <tbody>
+        
+                    
+        
+                </table>
+        
+
+
+                  </div>
+                </ng-template>
+            </ngb-tab>
+
+            <ngb-tab title="Equipment Info">
+                <ng-template ngbTabContent> 
+                    <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 40%;">
+                                Equipment
+                                </td>
+                                <td style="width: 40%;">
+                                Group
+                                </td>
+                                <td style="width: 10%;">
+                                Man hrs
+                                </td>
+                                <td style="width: 10%;">
+                                &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <select class="form-control" [(ngModel)]='equipid' (change)='makeEquipDetails()'>
+                                      <option *ngFor='let equi of equipment' value="{{equi.recordId}}">{{equi.equipmentName}}</option>  
+                                    </select>
+                                </td>
+                                <td style="width: 40%;"><input type="text" class="form-control" disabled [(ngModel)]='equip.grp'></td>
+                                <td style="width: 10%;"> <input type="number" class="form-control" [(ngModel)]='equipmanhrs'>  </td>
+                                <td style="width: 10%;"><button class="btn-info" (click)='addEquipmentInfo()'>Add</button></td>
+                            </tr>
+                            </table>
+                            <table class="table m-0" style="width: 100%;">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th>#</th>
+                                  
+                                    <th>Equipment</th>
+                                    <th>Group</th>
+                                    <th style="text-align: right;">Machine hours</th>
+                                     
+                                    
+                                    <th></th>
+                                   
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor='let equi of proWiseEquipment;let i=index'>
+                                      <th>{{i+1}}</th>
+                                      <td>{{equi.name}}</td>
+                                      <td>{{equi.grp}}</td>
+                                      <td>{{equi.manhrs}}</td>
+                                      <td><i class="ft-trash font-medium-1" (click)='deleteEquipmentInfo(equi)'></i></td>
+                                  </tr>
+                                </tbody>
+                
+                            
+                
+                        </table>
+                
+                    </div>
+                  </ng-template>
+              </ngb-tab>
+
+              <ngb-tab title="Man Power Info">
+                <ng-template ngbTabContent> 
+                    <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 40%;">
+                                Designation
+                                </td>
+                                <td style="width: 40%;">
+                                Department
+                                </td>
+                                <td style="width: 10%;">
+                                Man hours
+                                </td>
+                                <td style="width: 10%;">
+                                &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 40%;">
+                                    <select class="form-control" [(ngModel)]='desigid' (change)='makeDesigDetails()' > 
+                                    <option *ngFor='let desig of designations' value="{{desig.recordId}}">{{desig.designation}}</option>
+                                    </select>
+                                </td>
+                                <td style="width: 40%;">
+                                     <input type="text" disabled class="form-control" [(ngModel)]='designation.department'>
+                              
+                                </td>                                <td style="width: 10%;"> <input type="number" class="form-control" [(ngModel)]='manhrs'>  </td>
+                                <td style="width: 10%;"><button class="btn-info" (click)='addDesignationInfo()' >Add</button></td>
+                            </tr>
+                            </table>
+                            <table class="table m-0" style="width: 100%;">
+                                <thead class="thead-light">
+                                  <tr>
+                                    <th>#</th>
+                                  
+                                    <th>Designation</th>
+                                    <th>Department</th>
+                                    <th style="text-align: right;">Man hours</th>
+                                     
+                                    
+                                    <th></th>
+                                   
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor='let des of proWiseDesignations;let i=index'>
+                                    <th>{{i+1}}</th>
+                                    <td>{{des.designation}}</td>
+                                    <td>{{des.department}}</td>
+                                    <td>{{des.manhrs}}</td>
+                                    <td><i class="ft-trash font-medium-1" (click)='deleteDesignationInfo(des)'></i></td>
+                           
+                                  </tr>
+                                </tbody>
+                                
+                            
+                
+                        </table>
+                
+                    </div>
+                  </ng-template>
+              </ngb-tab>
+
+
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+</div>
+
+<button class="btn-lg btn-primary" (click)='save()'>Save</button>
+<button class="btn-lg btn-warning" (click)='reset()'>Reset</button>

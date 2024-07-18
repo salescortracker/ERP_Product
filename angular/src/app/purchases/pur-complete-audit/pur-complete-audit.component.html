@@ -1,0 +1,249 @@
+
+ <ngx-spinner></ngx-spinner>
+<h3>Complete Transactions Audit</h3>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 25%;" align="left" valign="top">
+       
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Transactions</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+            <div style="width: 100%; height: 570px;">
+  <div #emailSidebar class="email-app-sidebar d-xl-block"  >
+    <span class="sidebar-close-icon d-xl-none">
+      <i class="ft-x"></i>
+    </span>
+    <div  class="email-app-sidebar-content">
+      <div class="email-app-menu">
+        
+        <hr class="m-0">
+        <span class="grey my-2 d-block font-small-3 text-uppercase">Order Management</span>
+
+        <div class="list-group list-group-messages">
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchase Request'}"
+            (click)="GetTransactionByType('Purchase Request')">
+            <i class="ft-file mr-2"></i> <span>Purchase Request</span></a>
+
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchase Enquiry'}"
+            (click)="GetTransactionByType('Purchase Enquiry')">
+            <i class="ft-file mr-2"></i> <span>Purchase Enquiry</span></a>
+
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchase Quotation'}"
+            (click)="GetTransactionByType('Purchase Quotation')">
+            <i class="ft-file mr-2"></i> <span>Purchase Quotation</span></a>
+
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchase Order'}"
+            (click)="GetTransactionByType('Purchase Order')">
+            <i class="ft-file mr-2"></i> <span>Purchase Order</span></a>
+ 
+        </div>
+        <hr class="my-2">
+        <span class="grey my-2 d-block font-small-3 text-uppercase">Transactions</span>
+        <div class="list-group list-group-messages border-0">
+            
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchases'}"
+            (click)="GetTransactionByType('Purchases')">
+            <i class="ft-send mr-2"></i> <span>Purchases</span></a>
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Purchase Returns'}"
+            (click)="GetTransactionByType('Purchase Returns')">
+            <i class="ft-send mr-2"></i> <span>Purchase Returns</span></a>
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Credit Notes'}"
+            (click)="GetTransactionByType('Credit Notes')">
+            <i class="ft-send mr-2"></i> <span>Credit Notes</span></a>
+            <a class="list-group-item list-group-item-action border-0" [ngClass]="{'active': activeTypeButton == 'Payments'}"
+            (click)="GetTransactionByType('Payments')">
+            <i class="ft-send mr-2"></i> <span>Payments</span></a>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+</td>
+<td style="width: 75%;" align="left" valign="top">
+
+
+  
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Audit Details</h4>
+        <h6 *ngIf='activeTypeButton !=""'>
+             <span  *ngIf='activeTypeButton !=""'> Complete audit details of {{activeTypeButton}} 
+            </span> <span  *ngIf='fromstr !=""'> from {{fromdate | date:'yyyy-MM-dd'}} to {{todate | date:'yyyy-MM-dd'}} </span></h6>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+        <table style="width: 100%;">
+        <tr>
+            <td style="width: 30%;">
+                <input type="date" class="form-control"  [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)"> 
+       
+            </td>
+            <td style="width: 30%;">
+                <input type="date" class="form-control"  [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)"> 
+       
+            </td>
+            <td style="width: 10%;">
+            <button type="button" class="btn btn-primary" [disabled]='activeTypeButton==""' (click)='showDetails()'>Show</button>
+            </td>
+            <td style="width: 30%;">
+            &nbsp;</td>
+        </tr>
+        </table>
+
+        <div style="width: 100%; height: 530px; overflow-y: scroll ;">
+
+            <div *ngIf='activeTypeButton == "Purchase Request"'>
+                <table class="table m-0" style="width: 100%;">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Employee</th>
+                        <th>Department</th>
+                        <th>User</th>
+                        <th>Audit</th>
+                        <th></th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                     
+                      <tr *ngFor='let req of requests;let i=index'>
+                        <th scope="row" >{{i+1}}</th>
+                        <td>{{req.seq}}</td>
+                        <td>{{req.auditdat | date:'dd-MMM-yy'}}</td>
+                        <td>{{req.empname}}</td>
+                        <td>{{req.department}}</td>
+         
+                        <td>{{req.usr}}</td>
+                          <td>
+                            <font color="black" *ngIf='req.auditType==1' >Create</font>  
+                            <font color="blue" *ngIf='req.auditType==2' >Modify</font>  
+                            <font color="red" *ngIf='req.auditType==3' >Delete</font>  
+                        </td>
+                        <td><i class="ft-edit font-medium-1" (click)='makeRequestDetails(req,customContent)'></i></td>
+                        </tr>
+                     
+                    </tbody>
+                  </table>
+         
+            </div>
+
+
+        </div>
+
+            
+        </div>
+    </div>
+  </div>
+</div>
+
+</td>
+</tr>
+</table>
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Detailed Auditing</h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <!--Purchase Request Details start-->
+    <div *ngIf='activeTypeButton == "Purchase Request"'>
+
+      <table style="width: 100%;">
+        <tr>
+          <td colspan="6" style="background-color: gray;" align="center"> <b>PURCHSE REQUEST</b> </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Request # : {{detailedRequest.header.seq}}</td>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="2" align="right">Date : {{detailedRequest.header.dat | date:'dd-MMM-yy'}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">Department : {{detailedRequest.header.department}}</td>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="2" align="right">Employee : {{detailedRequest.header.employee}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="2">User : {{detailedRequest.header.usr}}</td>
+          <td colspan="2">&nbsp;</td>
+          <td colspan="2" align="right">&nbsp;</td>
+        </tr>
+
+        <tr style="background-color: black; color: white;">
+          <td style="width: 6%;" align="center">#</td>
+          <td style="width: 56%;" align="left">Description</td>
+  
+          <td style="width: 10%;" align="center">Qty</td>
+          <td style="width: 10%;" align="center">Approved</td>
+          <td style="width: 8%;" align="center">UOM</td>
+          <td style="width: 10%;" align="center">Reqd By</td>
+        </tr>
+
+        <tr *ngFor='let req of detailedRequest.lines;let i=index'>
+          <td style="width: 6%;" align="center">{{i+1}}</td>
+          <td style="width: 56%;" align="left">
+          {{req.itemDescription}}<br>
+         <i> {{req.purpose}}</i>
+          
+          </td>
+  
+          <td style="width: 10%;" align="center">{{req.qty}}</td>
+          <td style="width: 10%;" align="center">{{req.approved}}</td>
+          <td style="width: 8%;" align="center">{{req.um}}</td>
+          <td style="width: 10%;" align="center">{{req.requiredBy | date:'dd-MMM-yy'}}</td>
+        </tr>
+
+        
+      <tr>
+        <td colspan="6">&nbsp;</td>
+      </tr>
+
+      
+      <tr>
+        <td style="width: 6%;">
+          <input type="button" style="width: 80px;" class="btn btn-info" value="Prev" (click)='changeRequest(-1)'>
+        </td>
+        <td colspan="4">
+           Audit Date : {{detailedRequest.header.auditdate | date:'dd-MMM-yy HH:mm'}} and audit type  is
+        <i> 
+          <font *ngIf='detailedRequest.header.auditType==1' color="black">Create</font>
+          <font *ngIf='detailedRequest.header.auditType==2' color="blue">Modify</font>
+          <font *ngIf='detailedRequest.header.auditType==3' color="black">Delete</font>
+          <font *ngIf='detailedRequest.header.auditType==4' color="black">Approved</font>
+        </i>
+        </td>
+        <td style="width: 10%;">
+          <input type="button" style="width: 80px;" class="btn btn-info" value="Next" (click)='changeRequest(1)'>
+        </td>
+      </tr>
+
+      </table>
+     
+      <br>
+      
+   
+    </div>
+ <!--Purchase Request Details Ends-->
+
+
+  </div>
+</ng-template>

@@ -1,0 +1,33 @@
+<h3>Pending Dispatches</h3>
+
+
+
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Bill no</th>
+        <th>Customer Name</th>
+        <th>Mobile</th>
+        <th>Base Amt</th>
+        <th>Total Amt</th>
+        <th>Pass Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let sal of sales;let i=index'>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{sal.seq | slice: -4 }}</td>
+        <td>{{sal.partyName}}</td>
+        <td>{{sal.mobile}}</td>
+        <td>{{sal.baseamt | number:'0.2'}}</td>
+        <td>{{sal.totalAmt | number:'0.2'}}</td>
+        <td> <input type="text" class="form-control" style="width: 150px;" [(ngModel)] ='sal.pass'> </td>
+         <td> <button type="button" class="btn btn-info" (click)='checkPass(sal)'>Clear</button> </td>
+      </tr>
+     
+    </tbody>
+  </table>
+

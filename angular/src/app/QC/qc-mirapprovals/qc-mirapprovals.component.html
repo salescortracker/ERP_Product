@@ -1,0 +1,119 @@
+
+<ngx-spinner></ngx-spinner>
+<div> <!--Starting open-->
+<h3>MIR Approvals </h3>
+  
+<div class="row">
+
+    <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Select MIR</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                 
+                    <table class="table m-0" style="width: 90%;">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>#</th>
+                            <th>Seq</th>
+                            <th>Date</th>
+                            <th>Invoice</th>
+                            <th>Supplier</th>
+                            <th>Total</th>
+                            <th>Open</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          <tr *ngFor='let head of headers; let i=index'>
+                           <th scope="row" >{{i+1}}</th>
+                            <td>{{head.seq}}</td>
+                            <td>{{head.dat | date:'dd-MMM-yy'}}</td>
+                            <td>{{head.invoiceno}}</td>
+                            <td>{{head.vendorname}}</td>
+                            <td>{{head.totalAmt | number:'0.2'}}</td>
+                            <td><i class="ft-edit font-medium-1" (click)='openMIR(head)' ></i></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Test Details</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                 
+                    <table class="table m-0" style="width: 100%;">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Checked</th>
+                            <th>Rate</th>
+                            <th>Test</th>
+                            <th>Inspected</th>
+                            <th>Rectified</th>
+                            <th>Value</th>
+                            <th>Rejected</th>
+                            <th>Value</th>
+                            <th>Comments</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         
+                          <tr *ngFor='let det of details; let i=index'>
+                           <th scope="row" >{{i+1}}</th>
+                           <td>{{det.itemname}}</td>
+                           <td>{{det.qty}}</td>
+                           <td>{{det.checkedqty}}</td>
+                           <td>{{det.rat}}</td>
+                           <td>{{det.testname}}</td>
+                           <td>{{det.username}}</td>
+                           <td>{{det.rectifiedqty}}</td>
+                           <td>{{det.rectifiedvalue}}</td>
+                           <td>{{det.rejectedqty}}</td>
+                           <td>{{det.rejectedvalue}}</td>
+                           <td>{{det.comments}}</td>
+                                                      </tr>
+                         
+                        </tbody>
+                      </table>
+
+                      <div *ngIf='details'>
+                      <table *ngIf='details.length > 0'  style="width: 100%;">
+                          <tr>
+                              <td style="width: 80%;">Rectification Value</td>
+                              <td style="width: 20%;" align="right">{{rectification | number:'0.2'}}</td>
+                          </tr>
+                          <tr>
+                            <td style="width: 80%;">Rejecetion Value</td>
+                            <td style="width: 20%;" align="right">
+                              {{rejection | number:'0.2'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"> <button type="button" class="btn-lg btn-primary" (click)='approve()'>Approve</button> </td>
+                        </tr>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+ 

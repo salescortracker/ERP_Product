@@ -1,0 +1,91 @@
+<ngx-spinner></ngx-spinner>
+
+<ng-sidebar-container >
+    <ng-sidebar [opened]="opened" mode="push" position="right">
+      <h3>
+      Tax Details
+    </h3>
+    <br>
+    <table style="width: 60%;">
+    <tr>
+     
+      <td style="width: 100%;">
+       <input type="text" class="form-control" id="basicInput"  placeholder="Tax Code" ngDefaultControl  [(ngModel)]='tax.TaxCode' style="width: 90%;">
+      
+          </td>
+    </tr>
+    <tr>
+ 
+     <td style="width: 100%;">
+       <input type="number" class="form-control" id="basicInput"  placeholder="Tax %" ngDefaultControl  [(ngModel)]='tax.TaxPer' style="width: 40%;">
+      
+          </td>
+ 
+ 
+   </tr>
+  
+   
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='saveTax()' >{{saveStr}}</button>
+        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+      </td>
+    </tr>
+    </table>
+ 
+    
+    </ng-sidebar>
+    
+    <div ng-sidebar-content>
+      
+      <nav>
+       
+      
+ 
+ 
+        <h3>
+            List of Taxes
+        </h3>
+        
+        <table style="width: 100%;">
+        <tr>
+            <td align="left">
+                <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+            </td>
+        </tr>
+        </table>
+        
+        <table class="table m-0" style="width: 60%;">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Tax Code </th>
+                <th>Tax %</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let ta of taxes; let i=index'>
+                <th scope="row" >{{i+1}}</th>
+                <td>{{ta.taxCode}}</td>
+                <td>{{ta.taxPer}}</td>
+              </tr>
+             
+            </tbody>
+          </table>
+ 
+ 
+ 
+ 
+    </nav>
+ 
+    </div>
+  
+ 
+  </ng-sidebar-container>

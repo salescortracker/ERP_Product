@@ -1,0 +1,33 @@
+<ngx-spinner></ngx-spinner>
+  <div *ngIf='authCheck'>
+     <h3>
+    Inventory Costing detail
+   </h3>
+   <br>
+
+   <table style="width: 60%;">
+<tr>
+    <td style="width: 30%;" align="right">
+    Costing type
+    </td>
+    <td style="width: 70%;">
+        <select class="form-control" [(ngModel)]='costingtype'>
+            <option value="-1">--Select--</option>
+            <option value="1">Allow Negative</option>
+            <option value="2">FIFO</option>
+            <option value="3">LIFO</option>
+            <option value="4">Batch System</option>
+            <option value="5">GIN System</option>
+        </select>
+        </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <button type="button" class="btn btn-info mr-1 mb-1"  (click)='setInfo()' >Save</button>
+      </td>
+</tr>
+</table>
+</div>
+<div *ngIf='!authCheck'>
+    <h1>You are not authorised to view this page</h1>
+</div>

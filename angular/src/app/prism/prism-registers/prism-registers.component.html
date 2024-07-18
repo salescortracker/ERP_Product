@@ -1,0 +1,115 @@
+<div *ngIf='open'>
+<h3>Registration Details</h3>
+    <table style="width: 70%;">
+        <tr>
+            <td style="width: 15%;" align="right"> *Customer</td>
+            <td colspan="3"><input type="text" class="form-control" [(ngModel)]='customer.Customer'></td>
+        </tr>
+        <tr>
+            <td style="width: 15%;" align="right"> Address</td>
+            <td style="width: 35%;" rowspan="2"> <textarea rows="3" class="form-control" [(ngModel)]='customer.Addr'></textarea> </td>
+            <td style="width: 15%;" align="right"> Zip</td>
+            <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Zip'></td>
+        </tr>
+        <tr>
+            <td style="width: 15%;" align="right"> &nbsp; </td>
+            <td style="width: 15%;" align="right"> *Mobile</td>
+            <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Mobile'></td>
+        </tr>
+
+    <tr>
+        <td style="width: 15%;" align="right"> Country</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Country'></td>
+        <td style="width: 15%;" align="right"> Tel</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Tel'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> State</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Stat'></td>
+        <td style="width: 15%;" align="right"> GST</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Fax'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> District</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.District'></td>
+        <td style="width: 15%;" align="right"> *Email</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Email'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> City</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.City'></td>
+        <td style="width: 15%;" align="right"> Web</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.Web'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Product</td>
+        <td style="width: 35%;"> <select class="form-control" [(ngModel)]='customer.ProductId'> <option value="">--Select--</option> 
+        <option *ngFor='let pro of products' value="{{pro.productCode}}">{{pro.productName}}</option>
+        </select>  </td>
+        <td style="width: 15%;" align="right"> *Scheme</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.schem'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Currency Symbol</td>
+        <td style="width: 35%;"> <input maxlength="2" class="form-control" type="text" [(ngModel)]='customer.currencySymbol'>
+          </td>
+        <td style="width: 15%;" align="right"> *Currency</td>
+        <td style="width: 35%;"><input type="text" class="form-control" [(ngModel)]='customer.currency'></td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Coins</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.coins'>
+          </td>
+        <td style="width: 15%;" align="right"> *Fiscal Year</td>
+        <td style="width: 35%;"> <input type="date" class="form-control" [value]="fdate | date:'yyyy-MM-dd'" (input)="fdate=parseDate($event.target.value)">  </td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Db Server</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.servername'>
+          </td>
+        <td style="width: 15%;" align="right"> *Db Database</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.database'>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Db User</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.username'>
+          </td>
+        <td style="width: 15%;" align="right"> *Db Password</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.password'>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 15%;" align="right"> *Default User</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.defaultUser'>
+          </td>
+        <td style="width: 15%;" align="right"> *URL</td>
+        <td style="width: 35%;"> <input class="form-control" type="text" [(ngModel)]='customer.Urldet'>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"> <button type="button" class="btn-lg btn-primary" (click)='setRegistration()'>Register</button>  </td>
+    </tr>
+    </table>
+
+</div>
+<div *ngIf='!open'>
+
+    <font face=Arial size=5 color=black>
+        <table style="width: 50%;">
+        <tr>
+            <td style="width: 40%;">Customer code</td>
+            <td style="width: 40%;">{{result.customerCode}}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;">User Name</td>
+            <td style="width: 40%;">{{result.username}}</td>
+        </tr>
+        <tr>
+            <td style="width: 40%;">Password</td>
+            <td style="width: 40%;">{{result.password}}</td>
+        </tr>
+        </table>
+
+    </font>
+</div>

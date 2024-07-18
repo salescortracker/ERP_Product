@@ -1,0 +1,86 @@
+ 
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+    <h3>
+    Sale Return Testing Details
+  </h3>
+  <br>
+  <table style="width: 60%;">
+  <tr>
+   <td style="width:35%" align="right">Test</td>
+    <td style="width: 65%;">
+     <input type="text" class="form-control" id="basicInput" [(ngModel)]='test.Testname'>
+    
+        </td>
+  </tr>
+  <tr>
+    <td style="width:35%" align="right">Checking Type</td>
+     <td style="width: 65%;">
+    <select class="form-control"   [(ngModel)]='test.MicroCheck'>
+        <option value="-1">--Select--</option>
+        <option value="1">Micro Check</option>
+        <option value="2">Macro Check</option>
+    </select>
+         </td>
+   </tr>
+   <tr>
+    <td style="width:35%" align="right">Samples Required</td>
+     <td style="width: 65%;">
+    <select class="form-control"   [(ngModel)]='test.CheckingType'>
+        <option value="-1">--Select--</option>
+        <option value="1">Optional Samples</option>
+        <option value="2">Total LOT</option>
+    </select>
+         </td>
+   </tr>
+  
+  <tr>
+    <td colspan="2">
+      <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='recordid > 0' [disabled]='!delcheck' (click) ='deleteTest()' >Delete</button>
+      <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!crecheck' (click)='saveTest()'> <span *ngIf='recordid==0'>Save</span> <span *ngIf='recordid > 0'>Modify</span>    </button>
+      <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+    </td>
+  </tr>
+  </table>
+ </div>
+     
+    
+
+ <div *ngIf='!opened'>
+      <h3>
+          List of Sale Return Tests
+      </h3>
+      
+      <table style="width: 100%;">
+      <tr>
+          <td align="left" style="width: 30%;">
+              <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+          </td>
+          
+      </tr>
+      </table>
+    
+      <table class="table m-0" style="width: 60%;">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Test</th>
+              <th>Test Type</th>
+              <th>Sample Type</th>
+              <th>Open</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+            <tr *ngFor='let test of tests; let i=index'>
+             <th scope="row" >{{i+1}}</th>
+              <td>{{test.testName}}</td>
+              <td> <span *ngIf='test.microCheck ==1'>Micro Test</span><span *ngIf='test.microCheck==2'>Macro Test</span>  </td>
+              <td> <span *ngIf='test.checkingType ==1'>Optional Samples</span><span *ngIf='test.checkingType==2'>Total LOT</span>  </td>
+             
+              <td><i class="ft-edit font-medium-1" (click)='openOld(test)' ></i></td>
+            </tr>
+           
+          </tbody>
+        </table>
+ </div>

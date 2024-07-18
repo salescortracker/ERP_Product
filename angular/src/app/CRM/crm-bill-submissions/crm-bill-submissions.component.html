@@ -1,0 +1,80 @@
+<ngx-spinner></ngx-spinner>
+<div *ngIf='opened'>
+
+
+<h3>Bill Submissions</h3>
+
+<br>
+<table style="width: 100%;">
+<tr>
+    <td style="width:30%" >Select Customer</td>
+    <td style="width: 70%;"> <select class="form-control" [(ngModel)]='cusid' (change)='findPendings()'>
+      <option value="0">--Select--</option>
+<option *ngFor='let cus of customers' value="{{cus.recordId}}">{{cus.partyName}}</option>
+
+    </select> </td>
+</tr>
+</table>
+<h4>List of Bills to be submitted</h4>
+
+<div class="table-responsive">
+    <table class="table m-0">
+      <thead class="thead-light">
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:15%">Billno</th>
+          <th style="width:15%">Date</th>
+          <th style="width:35%">Customer</th>
+          <th style="width:15%">Base Amount</th>
+          <th style="width:15%">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr *ngFor='let pen of pendings'>
+              <td style="width: 5%;"> <input type="checkbox" [(ngModel)]='pen.chk'> </td>
+              <td style="width:15%">{{pen.seq}}</td>
+              <td style="width:15%">{{pen.dat | date:'dd-MMM-yy'}}</td>
+              <td style="width:35%">{{pen.customer}}</td>
+              <td style="width:15%">{{pen.baseamt | number:'0.2'}}</td>
+              <td style="width:15%">{{pen.totalamt | number:'0.2'}}</td>
+            </tr>
+       
+      </tbody>
+    </table>
+  </div>
+  <button type="button" class="btn-lg btn-primary" (click)='save()'>Submit</button>
+</div>
+
+  <div *ngIf='!opened'>
+<h3>List of Bills</h3>
+<table style="width: 100%;">
+<tr>
+  <td style="width:15%">Date</td>
+  <td style="width: 25%;"><input type="date" class="form-control"   [value]="listdate | date:'yyyy-MM-dd'" (input)="listdate=parseDate($event.target.value)"> </td>
+  <td style="width: 10%;"> <button type="button" class="btn-lg btn-info" (click)='listAdd()'>Show</button> </td>
+  <td style="width: 50%;" align="right"> <button type="button" class="btn-lg btn-success" (click)='openNew()'>New</button> </td>
+</tr>
+</table>
+<table class="table m-0">
+  <thead class="thead-light">
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:20%">Seq</th>
+        <th style="width:45%">Customer</th>
+      <th style="width:15%">Base Amount</th>
+      <th style="width:15%">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr *ngFor='let pen of submissions;let i=index'>
+          <td style="width: 5%;">  {{i+1}} </td>
+          <td style="width:20%">{{pen.seq}}</td>
+           <td style="width:45%">{{pen.customername}}</td>
+          <td style="width:15%">{{pen.totalbase  | number:'0.2'}}</td>
+          <td style="width:15%">{{pen.totalamt | number:'0.2'}}</td>
+        </tr>
+   
+  </tbody>
+</table>
+
+  </div>

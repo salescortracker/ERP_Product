@@ -1,0 +1,167 @@
+<ngx-spinner></ngx-spinner>
+
+
+
+
+<h2>Mass Plan Information</h2>
+
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 12%;">Planning From</td>
+    <td style="width: 76%;">&nbsp;</td>
+    <td style="width: 12%;">Planning To</td>
+</tr>
+<tr>
+    <td style="width: 12%;"><input type="date" class="form-control"   [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)"></td>
+    <td style="width: 76%;">&nbsp;</td>
+    <td style="width: 12%;"><input type="date" class="form-control"   [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)"></td>
+</tr>
+</table>
+<br>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 100%; background-color: lightgray;"  align="center"> Orders to be planned for Production </td>
+</tr>
+<tr>
+    <td style="width: 100%;">
+    
+        <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 4%;">#</th>
+                  
+                    <th style="width: 10%;">SO</th>
+                    <th style="width: 25%;">Customer</th>
+                    <th style="width: 25%;">Item</th>
+                    <th style="width: 8%; text-align: right;">Qty</th>
+                    <th style="width: 10%; text-align: right;">Available</th>
+                    <th style="width: 10%; text-align: right;">Pending</th>
+                    <th style="width: 8%; text-align: right;">UOM</th>
+        
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let pro of pendings;let i=index'>
+                    <th style="width: 4%;">{{i+1}}</th>
+                    <td style="width: 10%;">{{pro.seq}}</td>
+                    <td style="width: 25%;">{{pro.partyname}}</td>
+                    <td style="width: 25%;">{{pro.itemname}}</td>
+                    <td style="width: 8%;" align="right">{{pro.qty}}</td>
+                    <td style="width: 10%;" align="right">{{pro.qtyavailable}}</td>
+                    <td style="width: 10%;" align="right">{{pro.pending}}</td>
+                    <td style="width: 8%;" align="right">{{pro.um}}</td>
+                      </tr>
+                </tbody>
+                <tbody>
+          </table>
+   
+
+        </div>
+    
+    </td>
+</tr>
+</table>
+<table style="width: 100%;">
+   
+<tr>
+    <td style="width: 37%;">Product</td>
+    <td style="width: 30%;">Group</td>
+    <td style="width: 17%;">Qty</td>
+    <td style="width: 9%;">UM</td>
+    <td style="width: 7%;">&nbsp;</td>
+</tr>
+<tr>
+    <td style="width: 37%;"><ng-select [items]="products" bindLabel="itemname" [(ngModel)]='product'> </ng-select>
+
+    </td>
+    <td style="width: 30%;"><input type="text" disabled class="form-control" [(ngModel)]='product.grpname'> </td>
+    <td style="width: 17%;"><input type="number" class="form-control" [(ngModel)]='qty'> </td>
+    <td style="width: 9%;"><input type="text" disabled class="form-control" [(ngModel)]='product.um'></td>
+    <td style="width: 7%;"> <button class="btn-info" style="width: 100%;" (click)='addItem()'>Add</button> </td>
+</tr>
+<tr>
+    <td colspan="5">
+        <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 5%;">#</th>
+                  
+                    <th style="width: 35%;">Product</th>
+                    <th style="width: 30%;">Group</th>
+                    <th style="width: 12%; text-align: right;">Qty</th>
+                    <th style="width: 12%; text-align: right;">UOM</th>
+                    
+                    <th style="width: 6%;">&nbsp;</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let pro of massestimationslist;let i=index'>
+                    <th style="width: 5%;">{{i+1}}</th>
+                    <td style="width: 35%;">{{pro.itemname}}</td>
+                    <td style="width: 30%;">{{pro.grpname}}</td>
+                    <td style="width: 12%;" align="right">{{pro.Qty}}</td>
+                    <td style="width: 12%;" align="right">{{pro.uom}}</td>
+                    <td style="width: 6%;"><i class="ft-trash font-medium-1" (click)='deleteItem(pro)' ></i></td>
+                  </tr>
+                </tbody>
+                <tbody>
+          </table>
+   
+
+        </div>
+    </td>
+</tr>
+<tr *ngIf='massestimationslist.length > 0 && showCheck==0'>
+<td colspan="5"> <button class="btn btn-success" (click)='showEstimations()'>Show Estimation</button> </td>
+</tr>
+<tr *ngIf='showCheck==1'>
+    <td colspan="5">
+        <div style=" border-style: solid; border-color: black; overflow-y: scroll; width:100%; height: 400px">
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="width: 4%;">#</th>
+                  
+                    <th style="width: 33%;">Product</th>
+                    <th style="width: 25%;">Group</th>
+                    <th style="width: 10%; text-align: right;">Qty Reqd</th>
+                    <th style="width: 10%; text-align: right;">Qty Avail</th>
+                    <th style="width: 10%; text-align: right;">Qty Pending</th>
+                    <th style="width: 8%; text-align: right;">UOM</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let mat of estimatedItems;let i=index'>
+                    <th style="width: 4%;">{{i+1}}</th>
+                    <td style="width: 33%;">{{mat.itemName}}</td>
+                    <td style="width: 25%;">{{mat.grp}}</td>
+                    <td style="width: 10%;" align="right">{{mat.qtyrequired}}</td>
+                    <td style="width: 10%;" align="right">{{mat.qtyavailable}}</td>
+                    <th style="width: 10%; text-align: right;">{{mat.qtypending}}</th>
+                    <td style="width: 8%;" align="right">{{mat.uom}}</td>
+                      </tr>
+                </tbody>
+                <tbody>
+          </table>
+   
+
+        </div>
+    </td>
+</tr>
+<tr *ngIf='showCheck==1'>
+    <td colspan="5">
+    <button class="btn btn-info" (click)='showClose()'>Close Estimation</button> </td>
+</tr>
+<tr>
+    <td colspan="5">
+        <button class="btn btn-primary" (click)='save()'>Save Planning</button> 
+
+    </td>
+</tr>
+
+</table>

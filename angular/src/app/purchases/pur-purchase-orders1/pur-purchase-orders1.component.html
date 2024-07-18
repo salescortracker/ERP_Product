@@ -1,0 +1,182 @@
+<ngx-spinner></ngx-spinner>
+<h3>
+    Purchase Orders...
+</h3>
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 30%;">
+    Material
+    </td>
+    <td style="width: 20%;">Group</td>
+    <td style="width: 10%;">Available</td>
+    <td style="width: 8%;">UOM</td>
+    <td style="width: 12%;">
+        Purchase Request
+    </td>
+   
+    <td colspan="2">Department</td>
+     
+</tr>
+<tr>
+    <td style="width: 30%;">
+        <ng-select id='cmbmaterial' [items]="materials" bindLabel="itemname" [(ngModel)]='material' (change)="changeMaterial()" ></ng-select>
+
+        </td>
+        <td style="width: 20%;"> <input type="text" class="form-control" disabled  [(ngModel)]='material.grpname'>
+        </td>
+        <td style="width: 10%;"> <input type="text" class="form-control" disabled  [(ngModel)]='material.stock'>
+        </td>
+        <td style="width: 8%;"> <input type="text" class="form-control" disabled  [(ngModel)]='material.um'>
+        </td>
+        <td style="width: 12%;">
+            <select class="form-control" [(ngModel)]='reqId' (change)='requestChange()'> <option value="-1">--Select--</option> <option *ngFor='let req of pendingrequests' value="{{req.recordId}}">{{req.seq}}</option> </select>
+        </td>
+       
+        <td colspan="2"><input type="text" class="form-control" disabled [(ngModel)]='department'> </td>
+</tr>
+  <tr>
+      <td style="width: 30%;">Material</td>
+      <td colspan="2">Supplier</td>
+     
+      <td style="width: 8%;">Qty</td>
+      <td style="width: 12%;">UOM</td>
+    <td style="width: 12%;">Rate</td>
+    <td style="width: 8%;"> &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td style="width: 30%;"><input type="text" class="form-control" disabled [(ngModel)]='material.itemname'> </td>
+    <td colspan="2"><input type="text" disabled [(ngModel)]='supplier' class="form-control"></td>
+   
+    <td style="width: 8%;">   <input type="number" id='txtQty' class="form-control" [(ngModel)]='qty'></td>
+    <td style="width: 12%;"><input type="text" id='txtum' disabled class="form-control" [(ngModel)]='um'></td>
+  <td style="width: 12%;"> <input type="number" id='txtRat' disabled class="form-control" [(ngModel)]='rat'></td>
+  <td style="width: 8%;">   <input type="button" class="btn btn-success" value="Add" [disabled]='!addCheck()' (click)='addDetail()'>
+  </td>
+</tr>
+<tr>
+    <td colspan="3">
+        &nbsp;
+     </td>
+    <td style="width: 8%;">  Validity</td>
+    <td style="width: 12%;"><input type="date" class="form-control"></td>
+    <td style="width: 8%;">        <button class="btn btn-dark" type="button" (click)='openModal(customContent)'>Add Terms</button>
+    </td>
+</tr>
+      
+    <tr>
+        <td colspan="7">
+            <div style="width: 100%; height: 300px; overflow-y: scroll ;">
+                <table class="table m-0" style="width: 100%;" *ngIf='matprices'>
+                    <thead class="thead-light">
+                      <tr>
+                         
+                        <th style="width: 4%;">#</th>
+                        <th style="width: 30%;">Supplier</th>
+                        <th style="width: 10%;">Rate</th>
+                        <th style="width: 8%;">UOM</th>
+                        <th style="width: 44%;">Reference</th>
+                        <th style="width: 4%;">&nbsp;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let item of matprices;let i=index'>
+                            <th style="width: 4%;">{{i+1}}</th>
+                                <td style="width: 30%;">{{item.vendorname}}</td>
+                                <td style="width: 10%;">{{item.rat}}</td>
+                                <td style="width: 8%;">{{item.um}}</td>
+                                <td style="width: 44%;">{{item.reference}}</td>
+                                  <td>
+                                      <button class="btn-success" (click)='addItem(item)' type="button">Select</button>
+                                     </td>
+                         </tr>
+                    </tbody>
+                 
+         
+    
+                </table>
+
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            <div style="width: 100%; height: 400px; overflow-y: scroll ;" >
+            <table class="table m-0" style="width: 100%;" *ngIf='totalDetails.length > 0'>
+                <thead class="thead-light">
+                  <tr>
+                     
+                    <th>#</th>
+                    <th>Supplier</th>
+                    <th>Material</th>
+                    <th>Request</th>
+                    <th>Qty</th>
+                    <th>Rate</th>
+                    <th>UOM</th>
+                    <th>&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let item of totalDetails;let i=index'>
+                        <th>{{i+1}}</th>
+                            <td>{{item.supplier}}</td>
+                            <td>{{item.itemname}}</td>
+                            <td>{{item.request}}</td>
+                            <td>{{item.qty}}</td>
+                            <td>{{item.rat}}</td>
+                            <td>{{item.um}}</td>
+                              <td>
+                                  <button class="btn-success" (click)='deleteDetail(item)' type="button">Delete</button>
+                                 </td>
+                     </tr>
+                </tbody>
+             
+     
+
+            </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7">
+            
+            <button class="btn btn-primary" type="button" *ngIf='totalDetails.length > 0' (click)='save()'>Submit Orders</button>
+        </td>
+    </tr>
+</table>
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Terms</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         
+              <table style="width: 100%;">
+            <tr>
+                <td style="width: 85%;">
+                <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='term'>
+                </td>
+                <td style="width: 15%;">
+                    <button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1"(click)="addTerm()">Add</button>
+                </td>
+            </tr>
+              </table>
+              <table style="width:100%">
+            <tr *ngFor='let ter of terms'>
+                <td style="width: 8%;"><input type="checkbox" [(ngModel)]='ter.chk'> </td>
+                <td style="width: 92%;">
+                    {{ter.term}}
+                </td>
+             </tr>
+            </table>
+         
+    </div>
+    
+  
+  </ng-template>

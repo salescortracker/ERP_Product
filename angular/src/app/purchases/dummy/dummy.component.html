@@ -1,0 +1,446 @@
+<!--
+ 
+ <ng-sidebar-container *ngIf='!advanceCheck' >
+   <ng-sidebar [opened]="opened" mode="push" >
+-->
+
+
+
+
+<ngx-spinner></ngx-spinner>
+
+<div *ngIf='opened'>
+    <h3>
+    Purchase Order Details
+  </h3>
+  <br>
+
+
+  <table style="width: 99%;">
+
+   <tr>
+       <td style="width: 10%;" align="right">
+       Supplier
+       </td>
+       <td colspan="3">
+         <!--
+           <ng-select [items]="suppliers" bindLabel="accountname" (change)='findAddresses()' [(ngModel)]='supdetail'></ng-select> 
+           -->
+           <ng-select id='cmbsupplier'  (change)="findAddresses($event)" >
+            <ng-option *ngFor="let sup of suppliers" [value]="sup.accountId">{{sup.accountname}}</ng-option>
+        </ng-select>
+          
+          </td>
+
+             <td style="width:8%">
+              <button type="button" style="width: 100%;" class="btn btn-info mr-1 mb-1"(click)="openModal(customContent,1)">Add</button>
+            </td>
+
+       <td style="width: 10%;" align="right">
+       PO No
+       </td>
+       <td style="width: 20%;">
+           <input type="text"   class="form-control" style="width: 100%;" disabled [(ngModel)]='poseq'>
+           </td>
+   </tr>
+<tr>
+  <td style="width: 10%;" align="right">Check Address</td>
+  <td colspan="4"> <select class="form-control" [(ngModel)]='addr' (change)='assignAddress()'>
+<option value="">-Select-</option>
+<option *ngFor='let adr of addresses' value="{{adr.addressName}}">{{adr.addressName}}</option>
+  </select> </td>
+  <td style="width: 10%;" align="right">
+    Transaction Date
+      </td>
+      <td style="width: 20%;">
+       <input type="date" class="form-control"  [disabled]='!delCheck' [value]="tradat | date:'yyyy-MM-dd'" (input)="tradat=parseDate($event.target.value)">
+  
+      </td>
+   </tr>
+   <tr>
+       <td style="width: 10%;" rowspan="2" align="right">Address</td>
+       <td style="width: 25%;" rowspan="2"> <textarea style="width: 100%; height: 50px; " [(ngModel)]='supdetail.address'  ></textarea>  </td>
+       <td style="width: 10%;" align="right">ZIP</td>
+       <td colspan="2" > <input type="text"   class="form-control" style="width: 100%;" [(ngModel)]='supdetail.zip'></td>
+      
+       <td style="width: 10%;" align="right">
+        Purchase type
+          </td>
+          <td style="width: 20%;">
+            <select style="width: 100%;" class="form-control" [(ngModel)]='purtype'>
+              <option *ngFor='let purt of purtypes' value="{{purt.purtype}}">{{purt.purtype}}</option>
+                </select>
+            </td>
+
+              
+   </tr>
+<tr>
+   <td style="width: 10%;" align="right">Mobile</td>
+   <td colspan="2" > <input type="text"   class="form-control" style="width: 100%;" [(ngModel)]='supdetail.mobile'></td>
+   <td style="width: 10%;" align="right">
+       Conversion
+         </td>
+         <td style="width: 20%;">
+          <input type="number" class="form-control" [(ngModel)]='conversion'>
+           </td>
+</tr>
+
+<tr>
+   <td style="width: 10%;" align="right"> Country </td>
+   <td style="width: 25%;">    <select class="form-control" [(ngModel)]='supdetail.country' (change)='changeCountry()'>
+    <option value=" ">--Select Country--</option>
+    <option *ngFor='let cnt of countries' value="{{cnt.cntname}}">{{cnt.cntname}}</option>
+  </select> </td>
+   <td style="width: 10%;" align="right"> Tel </td>
+   <td colspan="2"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.tel'> </td>
+   <td style="width: 10%;" align="right"> Reference </td>
+   <td style="width: 20%;">
+       
+      <input type="text" class="form-control">
+       
+        </td>
+</tr>
+
+
+<tr>
+   <td style="width: 10%;" align="right"> State </td>
+   <td style="width: 25%;">  <select class="form-control" [(ngModel)]='supdetail.stat'>
+    <option value=" ">--Select State--</option>
+    <option *ngFor='let sta of selectedstates' value="{{sta.stateName}}">{{sta.stateName}}</option>
+    
+
+  </select> </td>
+   <td style="width: 10%;" align="right"> Fax </td>
+   <td colspan="2" > <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.fax'> </td>
+   <td style="width: 10%;" align="right"> Validity </td>
+   <td style="width: 20%;">  
+     <input type="date" class="form-control"   [value]="validitydate | date:'yyyy-MM-dd'" (input)="validitydate=parseDate($event.target.value)">
+       
+    
+    </td>
+</tr>
+
+<tr>
+   <td style="width: 10%;" align="right"> District </td>
+   <td style="width: 25%;"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.district'> </td>
+   <td style="width: 10%;" align="right"> Email </td>
+   <td colspan="2" > <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.email'> </td>
+   <td style="width: 10%;" align="right"> Ref Quotation no </td>
+   <td style="width: 20%;">  <input type="text" class="form-control" style="width: 100%;">     </td>
+</tr>
+
+
+
+<tr>
+   <td style="width: 10%;" align="right"> City </td>
+   <td style="width: 25%;"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.city'> </td>
+   <td style="width: 10%;" align="right"> Web </td>
+   <td colspan="2" > <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='supdetail.webid'> </td>
+   <td style="width: 10%;" align="right"> &nbsp; </td>
+   <td style="width: 20%;"> <button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1"(click)="openModal(customContent,4)">Terms</button> </td>
+</tr>
+
+</table>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+ <div class="modal-header">
+   <h6 class="modal-title">
+<span *ngIf='modeltype==4'>Terms</span>
+<span *ngIf='modeltype==1'>Suppliers</span>
+<span *ngIf='modeltype==2'>Materials</span>
+
+   </h6>
+   <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body">
+      
+           <table style="width: 100%;" *ngIf='modeltype==4'>
+         <tr>
+             <td style="width: 85%;">
+             <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='term'>
+             </td>
+             <td style="width: 15%;">
+                 <button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1"(click)="addTerm()">Add</button>
+             </td>
+         </tr>
+         <tr *ngFor='let ter of terms'>
+             <td style="width: 85%;">
+                 {{ter}}
+             </td>
+             <td style="width: 15%;"><i class="ft-trash-2 font-medium-1" (click)='delTerm(ter)' ></i></td>
+         </tr>
+         </table>
+
+         <app-pur-suppliers-child *ngIf='modeltype==1' (notify)='getNewSupplier($event)'></app-pur-suppliers-child>
+         <app-pur-materials-child *ngIf='modeltype==2' (notify)='getNewMaterial($event)'></app-pur-materials-child>
+
+      
+ </div>
+ 
+
+</ng-template>
+
+<ng-template #content let-c="close" let-d="dismiss">
+   <div class="modal-header">
+     <h6 class="modal-title">{{title}}</h6>
+     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+    
+
+
+        <div *ngIf='title=="Taxes"'>
+         
+           <table class="table m-0" style="width: 100%;">
+               <thead class="thead-light">
+                 <tr>
+                    
+                 
+                   <th>Tax</th>
+                   <th>Tax%</th>
+                   <th>Tax</th>
+               
+                 </tr>
+               </thead>
+               <tbody>
+                   <tr *ngFor='let tax of taxes'>
+                           <td>{{tax.taxcode}}</td>
+                           <td>{{tax.taxper}}</td>
+                           <td><input type="number" class="form-control" style="width: 100%;" [(ngModel)]='tax.taxvalue' (input)='makeTaxes()'></td>
+                   </tr>
+               </tbody>
+            
+    
+
+           </table>
+       </div>
+   </div>
+</ng-template>
+
+
+
+
+
+
+
+<br>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 33%;">Material</td>
+    <td style="width:6%">&nbsp;</td>
+    <td style="width: 12%;">Pur Request</td>
+    <td style="width: 10%;">Qty</td>
+   <td style="width: 10%;">UOM</td>
+   <td style="width: 10%;">Required By</td>
+   <td style="width: 10%;">Rate</td>
+   
+   <td style="width: 9%;">&nbsp;</td>
+</tr>
+
+<tr>
+   
+   <td style="width: 33%;">   
+       
+       <ng-select id='cmbitem'  (change)="makeUnits($event)" >
+        <ng-option *ngFor="let item of items" [value]="item.recordId">{{item.itemname}}</ng-option>
+    </ng-select>
+   
+      </td>
+   <td style="width: 6%;">      <button type="button" style="width: 100%;" class="btn btn-info mr-1 mb-1"(click)="openModal(customContent,2)">Add</button>
+   </td>
+   <td style="width: 12%;">
+  <select class="form-control" [(ngModel)]='requestid' (change)='makeRequestInfo()'>
+    <option value="0">--Select--</option>
+    <option *ngFor='let req of requests' value="{{req.recordId}}">{{req.seq}}</option>
+  </select>
+  </td>
+   <td style="width: 10%;"><input type="number" class="form-control" style="width: 100%;" [(ngModel)]='qty'> </td>
+   
+    
+   <td style="width: 10%;"><select style="width: 100%;" class="form-control" [(ngModel)]='umid' (change)='makeRate()'>
+       <option *ngFor='let um of units' value="{{um.umid}}">{{um.um}}</option>
+       
+       </select>
+      
+      </td>
+       <td style="width: 10%;">
+        
+        <input type="date" class="form-control"   [value]="reqdby | date:'yyyy-MM-dd'" (input)="reqdby=parseDate($event.target.value)">
+  
+      </td>
+  
+   <td style="width: 10%;"><input type="number" class="form-control" style="width: 100%;" [(ngModel)]='rat'></td>
+  
+   <td style="width: 9%;"><button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1"(click)='addItems()'>Add</button></td>
+</tr>
+
+<tr>
+<td colspan="11">
+
+   <div style="width: 100%; height: 300px; overflow-y: scroll ;">
+   
+      
+
+           <table class="table m-0" style="width: 100%;">
+               <thead class="thead-light">
+                 <tr>
+                   <th style="width: 5%;">#</th>
+                 
+                   <th style="width: 28%;">Material</th>
+                   <th style="width: 12%;">Request</th>
+                   <th style="width: 10%;">Qty</th>
+                   <th style="width: 10%;">UOM</th>
+                   <th style="width: 10%;">Reqd by</th>
+                   <th style="width: 10%;">Rate</th>
+                   <th style="width: 10%;">Value</th>
+                   <th style="width: 5%;"></th>
+                 </tr>
+               </thead>
+               <tbody>
+                
+           <tr *ngFor='let det of itemdetails;let i=index'>
+               <td style="width: 5%;">{{i+1}}</td>
+              
+               <td style="width: 28%;"> {{det.itemname}}</td>
+              <td style="width: 12%;">{{det.request}}</td>
+               <td style="width: 10%;"> <input type="number" (input)='makeCalcu()'  class="form-control" [(ngModel)]='det.qty'> </td>
+               <td style="width: 10%;">{{det.um}}</td>
+               <td style="width: 10%;"> 
+              {{det.reqdby | date:'dd-MMM-yy'}}
+              </td>
+           
+               <td style="width: 10%;"><input type="number" (input)='makeCalcu()'  class="form-control" [(ngModel)]='det.rat'></td>
+               
+               <td style="width: 10%;">{{det.qty*det.rat | number:'0.2'}}</td>
+               <td style="width: 5%;"><i class="ft-trash-2 font-medium-1" (click)='deleteItem(det)' ></i></td>
+               </tr>
+               </tbody>
+
+       </table>
+   
+   
+   </div>
+
+
+</td>
+
+</tr>
+
+
+</table>
+
+<table style="width: 100%;">
+<tr>
+   <td style="width: 18%;">Base</td>
+   <td style="width: 18%;">Discount</td>
+   <td style="width: 18%;">Taxes</td>
+   <td style="width: 10%;">&nbsp;</td>
+   <td style="width: 18%;">Others</td>
+   <td style="width: 18%;">Total</td>
+   
+</tr>
+<tr>
+   <td style="width: 18%;"><input type="text" class="form-control" style="width: 100%; text-align: right;"   disabled value="{{baseAmt | number:'0.2'}}"></td>
+   <td style="width: 18%;"><input type="number" class="form-control" style="width: 100%; text-align: right;"  [(ngModel)]='discount' (input)='makeOthers()'></td>
+   <td style="width: 18%;"><input type="text" class="form-control" style="width: 100%; text-align: right;" disabled  value='{{taxesAmt | number:"0.2"}}'></td>
+   <td style="width: 10%;"><button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1" (click)="open(content,2)">Add</button></td>
+   <td style="width: 18%;"><input type="number" class="form-control" style="width: 100%; text-align: right;" [(ngModel)]='otherAmt'  (input)='makeOthers()'></td>
+   <td style="width: 18%;"><input type="text" class="form-control" style="width: 100%; text-align: right;" disabled value='{{totalAmt | number:"0.2"}}'></td>
+  
+</tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+ <table>
+  <tr>
+    <td colspan="2">
+      <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+      <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+      <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+    </td>
+  </tr>
+  </table>
+ </div>
+  
+
+ 
+
+<div *ngIf='!opened'>
+      <h3>
+          List of Purchase Orders
+      </h3>
+      
+      <table style="width: 100%;">
+      <tr>
+
+       <td align="right" style="width: 40%;">
+            
+             <input type="date" class="form-control"  [disabled]='!delCheck'  [value]="listdat | date:'yyyy-MM-dd'" (input)="listdat=parseDate($event.target.value)">
+       
+       </td>
+       <td align="left" style="width: 25%;">   <button type="button" class="btn-lg btn-info mr-1 mb-1" (click)='ShowOrders()' >Show</button> </td>
+
+          <td align="left" style="width: 25%;">
+              <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+          </td>
+        
+      </tr>
+      </table>
+      
+      <table class="table m-0" style="width: 100%;">
+          <thead class="thead-light">
+            <tr>
+              <th style="width: 5%;">#</th>
+              <th style="width: 15%;">PO</th>
+              <th style="width: 25%;">Supplier</th>
+              <th style="width: 15%;">Mobile</th>
+              <th style="text-align: right; width: 10%;">Base Amount</th>
+              <th style="text-align: right; width: 10%;">Others</th>
+              <th style="text-align: right; width: 12%;">Total</th>
+              <th style="width: 4%;"></th>
+              <th style="width: 4%;"></th>
+            </tr>
+          </thead>
+          <tbody>
+           
+            <tr *ngFor='let order of purchaseorders;let i=index'>
+              <th scope="row" style="width: 5%;">{{i+1}}</th>
+              <td style="width: 15%;">{{order.seq}}</td>
+              <td style="width: 25%;">{{order.vendorname}}</td>
+              <td style="width: 15%;">{{order.mobile}}</td>
+
+              <td align="right" style="width: 12%;">{{order.baseamt | number:'0.2'}}</td>
+              <td align="right" style="width: 12%;">{{order.others | number:'0.2'}}</td>
+              <th scope="row" style="text-align: right; width: 12%;" >{{order.totalAmt | number:'0.2'}}</th>
+              <td style="width: 4%;"><i class="ft-edit font-medium-1" (click)='openOld(order)' ></i></td>
+              <td style="width: 4%;"><i class="ft-printer font-medium-1" (click)='print(order)' ></i></td>
+            </tr>
+           
+          </tbody>
+        </table>
+
+       </div>
+
+
+<!--  </nav>
+ </div>
+</ng-sidebar-container>-->
+
+

@@ -1,0 +1,297 @@
+<ngx-spinner></ngx-spinner>
+
+<div *ngIf='opened'>
+<h3>Credit Note Details</h3>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 20%;" align="right"> Transaction Date </td>
+    <td style="width: 30%;"> <input type="text" class="form-control" disabled [(ngModel)]='tradat'> </td>
+    <td style="width: 20%;" align="right"> Seq </td>
+    <td style="width: 20%;"> <input type="text" class="form-control" disabled [(ngModel)]='seq'> </td>
+    <td style="width: 10%;"> <button class="btn-lg btn-success" (click)="openModal(customContent)">Purchases</button> </td>
+</tr>
+ 
+</table>
+
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 20%;" align="right">MIR & Date</td>
+        <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='mir'></td>
+    
+        <td style="width: 20%;" align="right">Invoice No</td>
+        <td style="width: 30%;"> <input type="text" disabled  class="form-control" style="width: 100%;" [(ngModel)]='invoiceno'></td>
+    </tr>
+    <tr>
+        <td style="width: 20%;" align="right">Supplier</td>
+        <td colspan="3"><input type="text" disabled  class="form-control" style="width: 100%;" [(ngModel)]='header.Vendorname'>  </td>
+    </tr>
+<tr>
+    <td style="width: 20%;" align="right">Address</td>
+    <td style="width: 30%;" rowspan="2"> <textarea style="width: 100%; height: 50px; " [(ngModel)]='header.Addr' disabled ></textarea>  </td>
+    <td style="width: 20%;" align="right">ZIP</td>
+    <td style="width: 30%;" > <input type="text" disabled  class="form-control" style="width: 100%;" [(ngModel)]='header.Zip'></td>
+</tr>
+<tr>
+    <td style="width: 20%;" align="right">&nbsp;</td>
+    <td style="width: 20%;" align="right">Mobile</td>
+    <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='header.Mobile'></td>
+</tr>
+<tr>
+    <td style="width: 20%;" align="right">Country</td>
+    <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='header.Country'></td>
+
+    <td style="width: 20%;" align="right">Base</td>
+    <td style="width: 30%;"> <input type="text" disabled  class="form-control" style="width: 100%; text-align: right;" value='{{prevbaseamt | number:"0.2"}}'></td>
+</tr>
+<tr>
+    <td style="width: 20%;" align="right">State</td>
+    <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='header.State'></td>
+
+    <td style="width: 20%;" align="right">Taxes</td>
+    <td style="width: 30%;"> <input type="text" disabled  class="form-control" style="width: 100%; text-align: right;" value='{{prevtaxes | number:"0.2"}}'></td>
+</tr>
+<tr>
+    <td style="width: 20%;" align="right">District</td>
+    <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='header.District'></td>
+
+    <td style="width: 20%;" align="right">Others</td>
+    <td style="width: 30%;"> <input type="text" disabled  class="form-control" style="width: 100%; text-align: right;" value='{{prevothers | number:"0.2"}}'></td>
+</tr>
+<tr>
+    <td style="width: 20%;" align="right">City</td>
+    <td style="width: 30%;"> <input type="text"  disabled class="form-control" style="width: 100%;" [(ngModel)]='header.City'></td>
+
+    <td style="width: 20%;" align="right">Total</td>
+    <td style="width: 30%;"> <input type="text" disabled  class="form-control" style="width: 100%; text-align: right;" value='{{prevtotal | number:"0.2"}}'></td>
+</tr>
+</table>
+
+<div style="width: 100%; height: 250px; overflow-y: scroll ;">
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+         
+      
+        <th>#</th>
+        <th>Item</th>
+        <th>Batch</th>
+        <th>Manufactured</th>
+        <th>Expiry</th>
+        <th>Qty</th>
+        <th>Consumed</th>
+        <th>Available</th>
+         <th>Rate</th>
+        <th>UM</th>
+         
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let mat of materials'>
+                <td>{{mat.sno}}</td>
+                <td>{{mat.itemname}}</td>
+                <td>{{mat.batchno}}</td>
+                <td>{{mat.manudate}}</td>
+                <td>{{mat.expdate}}</td>
+                <td>{{mat.qty}}</td>
+                <td>{{mat.qtyout}}</td>
+                <td>{{mat.available}}</td>
+                 <td>{{mat.rat}}</td>
+                <td>{{mat.um}}</td>
+        </tr>
+    </tbody>
+ 
+
+
+</table>
+</div>
+ 
+<table style="width: 100%;">
+<tr>
+  <td style="width: 70%;" align="right">Credit Note</td>
+  <td colspan="2"> <input type="text" class="form-control" style="width: 100%; text-align: right;"  [(ngModel)]='note.Amt'></td>
+</tr>
+<tr>
+  <td colspan="3">
+<input type="text" class="form-control" placeholder="Description" [(ngModel)]='note.Descriptio'>
+
+  </td>
+  </tr>
+
+<tr>
+  <td style="width: 70%;" align="right">Previous Returns</td>
+  <td colspan="2"> <input type="text" class="form-control" disabled  style="width: 100%; text-align: right;"  value="{{prevreturn | number:'0.2'}}"></td>
+</tr>
+<tr>
+  <td style="width: 70%;" align="right">Previous Credit Notes</td>
+  <td colspan="2"> <input type="text" class="form-control" disabled  style="width: 100%; text-align: right;"  value="{{prevnote | number:'0.2'}}"></td>
+</tr>
+<tr>
+  <td colspan="3">
+
+    <button type="button" class="btn-lg btn-primary mr-1 mb-1" *ngIf='recordId==0'  (click)='savePurchase()' >Submit</button>
+     <button type="button" class="btn-lg btn-dark mr-1 mb-1"  (click)='close()' >Close</button>
+  
+  </td>
+</tr>
+</table>
+
+     
+
+
+
+ 
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Purchases</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         <table style="width: 100%;">
+        <tr>
+            <td style="width: 15%;" align="right">From</td>
+            <td style="width: 30%;" ><input type="date" class="form-control" [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)"></td>
+            <td style="width: 15%;" align="right">To</td>
+            <td style="width: 30%;" ><input type="date" class="form-control" [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)"></td>
+            <td style="width: 10%;"><button class="btn btn-secondary" (click)='purchasesAdd()'>Show</button> </td>
+        </tr>
+        </table>
+        <table class="table m-0" style="width: 100%;">
+            <thead class="thead-light">
+              <tr>
+                 
+              
+                <th>MIR</th>
+                <th>Supplier</th>
+                <th>Date</th>
+                <th>Base</th>
+                <th>Total</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let pur of purchases'>
+                        <td>{{pur.seq}}</td>
+                        <td>{{pur.vendorname}}</td>
+                        <td>{{pur.dat | date:'dd-MMM-yy'}}</td>
+                        <td>{{pur.baseamt | number:'0.2'}}</td>
+                        <td>{{pur.totalAmt | number:'0.2'}}</td>
+                        <td> <i class="ft-edit font-medium-1" (click)='getPurchase(pur)' ></i>  </td>
+                </tr>
+            </tbody>
+         
+ 
+
+        </table>
+         
+    </div>
+    
+  
+  </ng-template>
+
+  
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">{{title}}</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+     
+
+
+         <div *ngIf='title=="Taxes"'>
+          
+            <table class="table m-0" style="width: 100%;">
+                <thead class="thead-light">
+                  <tr>
+                     
+                  
+                    <th>Tax</th>
+                    <th>Tax%</th>
+                    <th>Tax</th>
+                
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let tax of taxes'>
+                            <td>{{tax.taxCode}}</td>
+                            <td>{{tax.taxPer}}</td>
+                            <td><input type="number" class="form-control" style="width: 100%;" [(ngModel)]='tax.taxvalue' (input)='makeTaxes()'></td>
+                    </tr>
+                </tbody>
+             
+     
+
+            </table>
+        </div>
+    </div>
+</ng-template>
+</div>
+
+<div *ngIf='!opened'>
+  <h3>
+    List of Credit Notes
+</h3>
+
+<table style="width: 100%;">
+<tr>
+
+ <td align="right" style="width: 40%;">
+     <div class="input-group">
+         <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker 
+           #d1="ngbDatepicker" style="width: 50%;" [(ngModel)]='listdat'>
+         <div class="input-group-append">
+           <div class="input-group-text" (click)="d1.toggle()">
+             <i class="fa fa-calendar" style="cursor: pointer;"></i>
+           </div>
+         </div>
+       </div>
+ 
+ </td>
+ <td align="left" style="width: 25%;">   <button type="button" class="btn-lg btn-secondary mr-1 mb-1" (click)='listAdd()' >Show</button> </td>
+
+    <td align="left" style="width: 25%;">
+        <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+    </td>
+  
+</tr>
+</table>
+
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Seq</th>
+        <th>Ref MIR</th>
+        <th>Ref Invoice</th>
+        <th>Supplier</th>
+        <th>Mobile</th>
+        <th style="text-align: right;">Base Amount</th>
+        <th style="text-align: left;">Description</th>
+        
+        <th style="text-align: center;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr *ngFor='let pur of purchasecrnotes;let i=index'>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{pur.seq}}</td>
+        <td>{{pur.refmir}}</td>
+        <td>{{pur.refinvoice}}</td>
+        <td>{{pur.vendorname}}</td>
+        <td>{{pur.mobile}}</td>
+        <td align="right">{{pur.amt | number:'0.2'}}</td>
+        <td align="right">{{pur.descriptio}}</td>
+         
+        <td align="center"><i class="ft-trash font-medium-1" (click)='deleteCreditNote(pur)' ></i></td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+</div>

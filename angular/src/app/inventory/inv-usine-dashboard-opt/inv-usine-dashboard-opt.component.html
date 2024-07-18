@@ -1,0 +1,243 @@
+<div class="row ">
+    <div class="col-sm-12">
+        <div class="content-header">Inventory Dashboard</div>
+   </div>
+  </div>
+
+  <div class="row">
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-info">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">17,500.00</h3>
+              <span>Blanks Value</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-arrow-up font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-info">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">12,500.00</h3>
+              <span>Stock Value</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-dollar-sign font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-info">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">10,000.00</h3>
+              <span>Cosnumable Value</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-dollar-sign font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-dark">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body text-left">
+              <h3 class="card-text">22,450.00</h3>
+              <span>Blanks Consum.</span>
+            </div>
+            <div class="media-right align-self-center">
+              <i class="ft-dollar-sign font-large-2 float-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-dark">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-left align-self-center">
+              <i class="ft-map-pin font-large-2 float-left"></i>
+            </div>
+            <div class="media-body text-right">
+              <h3 class="card-text">15,000.00</h3>
+              <span>Stocks Consum.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="col-xl-2 col-lg-6 col-12">
+    <div class="card card-inverse bg-dark">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-left align-self-center">
+              <i class="ft-map-pin font-large-2 float-left"></i>
+            </div>
+            <div class="media-body text-right">
+              <h3 class="card-text">11,000.00</h3>
+              <span>Consumables</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <section id="apexchart">
+    <div class="row">
+       
+      <!-- Bar Chart starts -->
+      <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Consumptions Chart</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="barChartOptions.series"
+                  [colors]="barChartOptions.colors"
+                  [chart]="barChartOptions.chart"
+                  [xaxis]="barChartOptions.xaxis"
+                  [yaxis]="barChartOptions.yaxis"
+                  [title]="barChartOptions.title"
+                  [dataLabels]="barChartOptions.dataLabels"
+                  [stroke]="barChartOptions.stroke"
+                  [grid]="barChartOptions.grid"
+                  [tooltip]="barChartOptions.tooltip"
+                  [plotOptions]="barChartOptions.plotOptions"
+                  [fill]="barChartOptions.fill"
+                  [legend]="barChartOptions.legend"
+                  [labels]="barChartOptions.labels"
+                  [markers]="barChartOptions.markers"
+                  [theme]="barChartOptions.theme"
+                  [responsive]="barChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+
+  
+  <!-- Pie Chart starts -->
+  <div class="col-lg-6 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Category wise Expectations</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                  <apx-chart
+                  [series]="piedata"
+                  [colors]="pieChartOptions.colors"
+                  [chart]="pieChartOptions.chart"
+                  [xaxis]="pieChartOptions.xaxis"
+                  [yaxis]="pieChartOptions.yaxis"
+                  [title]="pieChartOptions.title"
+                  [dataLabels]="pieChartOptions.dataLabels"
+                  [stroke]="pieChartOptions.stroke"
+                  [grid]="pieChartOptions.grid"
+                  [tooltip]="pieChartOptions.tooltip"
+                  [plotOptions]="pieChartOptions.plotOptions"
+                  [fill]="pieChartOptions.fill"
+                  [legend]="pieChartOptions.legend"
+                  [labels]="pieLabels"
+                  [markers]="pieChartOptions.markers"
+                  [theme]="pieChartOptions.theme"
+                  [responsive]="pieChartOptions.responsive"
+                ></apx-chart>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- Pie Chart ends -->
+
+
+<div class="col-lg-6 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Top 5 Consumables</h4>
+        </div>
+        <div class="card-content">
+         
+
+            <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                 
+                    <div class="card-content">
+                      <div class="card-body">
+                       
+                        <div class="table-responsive">
+                          <table class="table m-0">
+                            <thead class="thead-light">
+                              <tr>
+                                <th>#</th>
+                                <th>Consumable</th>
+                                <th align="right">Value</th>
+                                    <th align="right">Role</th>
+                               
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor='let customer of customers; let i=index'>
+                                <th scope="row">{{i+1}}</th>
+                                <td> {{customer.name}} </td>
+                                <td align="right">{{customer.busi | number:'0.2-2'}}</td>
+                                <td align="right">{{customer.role}}%</td>
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    </div>
+  
+  </section>
+  

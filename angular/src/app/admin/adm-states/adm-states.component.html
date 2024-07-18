@@ -1,0 +1,50 @@
+<h3>
+    State Details
+  </h3>
+
+  <table style="width: 70%;">
+    <tr>
+        <td style="width: 45%;">
+        Country</td>
+        <td style="width: 45%;">State</td>
+        <td style="width: 10%;">&nbsp;</td>
+    </tr>
+<tr>
+    <td style="width: 45%;">
+    <select class="form-control" style="width: 100%;" [(ngModel)]='cnt' (change)='getStates()'> 
+        <option *ngFor='let countr of countries' value="{{countr.recordId}}">{{countr.cntname}}</option>
+    </select>
+    </td>
+    <td style="width: 45%;">
+        <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='statename'>
+    </td>
+    <td style="width: 10%;">
+    <input type="button" value="Add" class="btn btn-secondary mr-1 mb-1" (click)='saveState()'>
+    </td>
+</tr>
+<tr>
+    <td style="width: 45%;">&nbsp;</td>
+    <td colspan="2" valign="top">
+<table style="width: 100%;" class="table m-0">
+<tr *ngFor='let sta of states'>
+    <td style="width: 80%;">
+        <span *ngIf='sta.chk != 1'> {{sta.stateName}}</span>
+    
+     <input class="form-control" type="text" [(ngModel)]='newState' *ngIf='sta.chk==1'>
+    </td>
+    <td style="width: 5%"  *ngIf='sta.chk==1'>  <i class="ft-check-square font-medium-1" (click)='modifyState(sta)'></i></td>
+    <td style="width: 5%"  *ngIf='sta.chk==1'>  <i class="icon-close font-medium-1" (click)='closeState(sta)'></i></td>
+
+    <td colspan="2" *ngIf='sta.chk != 1'>
+        <i class="ft-edit font-medium-1" (click)='oldState(sta)'></i>
+    </td>
+    <td style="width: 10%;">
+        <i class="ft-trash font-medium-1" (click)='deleteState(sta)'></i>
+    </td>
+</tr>
+ 
+</table>
+
+    </td>
+</tr>
+</table>

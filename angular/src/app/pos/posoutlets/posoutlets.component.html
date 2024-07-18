@@ -1,0 +1,145 @@
+
+ <ngx-spinner></ngx-spinner>
+  <div *ngIf='opened'>
+     <h3>
+     Outlet Details
+   </h3>
+   <br>
+   <table style="width: 70%;">
+    <tr>
+      <td style="width: 30%;">&nbsp;</td>
+      <td style="width: 70%;"> 
+      <span style="color: red;">Outlet once created can not be deleted</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;" align="right">
+      Outlet Name
+      </td>
+      <td style="width: 70%;">
+        <input type="text" class="form-control" id="basicInput"  placeholder="Outlet name" [(ngModel)]='outlet.RestaName'  >
+  
+      </td>
+     
+     
+    </tr>
+    <tr>
+      <td style="width: 30%;" align="right">
+      Outlet Type
+      </td>
+      <td style="width: 70%;">
+        <select id="basicInput1" class="form-control"  [(ngModel)]='outlet.Outlettype'>
+
+          <option value="0">--Select Outlet Type --</option>
+          <option value="1">Detailed </option>
+          <option value="2">Fast Counter</option>
+           
+          
+                  </select>
+      </td>
+     
+     
+    </tr>
+    <tr>
+      <td style="width: 30%;" align="right">
+      Billing Group
+      </td>
+      <td style="width: 70%;">
+        <select id="basicInput2" class="form-control"  [(ngModel)]='outlet.BillingGroup'>
+
+          <option value="0">--Billing Group --</option>
+          
+          <option *ngFor='let valu of billinggroups' value="{{valu.valu}}">{{valu.valu}}</option>
+          
+          
+          
+                  </select>
+      </td>
+     
+     
+    </tr>
+    
+    <tr>
+      <td style="width: 30%;" align="right">
+      Maximum Outlets
+      </td>
+      <td style="width: 70%;">
+        <input type="text" class="form-control" id="basicInput" disabled   [(ngModel)]='maxoutlets'  >
+  
+      </td>
+     
+     
+    </tr>
+     
+    <tr>
+      <td colspan="2">
+
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+       <!-- <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+        --><button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+        <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+      </td>
+    </tr>
+    </table>
+
+  </div>
+     
+
+<div *ngIf='!opened'>
+       <h3>
+           List of Outlets
+       </h3>
+       
+       <table style="width: 90%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td  style="width: 50%;" align="right">
+            <input type="text" class="form-control" id="basicInput"  placeholder="Search...." [(ngModel)]='searchText' (input)='searchDetails()' >
+        </td>
+
+           
+       </tr>
+       </table>
+       
+       <table class="table m-0" style="width: 90%;">
+           <thead class="thead-light">
+             <tr>
+               <th>#</th>
+               <th>Outlet</th>
+               <th>Outlet Type</th>
+               <th>Billing Group</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let outlet of outlets; let i=index'>
+               <th scope="row" >{{i+1}}</th>
+               <td>{{outlet.restaName}}</td>
+               <td *ngIf='outlet.outlettype==1'> Detailed </td>
+               <td *ngIf='outlet.outlettype!=1'> Fast Counter </td>
+               <td>{{outlet.billingGroup}}</td>
+               <td>
+                 
+                 <i class="ft-edit font-medium-1" (click)='openOld(outlet)' ></i>
+                 
+                </td>
+             </tr>
+            
+           </tbody>
+         </table>
+         
+
+
+        </div>

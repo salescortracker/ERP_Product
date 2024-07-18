@@ -1,0 +1,120 @@
+
+ <ngx-spinner></ngx-spinner>
+ <div *ngIf='opened'>
+     <h3>
+     Supplier Group Details
+   </h3>
+   <br>
+   <table style="width: 40%;">
+   <tr>
+    <td>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Select Supplier Group</h5>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+
+    <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 360px; overflow-y: scroll;">
+    
+        <span *ngFor='let obj1 of treeObj'  >
+            <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+            <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i> <a> <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.subGroup}} </span></a> <br>
+
+            <div  *ngIf='obj1.openCheck'>
+            
+            <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+              <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+              <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>    <a>  <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span></a><br>
+              
+              <div  *ngIf='obj2.openCheck'>
+              <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+              <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>     <a> <span (click)='toggleVisible(obj3)'> {{obj3.subGroup}} </span></a> <br>
+              </span>
+              </div>
+
+            </span>
+        </div>
+        </span>
+
+    </div>
+            </div>
+        </div>
+    </div>
+  </td>
+   </tr>
+   <tr>
+<td>
+ 
+  <input type="text" class="form-control" id="basicInput"  placeholder="Enter Group" [(ngModel)]='subgrp'>
+</td>
+   </tr>
+   <tr>
+    <td>
+      <input type="text" class="form-control" id="basicInput"  placeholder="Main Group" disabled [(ngModel)]='maingrp'>
+    </td>
+       </tr>
+   <tr>
+     <td colspan="2">
+       &nbsp;
+     </td>
+   </tr>
+   <tr>
+     <td colspan="2">
+       <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+       <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' >{{saveStr}}</button>
+       <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+     </td>
+   </tr>
+   </table>
+ </div>
+
+ <div *ngIf='!opened'>
+       
+       <h3>
+           List of Supplier Groups
+       </h3>
+       
+       <table style="width: 100%;">
+       <tr>
+           <td align="left" style="width: 50%;">
+               <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+           </td>
+           <td align="right" style="width: 50%;">
+            <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchCategories()' >
+            </div>
+           </td>
+       </tr>
+       </table>
+       <ngb-pagination [collectionSize]="totalpages" (pageChange)="loadPage($event)" [(page)]="page4" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+  
+       <table class="table m-0" style="width: 100%;">
+           <thead class="thead-light">
+             <tr>
+               <th style="width: 5%;">#</th>
+               <th style="width: 40%;">Group</th>
+               <th style="width: 30%;">Main Group</th>
+               <th style="width: 20%;">Status</th>
+               <th style="width: 5%;"></th>
+             </tr>
+           </thead>
+           <tbody>
+            
+             <tr *ngFor='let grp of grps;let i=index'>
+              <th scope="row" style="width: 5%;" >{{i+1+((pageno-1)*PAGESIZE)}}</th>
+               <td style="width: 40%;">{{grp.sGrp}}</td>
+               <td style="width: 30%;" *ngIf='grp.mGrp != "MAIN"'>{{grp.mGrp}}</td>
+               <td style="width: 30%;" *ngIf='grp.mGrp == "MAIN"'>&nbsp;</td>
+               <td style="width: 20%;"><span *ngIf='grp.statu==1'> Active</span><span *ngIf='grp.statu!=1'> Inactive</span></td>
+               <td style="width: 5%;"><i class="ft-edit font-medium-1"(click)='openOld(grp)'></i></td>
+             </tr>
+            
+           </tbody>
+         </table>
+    
+        </div>
+
+ 

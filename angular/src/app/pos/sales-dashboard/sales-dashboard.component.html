@@ -1,0 +1,197 @@
+<div class="row ">
+    <div class="col-sm-12">
+        <div class="content-header">Sales Dashboard</div>
+   </div>
+   
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-info bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">122</h3>
+                <span>Total Customers</span><br>
+                <span>Active 100</span><br>
+                <span>Inactive 22</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-check-square font-large-1"></i>
+              </div>
+            </div>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-warning bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            
+              <div class="media">
+                <div class="media-body info text-left">
+                  <h3 class="font-large-1 info mb-0">122</h3>
+                  <span>Total Materials</span><br>
+                  <span>Active 100</span><br>
+                  <span>Inactive 22</span>
+                </div>
+                <div class="media-right info text-right">
+                  <i class="ft-check-square font-large-1"></i>
+                </div>
+              </div>
+           
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-primary bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">122</h3>
+                <span>Total Sales</span><br>
+                <span>&nbsp;</span><br>
+                <span>&nbsp;</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-check-square font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-success bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">2,332.00/-</h3>
+                <span>Total Sale Value</span><br>
+                <span>&nbsp;</span><br>
+                <span>&nbsp;</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-dollar-sign font-large-1"></i>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  
+    
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-info bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media">
+              <div class="media-body info text-left">
+                <h3 class="font-large-1 info mb-0">122</h3>
+                <span>Total Sale Orders</span><br>
+                <span>Active 100</span><br>
+                <span>Inactive 22</span>
+              </div>
+              <div class="media-right info text-right">
+                <i class="ft-check-square font-large-1"></i>
+              </div>
+            </div>
+          </div>
+           
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-xl-2 col-lg-6 col-md-6 col-12">
+      <div class="card bg-warning bg-lighten-3">
+        <div class="card-content">
+          <div class="card-body py-0">
+            
+              <div class="media">
+                <div class="media-body info text-left">
+                  <h3 class="font-large-1 info mb-0">122</h3>
+                  <span>Total SO Cost</span><br>
+                  <span>Active 100</span><br>
+                  <span>Inactive 22</span>
+                </div>
+                <div class="media-right info text-right">
+                  <i class="ft-dollar-sign font-large-1"></i>
+                </div>
+              </div>
+           
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  
+      <!-- Bar Chart starts -->
+      <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Sales Chart</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                  <apx-chart
+                  [series]="barChartOptions.series"
+                  [colors]="barChartOptions.colors"
+                  [chart]="barChartOptions.chart"
+                  [xaxis]="barChartOptions.xaxis"
+                  [yaxis]="barChartOptions.yaxis"
+                  [title]="barChartOptions.title"
+                  [dataLabels]="barChartOptions.dataLabels"
+                  [stroke]="barChartOptions.stroke"
+                  [grid]="barChartOptions.grid"
+                  [tooltip]="barChartOptions.tooltip"
+                  [plotOptions]="barChartOptions.plotOptions"
+                  [fill]="barChartOptions.fill"
+                  [legend]="barChartOptions.legend"
+                  [labels]="barChartOptions.labels"
+                  [markers]="barChartOptions.markers"
+                  [theme]="barChartOptions.theme"
+                  [responsive]="barChartOptions.responsive"
+                ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bar Chart ends -->
+  
+    <div class="col-xl-6 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Category wise Sales</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <i class="ft-plus-square font-medium-1"></i>
+  
+              </div>
+          </div>
+      </div>
+    </div>
+  
+    <div class="col-xl-6 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Customer wise Sales</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                
+                <i class="ft-minus-square font-medium-1"></i>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  

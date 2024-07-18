@@ -1,0 +1,90 @@
+
+
+  
+        <ngx-spinner></ngx-spinner>
+        <!--Light table starts-->
+        <section id="light" >
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Closing Stock Information</h3>
+          
+                    <table style="width: 50%;">
+                        <tr>
+                            
+                            <td style="width: 20%;" align="right">As on</td>
+                            <td style="width: 70%;">
+                                <input type="date" class="form-control"   [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)">
+                            </td>
+                            <td style="width: 10%;">
+                            <button class="btn-lg btn-secondary" (click)='listAdd()'>Show</button>
+                            </td>
+                        </tr>
+                        </table>
+                 
+          
+                  <div class="position-relative float-right" *ngIf='details'>
+                    <div ngbDropdown display="dynamic"  placement="bottom-right"  class="d-inline-block">
+                      <i class="ft-more-vertical- mt-1 dropdown-toggle" id="chatOptions" ngbDropdownToggle></i>
+                      <div ngbDropdownMenu aria-labelledby="chatOptions">
+                        <!--<a href="javascript:;" class="dropdown-item" [href]='pdfFile'target="_aa" >Download Pdf</a>-->
+                        <a href="javascript:;" class="dropdown-item" [href]='pdffile' target="_blank" >Download Pdf</a>
+                        <a href="javascript:;" class="dropdown-item" [href]='excelfile' target="_ aa">Download Excel</a>
+                 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="card-content" *ngIf='details'>
+                    <div class="card-body">
+                     
+                      <div class="table-responsive">
+                        <table class="table m-6">
+                          <thead class="thead-light">
+                            <tr>
+                              <th>#</th>
+                              <th>Item Code</th>
+                              <th>Material</th>
+                              <th>Qty</th>
+                              <th>UOM</th>
+                              <th>Value</th>
+                              
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor='let det of details;let i=index' >
+                              <th scope="row">{{i+1}}</th>
+                              <td>{{det.det1}}</td>
+                              <td>{{det.det2}}</td>
+                              <td>{{det.det3}}</td>
+                              <td>{{det.det4}}</td>
+                              <td>{{det.det5}}</td>
+                            
+                            </tr>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <td>&nbsp;</td>
+                                <td>Total</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>{{total | number:'0.2'}}</td>
+                            </tr>
+                            <tr *ngIf='details.length <= 0'>
+                              <td colspan="6" align="center"> <span style="color: brown; font-weight: bold; font-size: large;"> No records found </span> </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--Light table Ends-->
+         
+          
+          
+          

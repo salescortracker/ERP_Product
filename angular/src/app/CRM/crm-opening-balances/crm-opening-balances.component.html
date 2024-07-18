@@ -1,0 +1,36 @@
+<ngx-spinner></ngx-spinner>
+<div *ngIf='authCheck'>
+<h3>Customer Opening Balances</h3>
+<button class="btn-lg btn-primary" (click)='save()'>Save</button>
+<table class="table m-0" style="width: 80%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Customer</th>
+        <th>Group</th>
+        <th>Debit</th>
+        <th>Credit</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+      <tr *ngFor='let party of parties;let i=index'>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{party.suppliername}}</td>
+        <td>{{party.suppliergroup}}</td>
+        <td>
+            <input type="number" class="form-control" [disabled] ='party.credit > 0' [(ngModel)]='party.debit'>
+           </td>
+           <td>
+            <input type="number" class="form-control" [disabled] ='party.debit > 0' [(ngModel)]='party.credit'>
+           </td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+
+
+<span *ngIf='!authCheck'>
+  <h2>Please verify your authorization</h2>
+</span>

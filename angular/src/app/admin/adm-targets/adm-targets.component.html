@@ -1,0 +1,30 @@
+<table class="table m-0" style="width: 80%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Module</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Target</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let tgt of targets;let i=index'>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{tgt.module}}</td>
+        <td>{{tgt.frmdate}}</td>
+        <td>{{tgt.todate}}</td>
+        <td> <input type="number" class="form-control" [(ngModel)]='tgt.target'> </td>
+      </tr>
+
+      <tr>
+        <td colspan="5">
+            <button type="button" class="btn btn-info mr-1 mb-1"  (click)='saveTarget()' >Save</button>
+     
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>

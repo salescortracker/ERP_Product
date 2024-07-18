@@ -1,0 +1,313 @@
+<ngx-spinner></ngx-spinner>
+
+ 
+<div *ngIf='opened'>    <h3>{{actype}} Details</h3>
+     
+
+
+
+<table style="width: 100%;">
+<tr>
+    <td style="width: 30%;"> <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Select Group</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+<div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 720px; overflow-y: scroll;">
+              <span *ngFor='let obj1 of treeObj'  >
+                  <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                  <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i> <a>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.subGroup}} </span> </a> <br>
+      
+                  <div  *ngIf='obj1.openCheck'>
+                  
+                  <span *ngFor='let obj2 of obj1.children' style="left: 32px; position: relative;"  >
+                    <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                    <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <a><span (click)='toggleVisiblePlus(obj2)'>  {{obj2.subGroup}} </span></a><br>
+                    
+                    <div  *ngIf='obj2.openCheck'>
+                    <span *ngFor='let obj3 of obj2.children' style="left: 32px; position: relative;" >
+                      <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                    <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>    <a> <span (click)='toggleVisible(obj3)'> {{obj3.subGroup}} </span></a> <br>
+                    </span>
+                    </div>
+      
+                  </span>
+              </div>
+              </span>
+      
+          </div>
+
+
+              </div>
+              </div>
+     </div> </td>
+    <td style="width: 70%;">
+ 
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Lead Details</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+
+                    <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 720px; overflow-y: scroll;">
+                      
+      
+
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 9%;" align="right">Code</td>
+                    <td colspan="3"> <input type="text" style="width: 40%;" class="form-control" id="basicInput"  [(ngModel)]='supplier.PartyCode' placeholder="Customer Code"></td>
+                </tr>
+                <tr>
+                    <td style="width: 9%;" align="right">Customer</td>
+                    <td colspan="3"> <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.PartyName'  placeholder="Customer"></td>
+                </tr>
+                <tr>
+                    <td style="width: 9%;" align="right">Group</td>
+                    <td colspan="3">  <input type="text" class="form-control" id="basicInput" [(ngModel)]='partygrp' placeholder="Customer Group" disabled></td>
+                </tr>
+               
+
+
+
+             
+<tr>
+<td style="width: 9%;" align="right">Status</td>
+<td colspan="3"> <select class="form-control" [(ngModel)]='supplier.Statu'> <option value="1">Active</option> <option value="2">Inactive</option>  </select>
+</td>
+</tr>    
+<tr>
+    <td colspan="4">&nbsp;</td>
+</tr>       
+<tr>
+    <td colspan="4" style="background-color: lightgray;">Contact Information</td>
+</tr>       
+
+<tr>
+
+<td style="width: 9%;" align="right">Contact</td>
+<td colspan="3">     <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactPerson' placeholder="Contact Person">
+                 
+</td>
+</tr>   
+</table>
+
+
+<table style="width: 100%;">
+    <tr>
+        <td style="width:9%" align="right">Designation</td>
+        <td style="width:24%" >        <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactDesignation'  placeholder="Designation">
+        </td>
+        <td style="width:9%" align="right">Email</td>
+        <td style="width:24%" >      <input type="email" class="form-control" id="basicInput" [(ngModel)]='supplier.ContactEmail' placeholder="Email">
+        </td>
+        <td style="width:9%" align="right">Mobile</td>
+        <td style="width:25%" >     <input type="text" class="form-control" id="basicInput"  [(ngModel)]='supplier.ContactMobile' placeholder="Mobile">
+        </td>
+    </tr>
+    <tr>
+        <td style="width:9%" align="right">Pref Language</td>
+        <td style="width:24%" >        <input type="text" class="form-control" id="basicInput" [(ngModel)]='supplier.PrefLanguage'  placeholder="Prefereable Language">
+        </td>
+        <td colspan="4">&nbsp;   </td>
+    </tr>
+ 
+<tr>
+    <td colspan="6">&nbsp;</td>
+</tr>
+
+
+<tr>
+    <td colspan="6" style="background-color: lightgrey;">Address Details</td>
+</tr>
+     
+       <tr>
+           <td colspan="6">
+
+            
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 9%;" align="right">Address Name</td>
+                    <td colspan="3"> <input type="text" class="form-control" [(ngModel)]='address.nam'> </td>
+                </tr>
+                <tr>
+                            
+                    <td style="width: 9%;" align="right">Address</td>
+                    <td style="width: 41%;" rowspan="2">  <textarea id="projectinput8" rows="3" class="form-control" name="comment" placeholder="Address" [(ngModel)]='address.addr'></textarea> </td>
+                    <td style="width: 9%;" align="right">ZIP</td>
+                    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Zip" [(ngModel)]='address.zip' ></td>
+            </tr>
+            <tr>
+                <td style="width: 9%;" align="right">&nbsp;</td>
+                <td style="width: 9%;" align="right">Mobile</td>
+                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Mobile" [(ngModel)]='address.mobile' ></td>
+        
+            </tr>
+            <tr>
+                
+                <td style="width: 9%;" align="right">Country</td>
+                <td style="width: 41%;">     <select class="form-control" [(ngModel)]='address.country'  (change)='changeCountry()'>
+                    <option value="-1">--Select Country--</option>
+                    <option *ngFor='let country of countries' value={{country.cntname}}>{{country.cntname}}</option>
+            </select>  </td>
+                <td style="width: 9%;" align="right">Tel</td>
+                <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Telephone" [(ngModel)]='address.tel'></td>
+        </tr>
+        <tr>
+                
+            <td style="width: 9%;" align="right">State</td>
+            <td style="width: 41%;">    
+                <select class="form-control" [(ngModel)]='address.stat'>
+                    <option value=" ">--Select State--</option>
+                    <option *ngFor='let sta of selectedstates' value="{{sta.stateName}}">{{sta.stateName}}</option>
+                    
+
+                  </select>
+            </td>
+            <td style="width: 9%;" align="right">Fax</td>
+            <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Fax" [(ngModel)]='address.fax'></td>
+    </tr>
+    <tr>
+                
+        <td style="width: 9%;" align="right">District</td>
+        <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="District" [(ngModel)]='address.district'></td>
+        <td style="width: 9%;" align="right">Email</td>
+        <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Email" [(ngModel)]='address.email'></td>
+</tr>
+<tr>
+                
+    <td style="width: 9%;" align="right">City</td>
+    <td style="width: 41%;">    <input type="text" class="form-control" id="basicInput"  placeholder="City" [(ngModel)]='address.city'></td>
+    <td style="width: 9%;" align="right">Web</td>
+    <td style="width: 41%;"> <input type="text" class="form-control" id="basicInput"  placeholder="Web" [(ngModel)]='address.web'></td>
+</tr>
+
+            </table>
+
+           </td>
+       </tr>
+
+
+
+         
+         
+          
+        
+      
+                 
+                   
+
+
+                   
+              
+              
+                  </table>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td colspan="2"> <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!crecheck' (click)='save()'>{{savestr}}</button>
+        <button type="button" class="btn-lg btn-danger mr-1 mb-1" [disabled]='!delcheck' (click)='delete()' *ngIf='recordid!=0' >Delete</button>
+        <button type="button" class="btn-lg btn-dark mr-1 mb-1" (click)='close()'>Close</button>
+   </td>
+</tr>
+</table>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Address</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+         
+         
+    </div>
+    
+  
+  </ng-template>
+
+
+</div>
+ 
+  
+<div *ngIf='!opened'>
+    <h3>
+        List of Leads
+    </h3>
+    
+    <table style="width: 100%;">
+    <tr>
+        <td align="left" style="width: 50%;">
+            <button type="button" *ngIf='!opened' class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+        </td>
+        <td align="right" style="width: 50%;">
+         <div class="form-group has-search">
+           <span class="fa fa-search form-control-feedback"></span>
+           <input type="text" class="form-control" placeholder="Search" [(ngModel)]='searchtext' (input)='searchParties()' >
+         </div>
+        </td>
+    </tr>
+    </table>
+    <ngb-pagination [collectionSize]="totalpages" (pageChange)="loadPage($event)" [(page)]="page4" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th  style="width: 30%;">{{actype}}</th>
+            <th  style="width: 15%;">Group</th>
+            <th  style="width: 21%;">Contact Person</th>
+            <th style="width: 12%;">Contact Mobile</th>
+            <th  style="width: 12%;">Status</th>
+            <th  style="width: 5%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let party of parties;let i=index'>
+            <th scope="row"  style="width: 5%;">{{i+1+((pageno-1)*PAGESIZE)}}</th>
+            <td  style="width: 30%;">{{party.partyName}}</td>
+            <td  style="width: 15%;">{{party.partyGroupName}}</td>
+            <td  style="width: 21%;">{{party.contactPerson}}</td>
+            <td  style="width: 12%;">{{party.contactMobile}}</td>
+            <td  style="width: 12%;">{{party.status}}</td>
+             <td style="width: 5%;"><i *ngIf='!opened' class="ft-edit font-medium-1"(click)='openOld(party)'></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+    </div>
+ 
+
+
+
+
+
+
+
+
+
+

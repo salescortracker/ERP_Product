@@ -1,0 +1,585 @@
+<!--Statistics cards Starts-->
+<div class="row" (resized)="onResized($event)">
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("fo")' >
+    <div class="card gradient-purple-love">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h4 class="font-large-1 white mb-0">FO</h4>
+              <br>
+              <span>34/45</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-tv font-large-1"></i>
+            </div>
+          </div>
+        </div>
+              <div id="ft-tv" class=" ft-tbv mb-2">
+      <br>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12"  (click)='setModule("pos")'>
+      <div class="card gradient-ibiza-sunset">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">POS</h3>
+                <br>
+                <span>1234</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-bar-chart font-large-1"></i>
+              </div>
+            </div>
+          </div>
+                <div id="ft-tv" class=" ft-tbv mb-2">
+        <br>
+        </div>
+        </div>
+      </div>
+    </div>
+
+ 
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-mint">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">Banquet</h3>
+              <br>
+              <span>2121</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="ft-trending-up font-large-1"></i>
+            </div>
+          </div>
+        </div>
+        <div id="ft-tv" class=" ft-tbv mb-2">
+                <br>
+                </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+    <div class="card gradient-king-yna">
+      <div class="card-content">
+        <div class="card-body py-0">
+          <div class="media pb-1">
+            <div class="media-body white text-left">
+              <h3 class="font-large-1 white mb-0">Housekeeping</h3>
+              <br>
+              <span>13/39</span>
+            </div>
+            <div class="media-right white text-right">
+              <i class="icon-note font-large-1"></i>
+            </div>
+          </div>
+        </div>
+        <div id="ft-tv" class=" ft-tbv mb-2">
+                  <br>
+                </div>
+      </div>
+    </div>
+  </div>
+ 
+
+
+
+
+
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("pur")'>
+      <div class="card gradient-king-yna">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Purchases</h3>
+                <br>
+                <span>400</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="fa-barcode font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("dinv")'>
+      <div class="card gradient-king-yna">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Inventory</h3>
+                <br>
+                <span>400</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-basket-loaded font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("acc")'>
+      <div class="card gradient-mint">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Accounts</h3>
+                <br>
+                <span>323</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="ft-dollar-sign font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("hrd")'>
+      <div class="card gradient-purple-bliss">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">HRD</h3>
+                <br>
+                <span>13/39</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-users font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+
+ 
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card gradient-man-of-steel">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Engineering</h3>
+                <br>
+                <span>13/39</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-wrench font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+  <!--
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("crm")'>
+      <div class="card gradient-king-yna">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">CRM</h3>
+                <br>
+                <span>13/39</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-earphones font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div> 
+-->
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12">
+      <div class="card gradient-purple-love">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Analysis</h3>
+                <br>
+                <span>13/39</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-pie-chart font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+ 
+
+    <div class="col-xl-3 col-lg-6 col-md-6 col-12" (click)='setModule("adm")'>
+      <div class="card gradient-blackberry">
+        <div class="card-content">
+          <div class="card-body py-0">
+            <div class="media pb-1">
+              <div class="media-body white text-left">
+                <h3 class="font-large-1 white mb-0">Admin</h3>
+                <br>
+                <span>13/39</span>
+              </div>
+              <div class="media-right white text-right">
+                <i class="icon-settings font-large-1"></i>
+              </div>
+            </div>
+          </div>
+          <div id="ft-tv" class=" ft-tbv mb-2">
+                    <br>
+                  </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!--Statistics cards Ends-->
+
+
+
+
+    <!--
+      
+      <div class="col-xl-12 col-12">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Sales Turnover Charts</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <apx-chart
+                [series]="lineAreaChartOptions.series"
+                [colors]="lineAreaChartOptions.colors"
+                [chart]="lineAreaChartOptions.chart"
+                [xaxis]="lineAreaChartOptions.xaxis"
+                [yaxis]="lineAreaChartOptions.yaxis"
+                [title]="lineAreaChartOptions.title"
+                [dataLabels]="lineAreaChartOptions.dataLabels"
+                [stroke]="lineAreaChartOptions.stroke"
+                [grid]="lineAreaChartOptions.grid"
+                [tooltip]="lineAreaChartOptions.tooltip"
+                [plotOptions]="lineAreaChartOptions.plotOptions"
+                [fill]="lineAreaChartOptions.fill"
+                [legend]="lineAreaChartOptions.legend"
+                [labels]="lineAreaChartOptions.labels"
+                [markers]="lineAreaChartOptions.markers"
+                [theme]="lineAreaChartOptions.theme"
+                [responsive]="lineAreaChartOptions.responsive"
+              ></apx-chart>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+-->
+
+<div class="row">
+  <div class="col-xl-3 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Tasks to be Completed</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+
+
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="white mb-3">List group item heading</h5>
+                    <small>3 days ago</small>
+                  </div>
+                  <p class="white mb-2">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                  <small>Donec id elit non mi porta.</small>
+                </li>
+                <li class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-3">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <p class="mb-2">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                  <small class="text-muted">Donec id elit non mi porta.</small>
+                </li>
+                <li class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-3">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <p class="mb-2">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                  <small class="text-muted">Donec id elit non mi porta.</small>
+                </li>
+              </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-6 col-12">
+  <div class="card">
+      <div class="card-header">
+          <h4 class="card-title">Time Line</h4>
+      </div>
+      <div class="card-content">
+          <div class="card-body">
+            <h2>Hi {{usrname}}</h2>
+
+            <button style="width: 100%;" class="btn btn-warning" (click)="openModal(customContent)">Post</button>
+<!--Time line 1 starts-->
+<!--
+            <div class="col-xl-12 col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <h4 class="card-title"></h4>
+                  </div>
+                  
+                  <div class="card-content">
+
+                   
+                      <div class="card-body">
+                        <table style="width:100%">
+                        <tr>
+                          <td style="width: 50%;" align="left"><font face="Arial" size=3>
+                            <div class="avatar">
+                              <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                          </div>Raja Gopal Kurapati</font><br></td>
+                          <td style="width: 50%;" align="right"><font face="Arial" size=2><i>3-Apr-23 4:50:20am</i></font><br></td>
+                        </tr>
+                        </table>
+                                                
+           
+                        <font face="Arial" size=3>This work is to be fine finished product team please check and come back again</font><br>
+                         <img src="../../../assets/img/crop-pic.jpg" style="width: 100%;"><br>
+                         <hr>
+                         <table style="width: 100%;">
+                         <tr>
+                           <td style="width: 50%;" align="center">
+                             <i class="ft-thumbs-up font-large-1"></i>Like(6)
+                             
+                           </td>
+                           <td style="width: 50%;" align="center">
+                             <i class="ft-message-square font-large-1"></i>Comment(4)
+                             
+                           </td>
+                         </tr>
+                         </table>
+                         <hr>
+                          <table style="width: 100%;">
+                          <tr>
+                            <td style="width: 10%;" valign="top">
+                              <div class="avatar">
+                                <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                            </div>
+                            </td>
+                            <td style="width: 90%;">
+                            <b>Ravi Chitta</b> <br>
+                            This idea is super ra but i am unable to join sorry for this
+                            </td>
+
+                          </tr>
+                          </table>
+                        <table style="width: 100%;">
+                          <tr>
+                            <td style="width: 10%;" valign="top">
+                              <div class="avatar">
+                                <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                            </div>
+                            </td>
+                            <td style="width: 90%;">
+                            <b>Ravi Chitta</b> <br>
+                            This idea is super ra but i am unable to join sorry for this
+                            </td>
+
+                          </tr>
+                          </table>
+           
+                      </div>
+                  </div>
+              </div>
+            </div>-->
+                      <!--Time line1 ends-->
+
+                      <!--Time line2 Starts-->
+
+                      <!--
+                      <div class="col-xl-12 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                            </div>
+                      <div class="card-content">
+                      <div class="card-body">
+                        <table style="width:100%">
+                        <tr>
+                          <td style="width: 50%;" align="left"><font face="Arial" size=3>
+                            <div class="avatar">
+                              <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                          </div>Raja Gopal Kurapati</font><br></td>
+                          <td style="width: 50%;" align="right"><font face="Arial" size=2><i>3-Apr-23 4:50:20am</i></font><br></td>
+                        </tr>
+                        </table>
+                                                
+           
+                        <font face="Arial" size=3>This work is to be fine finished product team please check and come back again</font><br>
+                         <img src="../../../assets/img/crop-pic.jpg" style="width: 100%;"><br>
+                         <hr>
+                         <table style="width: 100%;">
+                         <tr>
+                           <td style="width: 50%;" align="center">
+                             <i class="ft-thumbs-up font-large-1"></i>Like(6)
+                             
+                           </td>
+                           <td style="width: 50%;" align="center">
+                             <i class="ft-message-square font-large-1"></i>Comment(4)
+                             
+                           </td>
+                         </tr>
+                         </table>
+                         <hr>
+                          <table style="width: 100%;">
+                          <tr>
+                            <td style="width: 10%;" valign="top">
+                              <div class="avatar">
+                                <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                            </div>
+                            </td>
+                            <td style="width: 90%;">
+                            <b>Ravi Chitta</b> <br>
+                            This idea is super ra but i am unable to join sorry for this
+                            </td>
+
+                          </tr>
+                          </table>
+                        <table style="width: 100%;">
+                          <tr>
+                            <td style="width: 10%;" valign="top">
+                              <div class="avatar">
+                                <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+                            </div>
+                            </td>
+                            <td style="width: 90%;">
+                            <b>Ravi Chitta</b> <br>
+                            This idea is super ra but i am unable to join sorry for this
+                            </td>
+
+                          </tr>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>-->
+<!--Time line2 ends-->
+
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="col-xl-3 col-12">
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Users</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor='let usr of usersList'> <div class="avatar">
+              <img src="assets/img/portrait/small/avatar-s-16.png" alt="avatar" height="32" width="32">
+          </div>{{usr.username}}</li>
+             
+          </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+<ng-template #customContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title">Post </h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+       
+          <table style="width: 100%;">
+            <tr>
+              <td style="width: 100%;">
+              <textarea class="form-control" rows="3" placeholder="Say Something here..."></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 100%;">
+                <label for="upload" class="custom-file-upload" style="width: 100%;">
+                 <span>Choose file</span>
+                  </label>
+                      <input type="file" id="upload" [(ngModel)]='FileObj' accept="image/*" (change)='onSelectFile($event)'/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="width: 100%;">
+              <div style="width: 100%; height: 300px; overflow-x: hidden;  overflow-y: auto;">
+              <img *ngFor='let fil of fileNames' style="width: 100%;" [src]='fil.file'>
+              </div>
+              </td>
+            </tr>
+            
+        
+          
+          <tr>
+            <td style="width: 100%;">
+              <button class="btn btn-primary" style="width: 100%;" (click)='postDetails()'>POST</button>
+            </td>
+          </tr>
+          </table>
+       
+  </div>
+  
+
+</ng-template>

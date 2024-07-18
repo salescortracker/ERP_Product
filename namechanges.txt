@@ -1,0 +1,9 @@
+Angular
+1. Check index.html for title			
+2. Check footer componenet for powered by		
+3. Check logo for image 
+4. Check url for api services in admingeneral service
+.net
+1. Check footer for powered by in reports
+2. Check General db connectivities
+3. Check PrismAdmin db connectivity

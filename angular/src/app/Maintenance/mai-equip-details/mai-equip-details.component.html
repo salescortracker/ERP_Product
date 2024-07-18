@@ -1,0 +1,272 @@
+
+ <ngx-spinner></ngx-spinner>
+
+<div class="row" *ngIf='opened'>
+    <h3>Equipment Details</h3>
+     
+    <div class="  col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+       <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Select Group</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <div style="width: 100%; border-color: black; border-style: solid; border-width:thin; height: 600px; overflow-y: scroll;">
+    
+
+                      <span *ngFor='let obj1 of grptree'  >
+                       <i class="ft-chevron-right font-medium-1" *ngIf='!obj1.openCheck' (click)='toggleVisible(obj1)'></i>  
+                       <i class="ft-chevron-down font-medium-1" *ngIf='obj1.openCheck' (click)='toggleVisible(obj1)'></i>  <span (click)='toggleVisiblePlus(obj1)'>  {{obj1.sGrp}} </span> <br>
+           
+                       <div  *ngIf='obj1.openCheck'>
+                       
+                       <span *ngFor='let obj2 of obj1.child' style="left: 32px; position: relative;"  >
+                         <i class="ft-chevron-right font-medium-1" *ngIf='!obj2.openCheck' (click)='toggleVisible(obj2)'></i> 
+                         <i class="ft-chevron-down font-medium-1" *ngIf='obj2.openCheck' (click)='toggleVisible(obj2)'></i>      <span (click)='toggleVisiblePlus(obj2)'>  {{obj2.sGrp}} </span><br>
+                         
+                         <div  *ngIf='obj2.openCheck'>
+                         <span *ngFor='let obj3 of obj2.child' style="left: 32px; position: relative;" >
+                           <i class="ft-chevron-right font-medium-1" *ngIf='!obj3.openCheck'  (click)='toggleVisible(obj3)'></i> 
+                         <i class="ft-chevron-down font-medium-1" *ngIf='obj3.openCheck'  (click)='toggleVisible(obj3)'></i>      <span (click)='toggleVisible(obj3)'> {{obj3.sGrp}} </span> <br>
+                         </span>
+                         </div>
+           
+                       </span>
+                   </div>
+                   </span>
+              
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+    
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Enter Details</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <table style="width: 100%;">
+                <tr>
+                    <td style="width: 20%;" align="right">Equipment Code</td>
+                    <td style="width: 30%;"> <input type="text" class="form-control" [(ngModel)]='equip.EquipmentCode'>  </td>
+                    <td colspan="2"> <h6 style="color: maroon;">{{msg}}</h6> </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">Equipment Name</td>
+                    <td colspan="3"> <input type="text" class="form-control" [(ngModel)]='equip.EquipmentName'>  </td>
+                     
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">Group</td>
+                    <td colspan="3">  <input type="text" class="form-control" disabled [(ngModel)]='maingrp'> </td>
+                     
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">Pref Service Supplier</td>
+                    <td colspan="3"> <select class="form-control"  [(ngModel)]='equip.PreferableServiceSupplier'>
+                        <option value="-1">--Select--</option>
+                        <option *ngFor='let sup of suppliers' value="{{sup.recordId}}">{{sup.partyName}}</option>
+                    </select>   </td>
+                     
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">Pref Spares Supplier</td>
+                    <td colspan="3"> <select class="form-control" [(ngModel)]='equip.PreferableSparesSupplier'>
+                        <option value="-1">--Select--</option>
+                        <option *ngFor='let sup of suppliers' value="{{sup.recordId}}">{{sup.partyName}}</option>
+                    </select> </td>
+                     
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">Mobile Check</td>
+                    <td style="width: 30%;"> <select class="form-control" [(ngModel)]='equip.MobileCheck'>
+                        <option value="1">Movable</option>
+                        <option value="2">Fixed</option>
+                    </select>  </td>
+                    <td style="width: 20%;" align="right">Max Hours/day</td>
+                    <td style="width: 30%;"> <select class="form-control" [(ngModel)]='equip.MaxHrs'>
+                         
+                        <option *ngFor='let hr of hrs' value="{{hr}}">{{hr}}</option>
+                 
+                    </select>  </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%;" align="right">AMC Date</td>
+                    <td style="width: 30%;">   
+                        <input type="date" class="form-control" [value]="equip.AmcDate | date:'yyyy-MM-dd'" (input)="equip.AmcDate=parseDate($event.target.value)">
+       
+                    </td>
+                    <td style="width: 20%;" align="right">Last Prev Maintenance</td>
+                    <td style="width: 30%;">     <input type="date" class="form-control" [value]="equip.LastPMDate | date:'yyyy-MM-dd'" (input)="equip.LastPMDate=parseDate($event.target.value)">
+                    </td>
+                </tr>
+                </table>
+              
+            </div>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Specifications</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+
+
+
+                    <div style="width: 100%;  height: 200px; overflow-y: scroll;">
+                    <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 50%;">Specification</td>
+                        <td style="width: 40%;">Value</td>
+                        <td style="width: 10%;">&nbsp; </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%;"><input type="text" id='txtSpecification' class="form-control" [(ngModel)]='specification'></td>
+                        <td style="width: 40%;"><input type="text" class="form-control" [(ngModel)]='valu'></td>
+                        <td style="width: 10%;"><button class="btn-sm btn-success" style="width: 100%;" (click)='addSpecification()'>Add</button> </td>
+                    </tr>
+                    </table>
+       <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 50%;">Specification</th>
+            <th style="width: 37%;">Value</th>
+            <th style="width: 8%;">Del</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let spec of specifications;let i=index'>
+            <th scope="row" style="vertical-align: middle; width: 5%;">{{i+1}}</th>
+            <td style="vertical-align: middle; width: 50%;">{{spec.Specification}}</td>
+            <td style="vertical-align: middle; width: 37%;">{{spec.Valu}}</td>
+          
+            <td style="vertical-align: middle; width: 8%;"><i class="ft-trash font-medium-1" (click)='deleteSpecification(spec)'></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Preventive Maintenance</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+
+                            
+
+                    <div style="width: 100%;  height: 200px; overflow-y: scroll;">
+                        <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 50%;">Preventive Maintenance</td>
+                            <td style="width: 40%;">Frequency days</td>
+                            <td style="width: 10%;">&nbsp; </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 50%;"><input type="text" id='txtPM' class="form-control" [(ngModel)]='prevmaintenance'></td>
+                            <td style="width: 40%;"><input type="number" class="form-control" [(ngModel)]='freqdays'></td>
+                            <td style="width: 10%;"><button class="btn-sm btn-success" style="width: 100%;" (click)='addPreventiveMaintenance()'>Add</button></td>
+                        </tr>
+                        </table>
+           <table class="table m-0" style="width: 100%;">
+            <thead class="thead-light">
+              <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 50%;">Preve Maintenance</th>
+                <th style="width: 37%;">Frequency</th>
+                <th style="width: 8%;">Del</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let pm of prevmaintenances;let i=index'>
+                <th scope="row" style="vertical-align: middle; width: 5%;">{{i+1}}</th>
+                <td style="vertical-align: middle; width: 50%;">{{pm.Prevmaintenance}}</td>
+                <td style="vertical-align: middle; width: 37%;">{{pm.FrequencyInDays}}</td>
+              
+                <td style="vertical-align: middle; width: 8%;"><i class="ft-trash font-medium-1" (click)='deletePreventiveMaintenance(pm)'></i></td>
+              </tr>
+             
+            </tbody>
+          </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+  
+  <div class="col-xl-12 col-12">
+    <button type="button" class="btn-lg btn-danger mr-1 mb-1" *ngIf='recordID > 0' [disabled]='!delCheck' (click) ='delete()' >Delete</button>
+    <button type="button" class="btn-lg btn-primary mr-1 mb-1" [disabled]='!creCheck' (click)='save()' > <span *ngIf='recordID==0'>Save</span><span *ngIf='recordID!=0'>Modify</span>  </button>
+    <button type="button" class="btn-lg btn-dark mb-1" (click)='close()'>Close</button>
+
+  </div>
+
+  </div>
+
+
+
+<div class="row" *ngIf='!opened'>
+    <h3>
+        List of Equipment Details
+    </h3>
+    
+    <table style="width: 90%;">
+    <tr>
+        <td align="left" style="width: 50%;">
+            <button type="button" class="btn-lg btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+        </td>
+        <td  style="width: 50%;" align="right">
+         <input type="text" class="form-control" id="basicInput"  placeholder="Search...." [(ngModel)]='searchText' (input)='searchDetails()' >
+     </td>
+
+        
+    </tr>
+    </table>
+    <ngb-pagination [collectionSize]="totalpages" (pageChange)="loadPage($event)" [(page)]="page4" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+
+    <table class="table m-0" style="width: 90%;">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 34%;">Code</th>
+            <th style="width: 30%;">Equipment</th>
+            <th style="width: 15%;">Group</th>
+              <th style="width: 8%;"></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let equ of displayequipment; let i=index'>
+            <th scope="row" style="vertical-align: middle; width: 5%;">{{i+1+(pageno-1)*PAGESIZE}}</th>
+            <td style="vertical-align: middle; width: 34%;">{{equ.equipmentCode}}</td>
+            <td style="vertical-align: middle; width: 30%;">{{equ.equipmentName}}</td>
+            <td style="vertical-align: middle; width: 15%;">{{equ.sGrp}}</td>
+        
+            <td style="vertical-align: middle; width: 8%;"><i class="ft-edit font-medium-1" (click)='openOld(equ)' ></i></td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>

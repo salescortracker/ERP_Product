@@ -1,0 +1,318 @@
+<ngx-spinner></ngx-spinner>
+
+<div *ngIf='opened'>
+  <h3>
+    Sale Enquiry Details 
+     
+  </h3>
+  <br>
+<table style="width: 100%;">
+<tr>
+  <td style="width: 15%;" align="right">Customer</td>
+  <td colspan="3">
+    <input type="text" class="form-control" [(ngModel)]='call.Customer'>
+      </td>
+<td style="width: 10%;" align="right">
+Seq
+</td>
+<td style="width: 20%;">
+    <input type="text"   class="form-control" style="width: 100%;" disabled [(ngModel)]='call.Seq'>
+    </td>
+</tr>
+
+<tr>
+  <td style="width: 15%;" rowspan="2" align="right">Address</td>
+  <td style="width: 25%;" rowspan="2"> <textarea style="width: 100%; height: 50px; " [(ngModel)]='call.Addr'   ></textarea>  </td>
+  <td style="width: 10%;" align="right">ZIP</td>
+  <td style="width: 20%;" > <input type="text"   class="form-control" style="width: 100%;" [(ngModel)]='call.Zip' ></td>
+  <td style="width: 10%;" align="right">
+    Transaction Date
+      </td>
+      <td style="width: 20%;">
+         <!-- <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker 
+                #d2="ngbDatepicker" style="width: 50%;" [(ngModel)]='tradate'>
+              <div class="input-group-append">
+                <div class="input-group-text" (click)="d2.toggle()">
+                  <i class="fa fa-calendar" style="cursor: pointer;"></i>
+                </div>
+              </div>
+            </div>
+-->
+
+<input type="text" disabled value="{{tradates}}">
+
+         
+</tr>
+
+  
+<tr>
+  <td style="width: 10%;" align="right">Mobile</td>
+  <td style="width: 25%;"> <input type="text"   class="form-control" style="width: 100%;" [(ngModel)]='call.Mobile' ></td>
+  <td style="width: 10%;" align="right">
+     Type
+        </td>
+        <td style="width: 20%;">
+          <select style="width: 100%;" class="form-control">
+            <option value="0">--Select Type--</option>
+           <option value="1">Enquiry            
+           </option>
+           <option value="2">Presentation            
+          </option>
+              </select>
+          </td>
+</tr>
+
+
+   
+<tr>
+  <td style="width: 15%;" align="right"> Country </td>
+  <td style="width: 25%;"> <select class="form-control" [(ngModel)]='call.Country' (change)='makeStates()'>
+   <option value="">--select--</option>
+   <option *ngFor='let cnt of completeDet.countries' value="{{cnt.recordId}}" >
+     {{cnt.cntname}}
+                     </option>
+  </select>
+    
+</td>
+  <td style="width: 10%;" align="right"> Tel </td>
+  <td style="width: 20%;"> <input type="text" class="form-control" style="width: 100%;"  [(ngModel)]='call.Tel'> </td>
+  <td style="width: 10%;" align="right"> Reference </td>
+  <td style="width: 20%;">
+      
+      <table style="width: 100%;">
+      <tr>
+          <td style="width: 100%;">
+              <input type="text" class="form-control" style="width: 100%;"> 
+          </td>
+        
+      </tr>
+      </table>
+      
+       </td>
+</tr>
+
+
+<tr>
+  <td style="width: 15%;" align="right"> State </td>
+  <td style="width: 25%;">
+   <select class="form-control"  [(ngModel)]='call.Stat'>
+     <option value="">--select--</option>
+     <option *ngFor='let sta of states' value="{{sta.stateName}}" >
+       {{sta.stateName}}
+                       </option>
+   </select>
+   </td>
+  <td style="width: 10%;" align="right"> Fax </td>
+  <td style="width: 20%;"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='call.Fax' > </td>
+  <td style="width: 10%;" align="right"> Position </td>
+  <td style="width: 20%;">  
+    <select class="form-control" [(ngModel)]='call.CallPosition'>
+      <option value="0">--Select--</option>
+      <option value="1">Hot</option>
+      <option value="2">Warm</option>
+      <option value="3">Cool</option>
+      <option value="4">Declined</option>
+     </select>  </td>
+</tr>
+ 
+<tr>
+  <td style="width: 15%;" align="right"> District </td>
+  <td style="width: 25%;"> <input type="text" class="form-control" style="width: 100%;"  > </td>
+  <td style="width: 10%;" align="right"> Email </td>
+  <td style="width: 20%;"> <input type="text" class="form-control" style="width: 100%;"  > </td>
+  <td style="width: 10%;" align="right"> Next Call Date</td>
+  <td style="width: 20%;">  
+    <div class="input-group">
+      <input class="form-control" [(ngModel)]='call.NextCallDate' placeholder="yyyy-mm-dd" name="dp"   ngbDatepicker 
+        #d2="ngbDatepicker" style="width: 50%;" [(ngModel)]='nextdate'>
+      <div class="input-group-append">
+        <div class="input-group-text" (click)="d2.toggle()">
+          <i class="fa fa-calendar" style="cursor: pointer;"></i>
+        </div>
+      </div>
+    </div>   </td>
+</tr>
+
+
+
+<tr>
+  <td style="width: 15%;" align="right"> City </td>
+  <td style="width: 25%;"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='call.City' > </td>
+  <td style="width: 10%;" align="right"> Web </td>
+  <td style="width: 20%;"> <input type="text" class="form-control" style="width: 100%;" [(ngModel)]='call.Web' > </td>
+  <td style="width: 10%;" align="right"> Next Call Mode </td>
+  <td style="width: 20%;"> <select class="form-control" [(ngModel)]='call.NextCallMode'>
+    <option value="0">--Select--</option>
+    <option value="1">Tele Call</option>
+    <option value="2">Enquiry</option>
+    
+   </select>  </td>
+</tr>
+<!--<tr>
+  <td style="width: 15%;" align="right"> Main Customer </td>
+  <td colspan="3"> 
+    
+     
+  
+  </td>
+    <td style="width: 10%;" align="right"> &nbsp; </td>
+  <td style="width: 20%;">  &nbsp;
+   </td>
+</tr>-->
+
+</table>
+<table style="width: 100%;">
+ 
+  <tr>
+    <td style="width: 15%;" align="right">Prev Enquiry</td>
+    <td style="width: 30%;" align="right"> <input type="text" disabled class="form-control" [(ngModel)]='pendinginfo.seq'> </td>
+    <td style="width: 10%;">
+    <input type="button" value="Add" class="btn btn-secondary mr-1 mb-1" (click)="openModal(customContent)"></td>
+    <td style="width: 15%;" align="right">Date</td>
+    <td style="width: 30%;" align="right"> <input type="text" disabled class="form-control" value="{{pendinginfo.dat | date:'short' }}"> </td>
+  
+  </tr>
+  <tr>
+    <td style="width: 15%;" align="right">Prev Mode</td>
+    <td colspan="2" align="right"> <input type="text" disabled class="form-control" [(ngModel)]='pendinginfo.mode'> </td>
+    
+    <td style="width: 15%;" align="right">Mobile</td>
+    <td style="width: 30%;" align="right"> <input type="text" disabled class="form-control" [(ngModel)]='pendinginfo.mobile'> </td>
+  
+  </tr>
+  <tr>
+    <td style="width: 15%;" align="right">Prev Handled</td>
+    <td colspan="2" align="right"> <input type="text" disabled class="form-control" [(ngModel)]='pendinginfo.username'> </td>
+    
+    <td style="width: 15%;" align="right">Prev User</td>
+    <td style="width: 30%;" align="right"> <input type="text" disabled class="form-control" [(ngModel)]='pendinginfo.username'> </td>
+  
+  </tr>
+  
+  <tr>
+    <td style="width: 15%;" align="right">Prev Comments</td>
+    <td colspan="4">
+      <textarea class="form-control" rows=3 disabled value={{pendinginfo.customercomments}}></textarea>
+    </td>
+    </tr>
+ 
+
+
+    <tr>
+      <td style="width: 15%;" align="right">Customer Comments</td>
+      <td colspan="4">
+        <textarea class="form-control" rows=3 [(ngModel)]='call.CustomerComments'></textarea>
+      </td>
+      </tr>
+      <tr>
+        <td style="width: 15%;" align="right">Employee Comments</td>
+        <td colspan="4">
+          <textarea class="form-control" rows=3 [(ngModel)]='call.CallerComments'></textarea>
+        </td>
+        </tr>
+  </table>
+  <table>
+    <tr>
+ 
+      <td>
+        &nbsp;
+      </td>
+      <td>
+         &nbsp;
+       </td>
+    </tr>
+    <tr>
+      <td style="width: 15%;" align="right"> &nbsp;</td>
+      <td colspan="4">
+        <button type="button" class="btn btn-danger mr-1 mb-1" *ngIf='delVisible' [disabled]='!delCheck' (click) ='deleteCall()' >Delete</button>
+        <button type="button" class="btn btn-info mr-1 mb-1" [disabled]='!creCheck' (click)='saveCall()' >{{saveStr}}</button>
+        <button type="button" class="btn btn-dark mb-1" (click)='close()'>Close</button>
+      </td>
+    </tr>
+    </table>
+
+
+    
+   <ng-template #customContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title">Pending Calls</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+          
+      <table class="table m-0" style="width: 99%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Mobile</th>
+            <th>Mode</th>
+            <th>Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let pend of completeDet.pendings;let i=index'>
+            <td>{{i+1}}</td>
+            <td>{{pend.customer}}</td>
+            <td>{{pend.mobile}}</td>
+            <td>{{pend.mode}}</td>
+            <td><i class="ft-edit font-medium-1" (click)='openPending(pend)'></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  
+  </ng-template>
+
+</div>
+
+
+
+
+
+<div *ngIf='!opened'>
+  <h3>
+      List of Enquiries
+  </h3>
+  
+  <table style="width: 100%;">
+  <tr>
+      <td align="left">
+          <button type="button" class="btn btn-success mr-1 mb-1" (click)='openNew()' >New</button>
+      </td>
+  </tr>
+  </table>
+  
+  <table class="table m-0" style="width: 90%;">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Seq</th>
+          <th>Customer</th>
+          <th>Enquiry by</th>
+          <th>Mobile</th>
+          <th>Status</th>
+          <th>Open</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        <tr *ngFor='let det of details; let i=index'>
+          <th scope="row" >{{i+1}}</th>
+          <td>{{det.recordId}}</td>
+          <td>{{det.customer}}</td>
+          <td>{{det.caller}}</td>
+          <td>{{det.mobile}}</td>
+          <td>{{det.statu}}</td>
+         
+          <td><i class="ft-edit font-medium-1" (click)='openOld(det)' ></i></td> 
+        </tr>
+       
+      </tbody>
+    </table>
+   </div>
+

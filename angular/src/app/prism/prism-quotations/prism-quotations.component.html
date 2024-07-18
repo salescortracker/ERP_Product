@@ -1,0 +1,171 @@
+<ngx-spinner></ngx-spinner>
+<div *ngIf='!open'>
+    <h3>
+        List of Quotations
+    </h3>
+    
+    <table style="width: 100%;">
+     <tr>
+         <td style="width: 15%;" align="right">From</td>
+         <td style="width: 25%;" align="left"> <input type="date" class="form-control" [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)">  </td>
+         <td style="width: 15%;" align="right">To</td>
+         <td style="width: 25%;" align="left"> <input type="date" class="form-control" [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)">  </td>
+         <td style="width: 10%;" align="left"> <button class="btn btn-primary" (click)='listAdd()'>Show</button> </td>
+         <td style="width: 10%;" align="left"> <button class="btn btn-info" (click)='openNew()'>New</button> </td>
+     </tr>
+    </table>
+    
+    <table class="table m-0" style="width: 100%;">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+          <tr *ngFor='let enq of enquiries;let i=index'>
+            <th scope="row" >{{i+1}}</th>
+            <td>{{enq.seq}}</td>
+            <td>{{enq.dat | date:'dd-MMM-yy'}}</td>
+            <td>{{enq.customer}}</td>
+            <td>{{enq.productCode}}</td>
+            <td *ngIf='enq.statu==0'> Pending </td>
+             <td><i class="ft-edit font-medium-1"(click)='openOld(enq)'></i></td>
+         
+          </tr>
+         
+        </tbody>
+      </table>
+
+</div>
+
+<div *ngIf='open'>
+    
+<table style="width: 100%;">
+    <tr>
+        <td style="width: 10%;" align="right">*Customer</td>
+        <td colspan="3" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Customer'></td>
+        <td style="width: 10%;" align="right">ID</td>
+        <td style="width: 15%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Seq' disabled></td>
+    </tr>
+    <tr>
+     
+        <td style="width: 10%;" align="right">Address</td>
+        <td style="width: 30%;" rowspan="2" align="left"> <textarea [(ngModel)]='quotation.Addr' class="form-control" rows=3>
+
+        </textarea> </td>
+        <td style="width: 10%;" align="right">Zip</td>
+        <td style="width: 25%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Zip'></td>
+        <td style="width: 10%;" align="right">Date</td>
+        <td style="width: 15%;" align="left"><input type="date" class="form-control" [value]="quotation.Dat | date:'yyyy-MM-dd'" (input)="enquiry.Dat=parseDate($event.target.value)"></td>
+    </tr>
+    <tr>
+     
+        <td style="width: 10%;" align="right">&nbsp;</td>
+       
+        <td style="width: 10%;" align="right">*Mobile</td>
+        <td style="width: 25%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Mobile'></td>
+        <td style="width: 10%;" align="right">Enquiry</td>
+        <td style="width: 15%;" align="left"> <select class="form-control" (change)='selectProduct()' [(ngModel)]='quotation.EnquiryId'>
+            <option value="0">--Select Enquiry--</option>
+            <option *ngFor='let enq of pendingenquiries' value="{{enq.RecordId}}">{{enq.Seq}}</option>
+        </select>  </td>
+    </tr>
+ <tr>
+     
+     <td style="width: 10%;" align="right">Country</td>
+     <td style="width: 30%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Country'></td>
+     <td style="width: 10%;" align="right">Tel</td>
+     <td style="width: 25%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Tel'></td>
+     <td style="width: 10%;" align="right">Base Amount</td>
+     <td style="width: 15%;" align="left"><input type="text" style="text-align: right;" class="form-control" [value]="quotation.baseAmt | number:'0.2'"></td>
+ </tr>
+ <tr>
+     
+    <td style="width: 10%;" align="right">State</td>
+    <td style="width: 30%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Stat'></td>
+    <td style="width: 10%;" align="right">Fax</td>
+    <td style="width: 25%;" align="left"><input type="text" class="form-control"  [(ngModel)]='quotation.Fax'></td>
+    <td style="width: 10%;" align="right">Discount</td>
+    <td style="width: 15%;" align="left"> 
+        <input type="number" class="form-control" style="text-align: right;" [(ngModel)]='quotation.discount'>
+       </td>
+</tr>
+<tr>
+    <td style="width: 10%;" align="right">District</td>
+    <td style="width: 30%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.District' ></td>
+    <td style="width: 10%;" align="right">Email</td>
+    <td style="width: 25%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Email'></td>
+    <td style="width: 10%;" align="right">Taxes</td>
+    <td style="width: 15%;" align="left"><input type="text" class="form-control" disabled [(ngModel)]='quotation.taxes'></td>
+</tr>
+<tr>
+    <td style="width: 10%;" align="right">City</td>
+    <td style="width: 30%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.City'></td>
+    <td style="width: 10%;" align="right">Web</td>
+    <td style="width: 25%;" align="left"><input type="text" class="form-control" [(ngModel)]='quotation.Web'></td>
+    <td style="width: 10%;" align="right">Total Amount</td>
+    <td style="width: 15%;" align="left"><input type="text" class="form-control" style="text-align: right;" disabled value="{{quotation.totalamt | number:'0.2'}}"></td>
+</tr>
+<tr>
+    <td style="width: 10%;" align="right">Product</td>
+    <td colspan="5" align="left">{{product.productName}}</td>
+</tr>
+<tr>
+    <td colspan="6" align="left">*Customer Comments</td>
+ </tr>
+ <tr>
+    <td colspan="6" align="left"> <textarea class="form-control" rows="3" disabled [(ngModel)]='customerComments'></textarea> </td>
+ </tr>
+ <tr>
+    <td colspan="6" align="left">*Caller Comments</td>
+ </tr>
+ <tr>
+    <td colspan="6" align="left"> <textarea class="form-control" rows="3" disabled [(ngModel)]='callerComments'></textarea> </td>
+ </tr>
+</table>
+
+
+<table class="table m-0" style="width: 100%;">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Module</th>
+        <th>Description</th>
+        <th>Training</th>
+        <th>Price</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+     
+      <tr *ngFor='let mod of modules;let i=index'>
+        <th scope="row" >{{i+1}}</th>
+        <td>{{mod.moduleName}}</td>
+        <td>
+            <textarea class="form-control" rows=3 [(ngModel)]='mod.moduleDescription'></textarea>
+            </td>
+        <td>{{mod.trainingDays}}</td>
+        <td>  <input type="number" class="form-control" [(ngModel)]='mod.price'}}></td>
+      </tr>
+     
+    </tbody>
+  </table>
+
+  <table style="width: 100%;">
+<tr>
+    <td style="width: 100%;">
+    <button type="button" class="btn btn-primary" (click)='save()'> <span *ngIf='recordId==0'>Save</span> <span *ngIf='recordId>0'>Modify</span> </button>
+    <button type="button" class="btn btn-danger" (click)='delete()' *ngIf='recordId>0'>Delete</button>
+    <button type="button" class="btn btn-dark" (click)='close()'>Close</button>
+    </td>
+</tr>
+</table>
+
+</div>

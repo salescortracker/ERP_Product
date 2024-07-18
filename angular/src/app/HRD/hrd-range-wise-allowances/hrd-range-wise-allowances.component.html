@@ -1,0 +1,75 @@
+
+<ngx-spinner></ngx-spinner>
+<h3>
+   Range wise Allowances & Deductions
+ </h3>
+ <table style="width: 70%;">
+<tr>
+    <td>
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 40%;">Select Allowance/Deduction</td>
+                <td style="width: 16%;">
+            From
+              </td>
+              <td style="width: 16%;">
+              To
+              </td>
+              <td style="width: 16%;">Value</td>
+              <td style="width: 12%;">&nbsp;</td>
+            </tr>
+            <tr>
+              <td style="width: 40%;">
+                <select class="form-control" [(ngModel)]='allowanceId' (change)='getRanges()' [disabled]='selectRanges.length > 0'>
+                    <option value="0">--Select--</option>
+                    <option *ngFor='let opt of hrdallowancesdeductions' value="{{opt.recordId}}">{{opt.allowance}}</option>
+          
+              </select></td>
+              <td style="width: 16%;">
+          <input type="number" class="form-control" [(ngModel)]='fromValue'>
+            </td>
+            <td style="width: 16%;">
+              <input type="number" class="form-control"  [(ngModel)]='toValue'>
+            </td>
+            <td style="width: 16%;"><input type="number" class="form-control"  [(ngModel)]='valu'></td>
+            <td style="width: 12%;"><button class="btn btn-info" (click)='addRange()'>Add</button> </td>
+          </tr>
+          
+            
+           </table>
+    </td>
+</tr>
+<tr>
+    <td>
+
+        <table class="table m-0" style="width: 100%;">
+            <thead class="thead-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Value</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr *ngFor='let range of selectRanges;let i=index'>
+                <th scope="row" >{{i+1}}</th>
+                <td>{{range.allowanceName}}</td>
+              <td>{{range.fromValue}}</td>
+              <td>{{range.toValue}}</td>
+              <td>{{range.valu}}</td>
+                 
+                <td><i class="ft-trash font-medium-1" (click)='deleteRange(range)'></i></td>
+              </tr>
+             
+            </tbody>
+          </table>
+    </td>
+</tr>
+<tr>
+    <td><button class="btn btn-primary" style="width: 300px;" (click)='save()'>Save</button></td>
+</tr>
+</table>

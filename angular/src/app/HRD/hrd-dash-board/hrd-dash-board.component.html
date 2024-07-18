@@ -1,0 +1,244 @@
+<h3>Dashboard</h3>
+
+
+<table style="width: 15%;">
+    <tr>
+        <td style="width: 25%;" rowspan="2"> <img src='../../../assets/hrd/male.png' style="width: 100px;"> </td>
+        <td style="width: 25%;"> <font face=verdana color=blue size=4> <b>45</b></font> </td>
+        <td style="width: 25%;" rowspan="2"> <img src='../../../assets/hrd/female.png' style="width: 100px;"> </td>
+        <td style="width: 25%;">  </td>
+    </tr>
+    <tr>
+        
+        <td style="width: 50%;"> 
+          
+        
+        
+        </td>
+        <td style="width: 50%;">  <font face=verdana color=red size=4><b>35</b></font>   </td>
+    </tr>
+
+    
+</table>
+
+<table style="width: 100%;">
+<tr>
+    <td style="width:50%">
+    
+    
+    
+    
+    
+    
+
+<section id="light">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Todays birthdays</h4>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+           
+              <div class="table-responsive">
+                <table class="table m-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Designation</th>
+                      <th>Department</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>T. Bapaiah</td>
+                      <td>Manager</td>
+                      <td>Administration</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Ravi</td>
+                      <td>Incharge</td>
+                      <td>Production</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Somesh</td>
+                      <td>Executive</td>
+                      <td>CRM</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Somesh</td>
+                        <td>Executive</td>
+                        <td>CRM</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Somesh</td>
+                        <td>Executive</td>
+                        <td>CRM</td>
+                      </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Light table Ends-->
+
+
+  
+</td>
+<td style="width:50%">
+  <!-- Line Chart starts -->
+  <div class="col-xl-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Salaries Trendz</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+              <apx-chart
+              [series]="lineChartOptions.series"
+              [colors]="lineChartOptions.colors"
+              [chart]="lineChartOptions.chart"
+              [xaxis]="lineChartOptions.xaxis"
+              [yaxis]="lineChartOptions.yaxis"
+              [title]="lineChartOptions.title"
+              [dataLabels]="lineChartOptions.dataLabels"
+              [stroke]="lineChartOptions.stroke"
+              [grid]="lineChartOptions.grid"
+              [tooltip]="lineChartOptions.tooltip"
+              [plotOptions]="lineChartOptions.plotOptions"
+              [fill]="lineChartOptions.fill"
+              [legend]="lineChartOptions.legend"
+              [labels]="lineChartOptions.labels"
+              [markers]="lineChartOptions.markers"
+              [theme]="lineChartOptions.theme"
+              [responsive]="lineChartOptions.responsive"
+            ></apx-chart>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Line Chart ends -->
+
+
+</td>
+</tr>
+<tr>
+    <td style="width: 50%;">
+    
+<div class="col-lg-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Department wise Employees</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                  <apx-chart
+                  [series]="pieChartOptions.series"
+                  [colors]="pieChartOptions.colors"
+                  [chart]="pieChartOptions.chart"
+                  [xaxis]="pieChartOptions.xaxis"
+                  [yaxis]="pieChartOptions.yaxis"
+                  [title]="pieChartOptions.title"
+                  [dataLabels]="pieChartOptions.dataLabels"
+                  [stroke]="pieChartOptions.stroke"
+                  [grid]="pieChartOptions.grid"
+                  [tooltip]="pieChartOptions.tooltip"
+                  [plotOptions]="pieChartOptions.plotOptions"
+                  [fill]="pieChartOptions.fill"
+                  [legend]="pieChartOptions.legend"
+                  [labels]="pieChartOptions.labels"
+                  [markers]="pieChartOptions.markers"
+                  [theme]="pieChartOptions.theme"
+                  [responsive]="pieChartOptions.responsive"
+                ></apx-chart>
+            </div>
+        </div>
+    </div>
+</div>
+    </td>
+    <td style="width: 50%;">
+    
+    
+    
+
+<div class="col-lg-12 col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Designation wise Employees</h4>
+        </div>
+        <div class="card-content">
+            <div class="card-body">
+                <apx-chart
+                [series]="donutChartOptions.series"
+                [colors]="donutChartOptions.colors"
+                [chart]="donutChartOptions.chart"
+                [xaxis]="donutChartOptions.xaxis"
+                [yaxis]="donutChartOptions.yaxis"
+                [title]="donutChartOptions.title"
+                [dataLabels]="donutChartOptions.dataLabels"
+                [stroke]="donutChartOptions.stroke"
+                [grid]="donutChartOptions.grid"
+                [tooltip]="donutChartOptions.tooltip"
+                [plotOptions]="donutChartOptions.plotOptions"
+                [fill]="donutChartOptions.fill"
+                [legend]="donutChartOptions.legend"
+                [labels]="donutChartOptions.labels"
+                [markers]="donutChartOptions.markers"
+                [theme]="donutChartOptions.theme"
+                [responsive]="donutChartOptions.responsive"
+              ></apx-chart>
+          </div>
+        </div>
+    </div>
+</div>
+</td>
+</tr>
+<tr>
+    <td colspan="2">
+          <!-- Line Chart starts -->
+      <div class="col-xl-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Employee Joinings & Closings analysis</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <apx-chart
+                    [series]="columnChartOptions.series"
+                    [colors]="columnChartOptions.colors"
+                    [chart]="columnChartOptions.chart"
+                    [xaxis]="columnChartOptions.xaxis"
+                    [yaxis]="columnChartOptions.yaxis"
+                    [title]="columnChartOptions.title"
+                    [dataLabels]="columnChartOptions.dataLabels"
+                    [stroke]="columnChartOptions.stroke"
+                    [grid]="columnChartOptions.grid"
+                    [tooltip]="columnChartOptions.tooltip"
+                    [plotOptions]="columnChartOptions.plotOptions"
+                    [fill]="columnChartOptions.fill"
+                    [legend]="columnChartOptions.legend"
+                    [labels]="columnChartOptions.labels"
+                    [markers]="columnChartOptions.markers"
+                    [theme]="columnChartOptions.theme"
+                    [responsive]="columnChartOptions.responsive"
+                  ></apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Line Chart ends -->
+    </td>
+</tr>
+</table>

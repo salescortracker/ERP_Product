@@ -1,0 +1,36 @@
+<h3>
+    Purchase Order Terms
+</h3>
+<table style="width: 80%;">
+<td style="width: 90%;">
+<input type="text" class="form-control" placeholder="Term" [(ngModel)]='term'>
+</td>
+  
+<td style="width: 10%;">
+    <button type="button" style="width: 100%;" class="btn btn-secondary mr-1 mb-1"(click)='save()'>Add</button>
+
+
+</td>
+</table>
+<table class="table m-0" style="width: 80%;">
+    <thead class="thead-light">
+      <tr>
+         
+      
+        <th style="width: 90%;">Term</th>
+        <th style="width: 10%;"> </th>
+         
+    
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let det of details'>
+            <td style="width: 90%;">
+        {{det.term}}
+            </td>
+            <td style="width: 10%;">
+                <i class="ft-trash-2 font-medium-1" (click)='delete(det)' ></i>
+            </td>
+        </tr>
+        </tbody>
+</table>

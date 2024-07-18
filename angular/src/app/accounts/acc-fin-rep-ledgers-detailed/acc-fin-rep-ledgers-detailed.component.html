@@ -1,0 +1,77 @@
+<ngx-spinner></ngx-spinner>
+<section id="light">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Ledgers</h4>
+<table style="width: 100%;">
+<tr>
+    <td style="width: 10%;" align="right">From</td>
+    <td style="width: 17%;"> <input type="date" class="form-control"   [value]="fromdate | date:'yyyy-MM-dd'" (input)="fromdate=parseDate($event.target.value)"> </td>
+    <td style="width: 10%;" align="right">To</td>
+    <td style="width: 17%;"> <input type="date" class="form-control"   [value]="todate | date:'yyyy-MM-dd'" (input)="todate=parseDate($event.target.value)"> </td>
+   
+    <td style="width: 10%;" align="right">Account</td>
+    <td style="width: 30%;"> <select class="form-control" [(ngModel)]='rec'>
+        <option value="-1">--Select--</option>
+        <option *ngFor='let acc of accounts' value="{{acc.accountId}}">{{acc.accountname}}</option>
+    </select>  </td>
+    <td style="width: 6%;"> <button class="btn-lg btn-info" (click)='listAdd()'>Show</button> </td>
+</tr>
+</table>
+
+
+
+<div class="position-relative float-right">
+    <div ngbDropdown display="dynamic"  placement="bottom-right"  class="d-inline-block">
+      <i class="ft-more-vertical- mt-1 dropdown-toggle" id="chatOptions" ngbDropdownToggle></i>
+      <div ngbDropdownMenu aria-labelledby="chatOptions">
+        <!--<a href="javascript:;" class="dropdown-item" [href]='pdfFile'target="_aa" >Download Pdf</a>-->
+        <a href="javascript:;" class="dropdown-item" [href]='pdffile' target="_blank" >Download Pdf</a>
+        <a href="javascript:;" class="dropdown-item" [href]='excelfile' target="_ aa">Download Excel</a>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="card-content">
+    <div class="card-body">
+      
+      <div class="table-responsive">
+        <table class="table m-6">
+          <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Account</th>
+              <th>Date</th>
+              <th>Voucher</th>
+              <th style="text-align: right;">Debit</th>
+              <th style="text-align: right;">Credit</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let det of details;let i=index' >
+                <th scope="row">{{i+1}}</th>
+              <th scope="row">{{det.accname}}</th>
+              <td>{{det.dat}}</td>
+              <td>{{det.vouchertype | slice:0:20}}</td>
+              <td align="right">{{det.debit}}</td>
+              <td align="right">{{det.credit}}</td>
+             
+            </tr>
+           
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<!--Light table Ends-->
+
+
+
