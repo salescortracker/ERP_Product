@@ -1,0 +1,217 @@
+<!--
+Template Apex - Angular & Bootstrap 4 HTML Admin Template
+Author: PixInvent
+Website: http://www.pixinvent.com/
+Contact: hello@pixinvent.com
+Follow: www.twitter.com/pixinvents
+Like: www.facebook.com/pixinvents
+Purchase: https://1.envato.market/apex_admin
+Renew Support: https://1.envato.market/apex_admin
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<script type="text/javascript">
+function classyInputChange(x)
+{
+  switch(x)
+  {
+    case 1:
+      
+      break;
+  }
+}
+</script>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:700,800&amp;display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400&amp;display=swap">
+   
+
+
+   
+  <link href="../../../assets/assets/img/favicon.png" rel="icon">
+  <link href="../../../assets/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+   
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+   
+  <link href="../../../assets/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../../../assets/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+   
+  <link href="../../../assets/assets/css/style.css" rel="stylesheet">
+ 
+
+
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>:: USINE ::</title>
+  <base href="/">
+
+
+<!--<link rel="icon" type="image/x-icon" href="prism.ico">-->
+<!--Prism Link starts-->
+
+<link href="../../../assets/assets/img/prism1.jpg" rel="icon">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/fonts/feather/style.min.css" rel="stylesheet">
+  <link href="assets/fonts/simple-line-icons/style.css" rel="stylesheet">
+  <link href="assets/fonts/weathericons/css/weather-icons.css" rel="stylesheet">
+  <link href="assets/fonts/weathericons/css/weather-icons-wind.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900|Montserrat:300,400,500,600,700,800,900'
+    rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/vendor/pace/themes/black/pace-theme-flash.css" />
+  
+
+
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <style type="text/css">
+ 
+
+   .pace .pace-activity {
+      top: 19px;
+      right: 19px;
+      display: none;
+    }
+
+    .page-loading {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      overflow: hidden;
+      background: rgba(51, 51, 51, 1.00);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: -1;
+    }
+
+    .loading-icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 38px;
+      height: 38px;
+      margin-left: -19px;
+      margin-top: -19px;
+    }
+
+    app-root:empty~.page-loading {
+      opacity: 1;
+      z-index: 1;
+    }
+ 
+
+
+
+  </style>
+    
+  <script>
+
+    //===== close navbar-collapse when a  clicked
+    let navbarTogglerNine = document.querySelector(
+      ".navbar-nine .navbar-toggler"
+    );
+    navbarTogglerNine.addEventListener("click", function () {
+      navbarTogglerNine.classList.toggle("active");
+    });
+
+    // ==== left sidebar toggle
+    let sidebarLeft = document.querySelector(".sidebar-left");
+    let overlayLeft = document.querySelector(".overlay-left");
+    let sidebarClose = document.querySelector(".sidebar-close .close");
+
+    overlayLeft.addEventListener("click", function () {
+      sidebarLeft.classList.toggle("open");
+      overlayLeft.classList.toggle("open");
+    });
+    sidebarClose.addEventListener("click", function () {
+      sidebarLeft.classList.remove("open");
+      overlayLeft.classList.remove("open");
+    });
+
+    // ===== navbar nine sideMenu
+    let sideMenuLeftNine = document.querySelector(".navbar-nine .menu-bar");
+
+    sideMenuLeftNine.addEventListener("click", function () {
+      sidebarLeft.classList.add("open");
+      overlayLeft.classList.add("open");
+    });
+
+    //========= glightbox
+    GLightbox({
+      'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+      'type': 'video',
+      'source': 'youtube', //vimeo, youtube or local
+      'width': 900,
+      'autoplayVideos': true,
+    });
+    </script>
+
+<link rel="stylesheet" href="styles.63dcfc77ee06396b646b.css"></head>
+
+<body>
+  <app-root></app-root>
+  
+  
+  <div class="page-loading">
+    <img src="assets/img/oval.svg" class="loading-icon" />
+  </div>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+
+<!--Vendor JS Files -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <script src="assets/prism/assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/prism/assets/vendor/aos/aos.js"></script>
+  <script src="assets/prism/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/prism/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/prism/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/prism/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/prism/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/prism/assets/vendor/php-email-form/validate.js"></script>
+ 
+  <script src="assets/prism/assets/js/main.js"></script>
+
+
+  <!--====== js ======-->
+  <script src="../src/assets/shiiryoku/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../src/assets/shiiryoku/assets/js/glightbox.min.js"></script>
+  <script src="../src/assets/shiiryoku/assets/js/main.js"></script>
+  <script src="../src/assets/shiiryoku/assets/js/tiny-slider.js"></script>
+
+
+
+  
+  <!-- Vendor JS Files 
+  <script src="../../../assets/assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../../../assets/assets/vendor/aos/aos.js"></script>
+  <script src="../../../assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../../../assets/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../../../assets/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../../../assets/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="../../../assets/assets/vendor/php-email-form/validate.js"></script>
+
+   
+  <script src="../../../assets/assets/js/main.js"></script>-->
+<script src="runtime.e76d79e7d7d459fe1cee.js" defer></script><script src="polyfills-es5.d26bf549773e66c90cd0.js" nomodule defer></script><script src="polyfills.2572f4436aef8938af26.js" defer></script><script src="scripts.b033c8442f6391f72055.js" defer></script><script src="main.1a99559ad4b2b301bb78.js" defer></script></body>
+
+</html>
